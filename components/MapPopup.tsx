@@ -55,14 +55,6 @@ export default function MapPopup({ latitude, longitude, vineyardName, onClose }:
                 )}
             </div>
 
-            <div className="p-2 border-t border-[#E0E0E0]">
-                <button
-                    onClick={() => window.open(externalMapUrl, '_blank')}
-                    className="w-full py-2 text-sm font-bold bg-black hover:bg-[#424242] text-white rounded-lg transition-colors border border-black"
-                >
-                    VIEW ON GOOGLE MAPS
-                </button>
-            </div>
         </div>
     );
 }
