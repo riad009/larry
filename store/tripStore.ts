@@ -3,7 +3,6 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { VineyardExperience, VineyardOffer } from "@/types/vineyard";
 import { LunchExperience } from "@/types/lunch";
-import { TransportOption } from "@/types/transport";
 import { Option } from "@/types/option";
 
 /** Used by Trip/Overview to avoid redirect before persist has rehydrated. */
@@ -22,7 +21,6 @@ type TripState = {
     vineyards: VineyardExperience[];
     selectedOffer: VineyardOffer | null;
     lunches: LunchExperience[];
-    transport: TransportOption | null;
 
     setCountry: (c: Option | null) => void;
     setRegion: (r: Option | null) => void;
@@ -33,7 +31,6 @@ type TripState = {
     setSelectedOffer: (o: VineyardOffer | null) => void;
     addLunch: (lunch: LunchExperience) => void;
     removeLunch: (id: string) => void;
-    setTransport: (t: TransportOption | null) => void;
 
     resetTrip: () => void;
 };
@@ -47,7 +44,6 @@ export const useTripStore = create<TripState>()(
             vineyards: [],
             selectedOffer: null,
             lunches: [],
-            transport: null,
 
             setCountry: (c) =>
                 set({
@@ -57,7 +53,6 @@ export const useTripStore = create<TripState>()(
                     vineyards: [],
                     selectedOffer: null,
                     lunches: [],
-                    transport: null,
                 }),
 
             setRegion: (r) =>
@@ -67,7 +62,6 @@ export const useTripStore = create<TripState>()(
                     vineyards: [],
                     selectedOffer: null,
                     lunches: [],
-                    transport: null,
                 }),
 
             setSubRegion: (s) =>
@@ -76,7 +70,6 @@ export const useTripStore = create<TripState>()(
                     vineyards: [],
                     selectedOffer: null,
                     lunches: [],
-                    transport: null,
                 }),
 
             addVineyard: (v) =>
@@ -128,8 +121,6 @@ export const useTripStore = create<TripState>()(
                     lunches: state.lunches.filter((x) => x.id !== id),
                 })),
 
-            setTransport: (t) => set({ transport: t }),
-
             resetTrip: () =>
                 set({
                     country: null,
@@ -138,7 +129,6 @@ export const useTripStore = create<TripState>()(
                     vineyards: [],
                     selectedOffer: null,
                     lunches: [],
-                    transport: null,
                 }),
         }),
         {

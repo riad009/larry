@@ -13,6 +13,7 @@ interface MobileResultsListProps {
         cost: string;
     } | null;
     filteredResults: LunchExperience[];
+    filteredResultsCount: number;
     mainGridResults: LunchExperience[];
     areaTotalCount: number | undefined;
     topRatedInArea: LunchExperience[];
@@ -31,6 +32,7 @@ interface MobileResultsListProps {
 export default function MobileResultsList({
                                               appliedFilters,
                                               filteredResults,
+                                              filteredResultsCount,
                                               mainGridResults,
                                               areaTotalCount,
                                               topRatedInArea,
@@ -110,7 +112,7 @@ export default function MobileResultsList({
                     <div className="mb-6 flex flex-col gap-3">
                         <div className="flex items-center justify-between">
                             <p className="text-[#424242] text-base">
-                                <span className="text-black font-bold">{mainGridResults.length}</span> of <span className="font-bold">{items.length}</span> restaurants
+                                <span className="text-black font-bold">{mainGridResults.length}</span> of <span className="font-bold">{filteredResultsCount}</span> restaurants
                             </p>
                             <button
                                 onClick={onClearFilters}

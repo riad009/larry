@@ -1,20 +1,41 @@
 /* app/overview/page.tsx */
 "use client";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTripStore, useTripHydrationStore } from "@/store/tripStore";
 import {
-    OverviewLoadingState, MapDisplay, VineyardCard,
-    LunchCard, TimelineCard, ActionButtonsGrid,
-    PrimaryActionButton, OverviewLayout
+    OverviewLoadingState,
+    GoogleOverviewMap,
+    RouteOrderList,
+    ActionButtonsGrid,
+    PrimaryActionButton,
+    OverviewLayout,
+    type RouteStop,
 } from "@/components/overview";
 
 export default function OverviewPage() {
     const hasHydrated = useTripHydrationStore((s) => s.hasHydrated);
-    const { vineyards, lunches, transport, selectedOffer } = useTripStore();
-    const vineyard = vineyards?.[0] ?? null;
-    const firstLunch = lunches?.[0] ?? null;
+    const { vineyards, lunches } = useTripStore();
     const router = useRouter();
+
+    const defaultRouteStops = React.useMemo<RouteStop[]>(
+        () => [
+            ...vineyards.map((v) => ({ type: "vineyard" as const, data: v })),
+            ...lunches.map((l) => ({ type: "lunch" as const, data: l })),
+        ],
+        [vineyards, lunches]
+    );
+
+    const [routeStops, setRouteStops] = useState<RouteStop[]>([]);
+
+    useEffect(() => {
+        if (defaultRouteStops.length === 0) return;
+        if (routeStops.length === 0) {
+            setRouteStops(defaultRouteStops);
+        } else if (routeStops.length !== defaultRouteStops.length) {
+            setRouteStops(defaultRouteStops);
+        }
+    }, [defaultRouteStops, defaultRouteStops.length, routeStops.length]);
 
     useEffect(() => {
         if (!hasHydrated) return;
@@ -22,97 +43,29 @@ export default function OverviewPage() {
         else if (!lunches?.length) router.push("/lunch");
     }, [hasHydrated, vineyards?.length, lunches?.length, router]);
 
-    const { timelineItems, totalTripDuration } = useMemo(() => {
-        if (!vineyard || !firstLunch) return { timelineItems: [], totalTripDuration: "0h" };
-
-        const startTime = new Date();
-        startTime.setHours(9, 30, 0);
-
-        const formatTime = (date: Date) =>
-            date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-
-        const formatDuration = (mins: number) => {
-            const h = Math.floor(mins / 60);
-            const m = mins % 60;
-            return h > 0 ? `${h}h ${m > 0 ? m + 'm' : ''}` : `${m}m`;
-        };
-
-        // --- Stage 1: Vineyard ---
-        // Safety check: use duration from offer or default to 120 mins
-        const vDuration = Number(selectedOffer?.duration) || 120;
-        const travelStartTime = new Date(startTime.getTime() + vDuration * 60000);
-
-        // --- Stage 2: Travel ---
-        const tDuration = transport?.duration ? parseInt(transport.duration) : 30;
-        const lunchStartTime = new Date(travelStartTime.getTime() + tDuration * 60000);
-
-        // --- Stage 3: Lunch ---
-        const lDuration = 90;
-
-        const items = [
-            {
-                time: formatTime(startTime),
-                title: "Vineyard Visit",
-                description: `${vineyard.name}${selectedOffer?.title ? ` • ${selectedOffer.title}` : ""}`,
-                duration: formatDuration(vDuration),
-                color: "green" as const,
-            },
-            {
-                time: formatTime(travelStartTime),
-                title: "Travel",
-                description: transport ? `${transport.type} to Restaurant` : "Commute",
-                duration: formatDuration(tDuration),
-                color: "purple" as const,
-            },
-            {
-                time: formatTime(lunchStartTime),
-                title: "Lunch Break",
-                description: firstLunch.restaurantName || firstLunch.name || "Restaurant",
-                duration: formatDuration(lDuration),
-                color: "blue" as const,
-            }
-        ];
-
-        const totalMins = vDuration + tDuration + lDuration;
-        return {
-            timelineItems: items,
-            totalTripDuration: `${(totalMins / 60).toFixed(1)} Hours`
-        };
-    }, [vineyard, firstLunch, transport, selectedOffer]);
-
     if (!hasHydrated || !vineyards?.length || !lunches?.length) return <OverviewLoadingState />;
 
+    const orderedStops = routeStops.length > 0 ? routeStops : defaultRouteStops;
+
     return (
-        <OverviewLayout>
-            <div className="mb-6 md:mb-8">
-                <MapDisplay
-                    vineyard={{ latitude: vineyard.latitude, longitude: vineyard.longitude }}
-                    lunch={{ latitude: firstLunch.latitude, longitude: firstLunch.longitude, name: firstLunch.name }}
-                />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-                <VineyardCard vineyard={vineyard} />
-                <div className="space-y-4">
-                    {lunches.map((lunch) => (
-                        <LunchCard key={lunch.id} lunch={lunch} />
-                    ))}
+        <OverviewLayout fullViewport>
+            <div className="flex flex-col md:flex-row flex-1 min-h-0 w-full overflow-hidden">
+                <div className="relative w-full md:w-[68%] h-[65vh] md:h-full flex-shrink-0">
+                    <GoogleOverviewMap routeStops={orderedStops} />
                 </div>
-                <TimelineCard
-                    items={timelineItems}
-                    totalDuration={totalTripDuration}
-                    hasTransport={!!transport}
-                />
+                <div className="w-full md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white border-l border-[#E0E0E0] p-4 md:p-6 md:flex md:flex-col md:overflow-hidden">
+                    <div className="md:flex-1 md:min-h-0 md:overflow-y-auto">
+                        <h2 className="text-lg font-bold text-black mb-4">Your Trip Route</h2>
+                        <RouteOrderList routeStops={orderedStops} onReorder={setRouteStops} />
+                    </div>
+                    <div className="mt-6 md:mt-0 md:flex-shrink-0 md:border-t md:border-[#E0E0E0] md:pt-4 md:bg-white">
+                        <ActionButtonsGrid onButtonClick={(id) => console.log(id)} />
+                        <div className="mt-6">
+                            <PrimaryActionButton href="/transport" />
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div className="mb-6 md:mb-8">
-                <ActionButtonsGrid onButtonClick={(id) => console.log(id)} />
-            </div>
-
-            <PrimaryActionButton
-                hasTransport={!!transport}
-                href={transport ? "/itinerary" : "/transport"}
-            />
         </OverviewLayout>
     );
 }

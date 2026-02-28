@@ -13,6 +13,7 @@ interface DesktopResultsGridProps {
         cost: string;
     } | null;
     filteredResults: LunchExperience[];
+    filteredResultsCount: number;
     mainGridResults: LunchExperience[];
     areaTotalCount: number | undefined;
     topRatedInArea: LunchExperience[];
@@ -30,6 +31,7 @@ interface DesktopResultsGridProps {
 export default function DesktopResultsGrid({
                                                appliedFilters,
                                                filteredResults,
+                                               filteredResultsCount,
                                                mainGridResults,
                                                areaTotalCount,
                                                topRatedInArea,
@@ -70,7 +72,7 @@ export default function DesktopResultsGrid({
                     </p>
                 ) : (
                     <p className="text-black">
-                        Showing <span className="font-bold">{mainGridResults.length}</span> of <span className="font-bold">{items.length}</span> restaurants
+                        Showing <span className="font-bold">{mainGridResults.length}</span> of <span className="font-bold">{filteredResultsCount}</span> restaurants
                     </p>
                 )}
                 {appliedFilters && (

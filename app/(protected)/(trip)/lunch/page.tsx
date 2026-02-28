@@ -733,6 +733,17 @@ import {
     MainLayoutWrapper,
 } from "@/components/Lunch";
 
+/** Bracket code → display label for Lunch cost dropdown (display only; filter still uses bracket string). */
+const LUNCH_BRACKET_LABELS: Record<string, string> = {
+    A: "Under 25€",
+    B: "25€–50€",
+    C: "50€–100€",
+    D: "100€+",
+};
+
+/** Logical ascending price order for cost dropdown (A → D). */
+const LUNCH_COST_ORDER = ["A", "B", "C", "D"];
+
 function mapLunch(doc: any): LunchExperience {
     return {
         id: doc.id ?? doc["Restaurant ID"] ?? doc._id?.toString?.() ?? "",
@@ -901,7 +912,7 @@ export default function LunchPage() {
         return base.concat(unique.map((t) => ({ key: t!, name: t! })));
     }, [items, country, region, filters.area]);
 
-    // Cost options from LUNCH Bracket values only (no "ALL"; user must select a Bracket)
+    // Cost options from LUNCH Bracket values only (no "ALL"; user must select a Bracket). Key = bracket (for filter); name = label (for display). Sorted in ascending price order A→D.
     const costOptions = useMemo(() => {
         const scoped = items.filter((i) => {
             if (country && normalize(i.country) !== normalize(country.name))
@@ -913,7 +924,15 @@ export default function LunchPage() {
         const unique = Array.from(
             new Set(scoped.map((i) => i.bracket).filter((b): b is string => Boolean(b)))
         );
-        return unique.map((b) => ({ key: b, name: b }));
+        const sorted = [...unique].sort((a, b) => {
+            const ia = LUNCH_COST_ORDER.indexOf(a);
+            const ib = LUNCH_COST_ORDER.indexOf(b);
+            if (ia === -1 && ib === -1) return a.localeCompare(b);
+            if (ia === -1) return 1;
+            if (ib === -1) return -1;
+            return ia - ib;
+        });
+        return sorted.map((b) => ({ key: b, name: LUNCH_BRACKET_LABELS[b] ?? b }));
     }, [items, country, region]);
 
     // Filter + sort (no slice). Order: filter → sort. Same as Vineyard pattern.
@@ -1065,6 +1084,7 @@ export default function LunchPage() {
                 <DesktopResultsGrid
                     appliedFilters={appliedFilters}
                     filteredResults={filteredResults}
+                    filteredResultsCount={filteredResults.length}
                     mainGridResults={mainGridResults}
                     areaTotalCount={areaTotalCount}
                     topRatedInArea={topRatedInArea}
@@ -1098,6 +1118,7 @@ export default function LunchPage() {
                 <MobileResultsList
                     appliedFilters={appliedFilters}
                     filteredResults={filteredResults}
+                    filteredResultsCount={filteredResults.length}
                     mainGridResults={mainGridResults}
                     areaTotalCount={areaTotalCount}
                     topRatedInArea={topRatedInArea}
