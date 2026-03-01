@@ -24,6 +24,10 @@ export default withAuth(
             return NextResponse.rewrite(new URL("/", req.url));
         }
 
+        if (token?.role === "admin") {
+            return NextResponse.next();
+        }
+
         // Expired free plan: only allow /plan and /profile
         if (token && isTrialExpired(token)) {
             const allowedWhenExpired = path === PLAN_PATH || path.startsWith(PROFILE_PATH);

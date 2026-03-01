@@ -11,9 +11,6 @@ export default function TransportPage() {
                     <h1 className="text-3xl md:text-4xl font-bold text-black text-center">
                         Transport
                     </h1>
-                    <p className="text-[#424242] text-center mt-3 max-w-2xl mx-auto">
-                        Options for getting between your selected vineyards and lunch spots. Choose the service that fits your trip.
-                    </p>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">

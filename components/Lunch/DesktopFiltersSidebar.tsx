@@ -175,7 +175,7 @@ export default function DesktopFiltersSidebar({
                                 )}
                                 {appliedFilters.cost !== "" && (
                                     <span className="px-3 py-2 bg-[#F5F5F5] text-black text-sm rounded-lg border border-[#E0E0E0] flex items-center gap-2">
-                                        {appliedFilters.cost}
+                                        {costOptions.find((o) => o.key === appliedFilters.cost)?.name ?? appliedFilters.cost}
                                         <button
                                             onClick={() => onRemoveFilter("cost")}
                                             className="hover:text-[#424242]"

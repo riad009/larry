@@ -281,7 +281,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Star, MapPin, ChevronDown, ChevronUp, Loader2, X, ExternalLink, Clock, InstagramIcon } from "lucide-react";
+import { Star, MapPin, ChevronDown, ChevronUp, Loader2, ExternalLink, Clock, InstagramIcon } from "lucide-react";
 import { VineyardExperience, VineyardOffer } from "@/types/vineyard";
 import MapPopup from "./MapPopup";
 import GoogleIcon from "../public/google-icon.webp"
@@ -347,8 +347,8 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
                 {isSelected && (
-                    <div className="absolute top-3 left-3 bg-black px-3 py-1.5 rounded-full text-[11px] font-bold text-white uppercase tracking-wider border border-black">
-                        Selected
+                    <div className="absolute top-3 right-3 bg-black text-white rounded-full px-3 py-1 text-xs font-medium">
+                        ✓ Selected
                     </div>
                 )}
 
@@ -471,11 +471,13 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
                                     Add to Trip
                                 </button>
                             ) : (
-                                <div className="flex items-center justify-center w-full py-3 px-4 gap-2 bg-white text-black border-2 border-black hover:bg-[#F5F5F5] rounded-xl transition-all duration-200 group cursor-pointer"
-                                     onClick={() => onRemove(vineyard.id)}>
-                                    <span className="text-xs font-bold uppercase tracking-wider">REMOVE</span>
-                                    <X size={14} className="transition-colors" />
-                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => onRemove(vineyard.id)}
+                                    className="w-full py-3 px-4 text-sm font-bold uppercase tracking-wider rounded-xl bg-black text-white hover:bg-[#222] active:scale-[0.98] transition-all duration-200 shadow-sm"
+                                >
+                                    Selected
+                                </button>
                             )}
                         </div>
 

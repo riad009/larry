@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { LunchExperience } from "@/types/lunch";
 import clsx from "clsx";
 import { ImagePaths } from "@/public/images";
-import { Star, MapPin, Clock, X } from "lucide-react";
+import { Star, MapPin, Clock } from "lucide-react";
 import MapPopup from "./MapPopup";
 import GoogleIcon from "../public/google-icon.webp";
 
@@ -57,8 +57,8 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
                 {isSelected && (
-                    <div className="absolute top-3 left-3 bg-black px-3 py-1.5 rounded-full text-[11px] font-bold text-white uppercase tracking-wider border border-black">
-                        Selected
+                    <div className="absolute top-3 right-3 bg-black text-white rounded-full px-3 py-1 text-xs font-medium">
+                        ✓ Selected
                     </div>
                 )}
 
@@ -141,13 +141,13 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
                                     Add to Trip
                                 </button>
                             ) : (
-                                <div
-                                    className="flex items-center justify-center w-full py-3 px-4 gap-2 bg-white text-black border-2 border-black hover:bg-[#F5F5F5] rounded-xl transition-all duration-200 group cursor-pointer"
+                                <button
+                                    type="button"
                                     onClick={onRemove}
+                                    className="w-full py-3 px-4 text-sm font-bold uppercase tracking-wider rounded-xl bg-black text-white hover:bg-[#222] active:scale-[0.98] transition-all duration-200 shadow-sm"
                                 >
-                                    <span className="text-xs font-bold uppercase tracking-wider">REMOVE</span>
-                                    <X size={14} className="transition-colors" />
-                                </div>
+                                    Selected
+                                </button>
                             )}
 
                             

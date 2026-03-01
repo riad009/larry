@@ -46,9 +46,7 @@ export default function LoginPage() {
             const userRole = session?.user?.role;
             const trialEndDate = session?.user?.trialEndDate;
 
-            if (userRole === "admin") {
-                router.push("/admin/vineyard");
-            } else if (trialEndDate && new Date() > new Date(trialEndDate)) {
+            if (trialEndDate && new Date() > new Date(trialEndDate)) {
                 // Expired user: redirect to Plan / Pricing
                 router.push("/plan");
             } else {

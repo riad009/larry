@@ -719,7 +719,7 @@
 // app/lunch/page.tsx
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LunchExperience } from "@/types/lunch";
 import { useTripStore } from "@/store/tripStore";
@@ -733,16 +733,19 @@ import {
     MainLayoutWrapper,
 } from "@/components/Lunch";
 
-/** Bracket code → display label for Lunch cost dropdown (display only; filter still uses bracket string). */
-const LUNCH_BRACKET_LABELS: Record<string, string> = {
-    A: "Under 25€",
-    B: "25€–50€",
-    C: "50€–100€",
-    D: "100€+",
-};
+/** Static cost options for Lunch filter — matches Vineyard price filter (value + label). */
+const LUNCH_COST_OPTIONS = [
+    { value: "UNDER_25", label: "Under 25€" },
+    { value: "RANGE_25_40", label: "25–40€" },
+    { value: "RANGE_40_70", label: "40–70€" },
+    { value: "OVER_70", label: "70€+" },
+] as const;
 
-/** Logical ascending price order for cost dropdown (A → D). */
-const LUNCH_COST_ORDER = ["A", "B", "C", "D"];
+/** Cost options in FilterOption shape (key + name) for dropdowns. */
+const LUNCH_COST_OPTIONS_FOR_UI = LUNCH_COST_OPTIONS.map((o) => ({
+    key: o.value,
+    name: o.label,
+}));
 
 function mapLunch(doc: any): LunchExperience {
     return {
@@ -776,11 +779,29 @@ function mapLunch(doc: any): LunchExperience {
     };
 }
 
+function matchesLunchCostFilter(costValue: number | undefined | null, filterKey: string): boolean {
+    if (costValue == null || typeof costValue !== "number" || Number.isNaN(costValue))
+        return false;
+    switch (filterKey) {
+        case "UNDER_25":
+            return costValue < 25;
+        case "RANGE_25_40":
+            return costValue >= 25 && costValue <= 40;
+        case "RANGE_40_70":
+            return costValue > 40 && costValue <= 70;
+        case "OVER_70":
+            return costValue > 70;
+        default:
+            return false;
+    }
+}
+
 export default function LunchPage() {
     const router = useRouter();
     const { country, region, subRegion, lunches, addLunch, removeLunch } =
         useTripStore();
     const [showLunchWarning, setShowLunchWarning] = useState(false);
+    const resultsSectionRef = useRef<HTMLDivElement>(null);
 
     // Load filter states from localStorage or initialize
     const [filters, setFilters] = useState<{
@@ -912,28 +933,8 @@ export default function LunchPage() {
         return base.concat(unique.map((t) => ({ key: t!, name: t! })));
     }, [items, country, region, filters.area]);
 
-    // Cost options from LUNCH Bracket values only (no "ALL"; user must select a Bracket). Key = bracket (for filter); name = label (for display). Sorted in ascending price order A→D.
-    const costOptions = useMemo(() => {
-        const scoped = items.filter((i) => {
-            if (country && normalize(i.country) !== normalize(country.name))
-                return false;
-            if (region && normalize(i.region) !== normalize(region.name))
-                return false;
-            return true;
-        });
-        const unique = Array.from(
-            new Set(scoped.map((i) => i.bracket).filter((b): b is string => Boolean(b)))
-        );
-        const sorted = [...unique].sort((a, b) => {
-            const ia = LUNCH_COST_ORDER.indexOf(a);
-            const ib = LUNCH_COST_ORDER.indexOf(b);
-            if (ia === -1 && ib === -1) return a.localeCompare(b);
-            if (ia === -1) return 1;
-            if (ib === -1) return -1;
-            return ia - ib;
-        });
-        return sorted.map((b) => ({ key: b, name: LUNCH_BRACKET_LABELS[b] ?? b }));
-    }, [items, country, region]);
+    // Static cost options (matches Vineyard). Used for desktop and mobile dropdowns.
+    const costOptions = LUNCH_COST_OPTIONS_FOR_UI;
 
     // Filter + sort (no slice). Order: filter → sort. Same as Vineyard pattern.
     const filteredResults = useMemo(() => {
@@ -949,8 +950,12 @@ export default function LunchPage() {
                 return false;
             if (type !== "ALL" && normalize(i.type ?? "") !== normalize(type))
                 return false;
-            if (cost !== "" && normalize(i.bracket ?? "") !== normalize(cost))
-                return false;
+            if (cost !== "") {
+                if (i.lunchCost == null || (typeof i.lunchCost !== "number") || Number.isNaN(i.lunchCost))
+                    return false;
+                if (!matchesLunchCostFilter(i.lunchCost, cost))
+                    return false;
+            }
             return true;
         });
         // Sort: rating desc, name asc. Treat blank/NaN as -1.
@@ -1008,6 +1013,13 @@ export default function LunchPage() {
         if (hasActiveFilters) {
             const newApplied = { ...filters };
             setAppliedFilters(newApplied);
+        }
+    };
+
+    const handleApplyFiltersMobile = () => {
+        handleApplyFilters();
+        if (typeof window !== "undefined" && window.innerWidth < 768) {
+            resultsSectionRef.current?.scrollIntoView({ behavior: "smooth" });
         }
     };
 
@@ -1111,10 +1123,11 @@ export default function LunchPage() {
                     hasActiveFilters={hasActiveFilters}
                     hasSelectedLunch={lunches.length >= 1}
                     onFilterChange={handleFilterChange}
-                    onApplyFilters={handleApplyFilters}
+                    onApplyFilters={handleApplyFiltersMobile}
                     onClearFilters={handleClearFilters}
                 />
 
+                <div ref={resultsSectionRef}>
                 <MobileResultsList
                     appliedFilters={appliedFilters}
                     filteredResults={filteredResults}
@@ -1133,6 +1146,7 @@ export default function LunchPage() {
                     onRemoveLunch={handleRemoveLunch}
                     onRetry={handleRetry}
                 />
+                </div>
             </MainLayoutWrapper>
         </div>
     );

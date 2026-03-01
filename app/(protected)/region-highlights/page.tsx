@@ -135,9 +135,6 @@ const RegionalHighlights = () => {
                             >
                                 Explore vineyards
                             </Link>
-                            <p className="mt-4 text-sm text-[#424242]">
-                                Discover {displayName} estates
-                            </p>
                         </section>
                     </>
                 ) : (
@@ -157,9 +154,6 @@ const RegionalHighlights = () => {
                             >
                                 Explore vineyards
                             </Link>
-                            <p className="mt-4 text-sm text-[#424242]">
-                                Discover {region.name} estates
-                            </p>
                         </section>
                     </>
                 )}

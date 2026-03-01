@@ -142,7 +142,7 @@ export default function MobileFiltersPanel({
                         )}
                         {appliedFilters.cost !== "" && (
                             <span className="px-2 py-1 bg-[#F5F5F5] text-black text-xs rounded-lg border border-[#E0E0E0]">
-                                {appliedFilters.cost}
+                                {costOptions.find((o) => o.key === appliedFilters.cost)?.name ?? appliedFilters.cost}
                             </span>
                         )}
                     </div>
