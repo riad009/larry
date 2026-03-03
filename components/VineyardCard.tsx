@@ -298,11 +298,21 @@ interface CardProps {
 }
 
 
+const VINEYARD_PLACEHOLDER = "/images/vineyard-placeholder2.jpg";
+
 export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, isSelected, adminMode = false }: CardProps) {
     const [expanded, setExpanded] = useState(false);
     const [offers, setOffers] = useState<VineyardOffer[]>([]);
     const [loading, setLoading] = useState(false);
     const [showMapPopup, setShowMapPopup] = useState(false);
+    const name = (vineyard as any).Vineyard ?? vineyard.name ?? "";
+    const lat = typeof vineyard.latitude === "number" && Number.isFinite(vineyard.latitude) ? vineyard.latitude : null;
+    const lng = typeof vineyard.longitude === "number" && Number.isFinite(vineyard.longitude) ? vineyard.longitude : null;
+    const [imgSrc, setImgSrc] = useState<string>(() =>
+        name && String(name).trim() && lat != null && lng != null
+            ? `/api/place-photo?name=${encodeURIComponent(String(name).trim())}&lat=${lat}&lng=${lng}`
+            : VINEYARD_PLACEHOLDER
+    );
 
     const toggleExpand = async () => {
         const nextState = !expanded;
@@ -337,12 +347,13 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
         <div className={cardClasses}>
             <div className="relative w-full h-48 bg-[#F5F5F5]">
                 <Image
-                    src="/images/vineyard-placeholder2.jpg"
+                    src={imgSrc}
                     alt={vineyard.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                     className="object-cover opacity-90"
                     priority={false}
+                    onError={() => setImgSrc(VINEYARD_PLACEHOLDER)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 

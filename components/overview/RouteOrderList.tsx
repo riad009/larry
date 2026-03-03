@@ -6,6 +6,7 @@ import type { RouteStop } from "./GoogleOverviewMap";
 interface RouteOrderListProps {
     routeStops: RouteStop[];
     onReorder: (newOrder: RouteStop[]) => void;
+    onRemove?: (stop: RouteStop) => void;
 }
 
 function getName(stop: RouteStop): string {
@@ -30,7 +31,7 @@ function getSecondaryLine(stop: RouteStop): string {
     return [location, cost].filter(Boolean).join(" · ") || "—";
 }
 
-export function RouteOrderList({ routeStops, onReorder }: RouteOrderListProps) {
+export function RouteOrderList({ routeStops, onReorder, onRemove }: RouteOrderListProps) {
     const handleMoveUp = (index: number) => {
         if (index <= 0) return;
         const next = [...routeStops];
@@ -80,7 +81,7 @@ export function RouteOrderList({ routeStops, onReorder }: RouteOrderListProps) {
                             >
                                 {stop.type}
                             </span>
-                            <div className="flex gap-1">
+                            <div className="flex items-center gap-1">
                                 <button
                                     type="button"
                                     onClick={() => handleMoveUp(index)}
@@ -97,6 +98,16 @@ export function RouteOrderList({ routeStops, onReorder }: RouteOrderListProps) {
                                 >
                                     ↓
                                 </button>
+                                {onRemove && (
+                                    <button
+                                        type="button"
+                                        onClick={() => onRemove(stop)}
+                                        className="px-2 py-1 text-xs border border-black rounded bg-white text-black hover:bg-[#F5F5F5] disabled:opacity-40"
+                                        aria-label="Remove from trip"
+                                    >
+                                        ✕
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

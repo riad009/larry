@@ -15,7 +15,7 @@ import {
 
 export default function OverviewPage() {
     const hasHydrated = useTripHydrationStore((s) => s.hasHydrated);
-    const { vineyards, lunches } = useTripStore();
+    const { vineyards, lunches, removeVineyard, removeLunch } = useTripStore();
     const router = useRouter();
 
     const defaultRouteStops = React.useMemo<RouteStop[]>(
@@ -56,7 +56,14 @@ export default function OverviewPage() {
                 <div className="w-full md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white border-l border-[#E0E0E0] p-4 md:p-6 md:flex md:flex-col md:overflow-hidden">
                     <div className="md:flex-1 md:min-h-0 md:overflow-y-auto">
                         <h2 className="text-lg font-bold text-black mb-4">Your Trip Route</h2>
-                        <RouteOrderList routeStops={orderedStops} onReorder={setRouteStops} />
+                        <RouteOrderList
+                            routeStops={orderedStops}
+                            onReorder={setRouteStops}
+                            onRemove={(stop) => {
+                                if (stop.type === "vineyard") removeVineyard(stop.data.id);
+                                else removeLunch(stop.data.id);
+                            }}
+                        />
                     </div>
                     <div className="mt-6 md:mt-0 md:flex-shrink-0 md:border-t md:border-[#E0E0E0] md:pt-4 md:bg-white">
                         <ActionButtonsGrid onButtonClick={(id) => console.log(id)} />

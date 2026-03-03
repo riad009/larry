@@ -15,6 +15,8 @@ interface CompactVineyardCardProps {
     onDelete?: (id: string) => void;
 }
 
+const VINEYARD_PLACEHOLDER = "/images/vineyard-placeholder2.jpg";
+
 export default function CompactVineyardCard({
                                                 vineyard,
                                                 loadOffers,
@@ -26,6 +28,14 @@ export default function CompactVineyardCard({
     const [expanded, setExpanded] = useState<number>(0); // 0 = collapsed, 1 = basic info, 2 = full details
     const [offers, setOffers] = useState<VineyardOffer[]>([]);
     const [loading, setLoading] = useState(false);
+    const name = (vineyard as any).Vineyard ?? vineyard.name ?? "";
+    const lat = typeof vineyard.latitude === "number" && Number.isFinite(vineyard.latitude) ? vineyard.latitude : null;
+    const lng = typeof vineyard.longitude === "number" && Number.isFinite(vineyard.longitude) ? vineyard.longitude : null;
+    const [imgSrc, setImgSrc] = useState<string>(() =>
+        name && String(name).trim() && lat != null && lng != null
+            ? `/api/place-photo?name=${encodeURIComponent(String(name).trim())}&lat=${lat}&lng=${lng}`
+            : VINEYARD_PLACEHOLDER
+    );
 
     const toggleExpand = async (targetLevel?: number) => {
         const nextLevel = targetLevel !== undefined ? targetLevel : (expanded === 2 ? 0 : expanded + 1);
@@ -121,12 +131,13 @@ export default function CompactVineyardCard({
                 <div className="px-3 pb-3 border-t border-[#E0E0E0]">
                     <div className="relative w-full h-32 bg-[#F5F5F5] rounded-md overflow-hidden mb-3">
                         <Image
-                            src="/images/vineyard-placeholder2.jpg"
+                            src={imgSrc}
                             alt={vineyard.name}
                             fill
                             sizes="(max-width: 640px) 100vw, 300px"
                             className="object-cover"
                             priority={false}
+                            onError={() => setImgSrc(VINEYARD_PLACEHOLDER)}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 

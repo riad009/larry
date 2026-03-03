@@ -23,6 +23,17 @@ const safeText = (s?: string) => s?.trim() || "—";
 
 export default function LunchCard({ lunch, className, isSelected, onAdd, onRemove }: Props) {
     const [showMapPopup, setShowMapPopup] = useState(false);
+    const nameStr = (lunch.name ?? "").trim();
+    const hasValidCoords =
+        typeof lunch.latitude === "number" &&
+        typeof lunch.longitude === "number" &&
+        Number.isFinite(lunch.latitude) &&
+        Number.isFinite(lunch.longitude);
+    const initialImgSrc =
+        nameStr && hasValidCoords
+            ? `/api/place-photo?name=${encodeURIComponent(nameStr)}&lat=${lunch.latitude}&lng=${lunch.longitude}`
+            : ImagePaths.lunchPlaceHolder;
+    const [imgSrc, setImgSrc] = useState(initialImgSrc);
 
     const title = safeText(lunch.name);
     const type = safeText(lunch.type);
@@ -47,12 +58,13 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
             {/* Image block: h-48, overlay, badges (type bottom-left, rating bottom-right) */}
             <div className="relative w-full h-48 bg-[#F5F5F5]">
                 <Image
-                    src={ImagePaths.lunchPlaceHolder}
+                    src={imgSrc}
                     alt={title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                     className="object-cover opacity-90"
                     priority={false}
+                    onError={() => setImgSrc(ImagePaths.lunchPlaceHolder)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
