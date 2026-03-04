@@ -10,7 +10,7 @@ interface OverviewLayoutProps {
 export function OverviewLayout({ children, fullViewport }: OverviewLayoutProps) {
     if (fullViewport) {
         return (
-            <div className="h-screen w-full overflow-hidden flex flex-col text-black bg-white">
+            <div className="min-h-screen w-full overflow-visible flex flex-col text-black bg-white">
                 {children}
             </div>
         );

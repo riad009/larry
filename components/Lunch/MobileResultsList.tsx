@@ -129,7 +129,7 @@ export default function MobileResultsList({
                                 key={r.id}
                                 lunch={r}
                                 className="mb-4"
-                                isSelected={false}
+                                isSelected={selectedLunches.some((l) => l.id === r.id)}
                                 onAdd={() => onAddLunch(r)}
                                 onRemove={() => onRemoveLunch(r.id)}
                             />

@@ -344,14 +344,14 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
     `;
 
     return (
-        <div className={cardClasses}>
-            <div className="relative w-full h-48 bg-[#F5F5F5]">
+        <div className={`${cardClasses} max-w-full`}>
+            <div className="relative w-full max-w-full h-48 bg-[#F5F5F5] overflow-hidden">
                 <Image
                     src={imgSrc}
                     alt={vineyard.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                    className="object-cover opacity-90"
+                    className="object-cover opacity-90 w-full h-full"
                     priority={false}
                     onError={() => setImgSrc(VINEYARD_PLACEHOLDER)}
                 />

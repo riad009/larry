@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useTripStore, useTripHydrationStore } from "@/store/tripStore";
 import { mapVineyardDoc } from "@/utils/mappers";
 import { filterVineyardsByActiveFilters, getTopRatedInArea } from "@/utils/vineyardFilters";
@@ -69,6 +69,18 @@ export default function VineyardPage() {
     const hasHydrated = useTripHydrationStore((s) => s.hasHydrated);
     const { region: storeRegion, subRegion: storeSubRegion, vineyards: selectedVineyards, addVineyard, removeVineyard, setVineyards } = useTripStore();
     const { region, subRegion } = useTripStore();
+    const [showVineyardWarning, setShowVineyardWarning] = useState(false);
+    const resultsSectionRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (showVineyardWarning && resultsSectionRef?.current) {
+            resultsSectionRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    }, [showVineyardWarning]);
+
     const [items, setItems] = useState<VineyardExperience[]>([]);
     const [loading, setLoading] = useState(true);
     const [dataLoaded, setDataLoaded] = useState(false); // Test
@@ -207,6 +219,20 @@ export default function VineyardPage() {
         }
     };
 
+    const handleAddVineyard = (v: VineyardExperience) => {
+        if (selectedVineyards.length >= 6) {
+            setShowVineyardWarning(true);
+            return;
+        }
+        setShowVineyardWarning(false);
+        addVineyard(v);
+    };
+
+    const handleRemoveVineyard = (id: string) => {
+        setShowVineyardWarning(false);
+        removeVineyard(id);
+    };
+
     const loadOffers = async (id: string) => {
         const res = await fetch(`/api/vineyard-offers?vineyardId=${id}`);
         return res.json();
@@ -292,16 +318,18 @@ export default function VineyardPage() {
                             areaTotalCount={areaTotalCount}
                             topRatedInArea={topRatedInArea}
                             selectedVineyards={selectedVineyards}
-                            onAddVineyard={addVineyard}
-                            onRemoveVineyard={removeVineyard}
+                            onAddVineyard={handleAddVineyard}
+                            onRemoveVineyard={handleRemoveVineyard}
                             loadOffers={loadOffers}
                             onClearFilters={handleClearFilters}
+                            showVineyardWarning={showVineyardWarning}
+                            onDismissVineyardWarning={() => setShowVineyardWarning(false)}
                         />
                     </div>
                 </div>
             </div>
 
-            <div className="md:hidden flex flex-col items-center">
+            <div className="md:hidden flex flex-col items-center w-full">
                 <MobileFilterControls
                     pendingFilters={pendingFilters}
                     setPendingFilters={setPendingFilters}
@@ -314,6 +342,7 @@ export default function VineyardPage() {
                     selectedRegion={region}
                     selectedSubRegion={subRegion}
                 />
+                <div ref={resultsSectionRef} className="w-full min-w-0 max-w-full">
                 <MobileResults
                     items={items}
                     filteredResults={filteredResults}
@@ -322,11 +351,14 @@ export default function VineyardPage() {
                     areaTotalCount={areaTotalCount}
                     topRatedInArea={topRatedInArea}
                     selectedVineyards={selectedVineyards}
-                    onAddVineyard={addVineyard}
-                    onRemoveVineyard={removeVineyard}
+                    onAddVineyard={handleAddVineyard}
+                    onRemoveVineyard={handleRemoveVineyard}
                     loadOffers={loadOffers}
                     onClearFilters={handleClearFilters}
+                    showVineyardWarning={showVineyardWarning}
+                    onDismissVineyardWarning={() => setShowVineyardWarning(false)}
                 />
+                </div>
             </div>
         </div>
     );

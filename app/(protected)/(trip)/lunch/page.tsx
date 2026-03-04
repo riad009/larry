@@ -803,6 +803,15 @@ export default function LunchPage() {
     const [showLunchWarning, setShowLunchWarning] = useState(false);
     const resultsSectionRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        if (showLunchWarning && resultsSectionRef?.current) {
+            resultsSectionRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+    }, [showLunchWarning]);
+
     // Load filter states from localStorage or initialize
     const [filters, setFilters] = useState<{
         area: string;
@@ -1127,7 +1136,7 @@ export default function LunchPage() {
                     onClearFilters={handleClearFilters}
                 />
 
-                <div ref={resultsSectionRef}>
+                <div ref={resultsSectionRef} className="w-full min-w-0 max-w-full">
                 <MobileResultsList
                     appliedFilters={appliedFilters}
                     filteredResults={filteredResults}

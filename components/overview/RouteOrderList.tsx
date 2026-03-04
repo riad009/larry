@@ -67,7 +67,7 @@ export function RouteOrderList({ routeStops, onReorder, onRemove }: RouteOrderLi
                                         END
                                     </span>
                                 )}
-                                <span className="font-medium text-base text-black truncate">{getName(stop)}</span>
+                                <span className="font-medium text-base text-black break-words">{getName(stop)}</span>
                             </div>
                             <p className="text-sm text-[#424242] mt-0.5 pl-5">{getSecondaryLine(stop)}</p>
                         </div>

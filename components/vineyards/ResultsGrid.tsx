@@ -157,7 +157,7 @@ import React, { useState } from "react";
 import VineyardCard from "@/components/VineyardCard";
 import CompactVineyardCard from "@/components/CompactVineyardCard";
 import { Button } from "@/components/ui/button";
-import { Filter, Wine, ChevronUp } from "lucide-react";
+import { Filter, ChevronUp } from "lucide-react";
 import { VineyardExperience } from "@/types/vineyard";
 
 interface ResultsGridProps {
@@ -172,6 +172,8 @@ interface ResultsGridProps {
     onRemoveVineyard: (id: string) => void;
     loadOffers: (id: string) => Promise<any>;
     onClearFilters: () => void;
+    showVineyardWarning?: boolean;
+    onDismissVineyardWarning?: () => void;
 }
 
 export default function ResultsGrid({
@@ -186,11 +188,27 @@ export default function ResultsGrid({
                                         onRemoveVineyard,
                                         loadOffers,
                                         onClearFilters,
+                                        showVineyardWarning,
+                                        onDismissVineyardWarning,
                                     }: ResultsGridProps) {
     const [expandedId, setExpandedId] = useState<string | null>(null);
 
     return (
         <div className="flex-1">
+            {showVineyardWarning && (
+                <div className="mb-4 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between">
+                    <p className="text-amber-800 text-sm font-medium">Delete a selection to add a new one.</p>
+                    {onDismissVineyardWarning && (
+                        <button
+                            type="button"
+                            onClick={onDismissVineyardWarning}
+                            className="text-amber-700 hover:text-amber-900 text-sm font-medium underline"
+                        >
+                            Dismiss
+                        </button>
+                    )}
+                </div>
+            )}
             {/*<div className="mb-6">*/}
             {/*    <h1 className="text-3xl font-bold text-white mb-2">Discover Vineyards</h1>*/}
             {/*    <p className="text-zinc-100">Explore our curated selection of premium vineyard experiences</p>*/}
@@ -236,23 +254,13 @@ export default function ResultsGrid({
                 </div>
             )}
 
-            {/* 2. Selected for Trip (After main results, 2 columns) */}
+            {/* 2. Empty state: only when no filtered results */}
             {hasSearched && filteredResults.length === 0 && (
-                <div className="text-center py-12">
-                    <div className="max-w-md mx-auto p-8 rounded-3xl bg-white border border-[#E0E0E0] shadow-sm">
-                        <div className="p-4 bg-[#F5F5F5] rounded-2xl inline-block mb-4 border border-[#E0E0E0]">
-                            <Wine className="w-12 h-12 text-black" />
-                        </div>
-                        <p className="text-black text-base mb-4">
-                            {areaTotalCount ?? 0} vineyard{(areaTotalCount ?? 0) !== 1 ? "s" : ""} in this sub-region · Try adjusting your filters
-                        </p>
-                        <Button
-                            onClick={onClearFilters}
-                            className="bg-black text-white hover:bg-[#424242] border border-black"
-                        >
-                            Reset All Filters
-                        </Button>
-                    </div>
+                <div className="text-center py-6">
+                    <p className="text-black text-base mb-3">No vineyards match your filters.</p>
+                    <Button onClick={onClearFilters} className="bg-black text-white hover:bg-[#424242] border border-black">
+                        Reset All Filters
+                    </Button>
                 </div>
             )}
 

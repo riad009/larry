@@ -49,12 +49,12 @@ export default function OverviewPage() {
 
     return (
         <OverviewLayout fullViewport>
-            <div className="flex flex-col md:flex-row flex-1 min-h-0 w-full overflow-hidden">
-                <div className="relative w-full md:w-[68%] h-[65vh] md:h-full flex-shrink-0">
+            <div className="flex flex-col md:flex-row flex-1 min-h-0 w-full overflow-hidden md:overflow-hidden">
+                <div className="relative w-full md:w-[68%] h-[65vh] md:h-full flex-shrink-0 min-w-0">
                     <GoogleOverviewMap routeStops={orderedStops} />
                 </div>
-                <div className="w-full md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white border-l border-[#E0E0E0] p-4 md:p-6 md:flex md:flex-col md:overflow-hidden">
-                    <div className="md:flex-1 md:min-h-0 md:overflow-y-auto">
+                <div className="w-full min-w-0 md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white border-l border-[#E0E0E0] p-4 md:p-6 md:flex md:flex-col md:overflow-hidden flex-1 min-h-0 overflow-y-auto md:overflow-y-auto">
+                    <div className="md:flex-1 md:min-h-0 md:overflow-y-auto min-w-0">
                         <h2 className="text-lg font-bold text-black mb-4">Your Trip Route</h2>
                         <RouteOrderList
                             routeStops={orderedStops}

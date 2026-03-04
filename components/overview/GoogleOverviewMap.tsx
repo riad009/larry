@@ -69,7 +69,7 @@ export function GoogleOverviewMap({ routeStops }: GoogleOverviewMapProps) {
             zoom: 10,
             center: { lat: 48.8566, lng: 2.3522 },
             styles: [],
-            gestureHandling: "greedy",
+            gestureHandling: "cooperative",
         });
         mapRef.current = map;
 
@@ -271,7 +271,7 @@ export function GoogleOverviewMap({ routeStops }: GoogleOverviewMapProps) {
     return (
         <div
             ref={containerRef}
-            className="w-full h-full min-h-[300px] rounded-2xl overflow-hidden border border-[#E0E0E0] bg-white shadow-sm relative"
+            className="w-full max-w-full h-full min-h-[300px] rounded-2xl overflow-hidden border border-[#E0E0E0] bg-white shadow-sm relative"
         />
     );
 }

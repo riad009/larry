@@ -151,6 +151,8 @@ interface MobileResultsProps {
     onRemoveVineyard: (id: string) => void;
     loadOffers: (id: string) => Promise<any>;
     onClearFilters: () => void;
+    showVineyardWarning?: boolean;
+    onDismissVineyardWarning?: () => void;
 }
 
 export default function MobileResults({
@@ -165,11 +167,27 @@ export default function MobileResults({
                                           onRemoveVineyard,
                                           loadOffers,
                                           onClearFilters,
+                                          showVineyardWarning,
+                                          onDismissVineyardWarning,
                                       }: MobileResultsProps) {
     const [expandedId, setExpandedId] = useState<string | null>(null);
 
     return (
         <div className="w-full px-4 pb-20">
+            {showVineyardWarning && (
+                <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-2 mb-4">
+                    <p className="text-amber-800 text-sm font-medium">Delete a selection to add a new one.</p>
+                    {onDismissVineyardWarning && (
+                        <button
+                            type="button"
+                            onClick={onDismissVineyardWarning}
+                            className="text-amber-700 hover:text-amber-900 text-sm font-medium underline shrink-0"
+                        >
+                            Dismiss
+                        </button>
+                    )}
+                </div>
+            )}
             {hasSearched && areaTotalCount !== undefined && (
                 <div className="mb-6 flex flex-col gap-3">
                     <div className="flex items-center justify-between">
@@ -200,12 +218,9 @@ export default function MobileResults({
                     </div>
                 </div>
             ) : filteredResults.length === 0 ? (
-                <div className="text-center py-8">
-                    <div className="w-full p-6 rounded-3xl bg-white border border-[#E0E0E0] shadow-sm">
-                        <Wine className="w-10 h-10 text-black mx-auto mb-4" />
-                        <p className="text-black text-base mb-4">{areaTotalCount ?? 0} vineyards in this sub-region · Try adjusting your filters</p>
-                        <Button onClick={onClearFilters} className="bg-black text-white text-base mt-4 border border-black">Reset Filters</Button>
-                    </div>
+                <div className="text-center py-6">
+                    <p className="text-black text-base mb-3">No vineyards match your filters.</p>
+                    <Button onClick={onClearFilters} className="bg-black text-white text-base border border-black">Reset Filters</Button>
                 </div>
             ) : (
                 <div className="space-y-4 mb-10">

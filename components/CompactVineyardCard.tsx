@@ -58,7 +58,7 @@ export default function CompactVineyardCard({
     const location = [vineyard.subRegion, vineyard.commune].filter(Boolean).join(", ");
 
     const cardClasses = `
-    rounded-lg border transition-all duration-300 bg-white
+    rounded-lg border transition-all duration-300 bg-white w-full min-w-0 max-w-full overflow-hidden
     ${isSelected
         ? "border-black shadow-md ring-2 ring-black/20"
         : "border-[#E0E0E0] hover:border-[#9E9E9E]"
@@ -70,8 +70,8 @@ export default function CompactVineyardCard({
             <div className="p-3">
                 <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                            <h3 className="text-black font-medium text-sm truncate">
+                        <div className="flex items-center gap-2 mb-1 min-w-0">
+                            <h3 className="text-black font-medium text-sm truncate min-w-0">
                                 {vineyard.name}
                             </h3>
                             {isSelected && (

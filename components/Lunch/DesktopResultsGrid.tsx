@@ -107,7 +107,7 @@ export default function DesktopResultsGrid({
                                 >
                                     <LunchCard
                                         lunch={r}
-                                        isSelected={false}
+                                        isSelected={selectedLunches.some((l) => l.id === r.id)}
                                         onAdd={() => onAddLunch(r)}
                                         onRemove={() => onRemoveLunch(r.id)}
                                     />

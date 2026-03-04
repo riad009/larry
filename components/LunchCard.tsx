@@ -48,7 +48,7 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
     return (
         <div
             className={clsx(
-                "rounded-2xl overflow-hidden border transition-all duration-300 bg-white hover:shadow-md",
+                "rounded-2xl overflow-hidden border transition-all duration-300 bg-white hover:shadow-md max-w-full",
                 isSelected
                     ? "border-black shadow-md ring-2 ring-black/20"
                     : "border-[#E0E0E0] hover:border-[#9E9E9E]",
@@ -56,13 +56,13 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
             )}
         >
             {/* Image block: h-48, overlay, badges (type bottom-left, rating bottom-right) */}
-            <div className="relative w-full h-48 bg-[#F5F5F5]">
+            <div className="relative w-full max-w-full h-48 bg-[#F5F5F5] overflow-hidden">
                 <Image
                     src={imgSrc}
                     alt={title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                    className="object-cover opacity-90"
+                    className="object-cover opacity-90 w-full h-full"
                     priority={false}
                     onError={() => setImgSrc(ImagePaths.lunchPlaceHolder)}
                 />

@@ -24,7 +24,7 @@ export default function MainLayoutWrapper({
 
     // Mobile variant
     return (
-        <div className={`md:hidden flex flex-col items-center ${className}`}>
+        <div className={`md:hidden flex flex-col items-center w-full max-w-full overflow-x-hidden ${className}`}>
             {children}
         </div>
     );
