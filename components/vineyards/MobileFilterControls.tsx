@@ -162,6 +162,11 @@ export default function MobileFilterControls({
             <div className="flex gap-3">
                 <Button
                     onClick={onGo}
+                    disabled={
+                        !pendingFilters.selectedArea ||
+                        !pendingFilters.selectedType ||
+                        !pendingFilters.selectedCostBucket
+                    }
                     className="flex-1 font-bold h-12 rounded-xl transition-all duration-300 shadow-sm bg-black text-white hover:bg-[#424242] border border-black"
                 >
                     GO

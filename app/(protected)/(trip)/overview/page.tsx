@@ -13,6 +13,8 @@ import {
     type RouteStop,
 } from "@/components/overview";
 
+type MapViewMode = "normal" | "fullscreen" | "hidden";
+
 export default function OverviewPage() {
     const hasHydrated = useTripHydrationStore((s) => s.hasHydrated);
     const { vineyards, lunches, removeVineyard, removeLunch } = useTripStore();
@@ -27,6 +29,7 @@ export default function OverviewPage() {
     );
 
     const [routeStops, setRouteStops] = useState<RouteStop[]>([]);
+    const [mapViewMode, setMapViewMode] = useState<MapViewMode>("normal");
 
     useEffect(() => {
         if (defaultRouteStops.length === 0) return;
@@ -47,11 +50,65 @@ export default function OverviewPage() {
 
     const orderedStops = routeStops.length > 0 ? routeStops : defaultRouteStops;
 
+    if (mapViewMode === "fullscreen") {
+        return (
+            <OverviewLayout fullViewport>
+                <div className="relative w-full h-screen flex-shrink-0 min-w-0">
+                    <div className="absolute top-2 right-2 z-10">
+                        <button
+                            type="button"
+                            onClick={() => setMapViewMode("normal")}
+                            className="px-3 py-2 text-sm font-medium bg-white border border-[#E0E0E0] rounded-lg shadow-sm hover:bg-[#F5F5F5] text-black"
+                        >
+                            Exit fullscreen
+                        </button>
+                    </div>
+                    <div className="w-full h-full">
+                        <GoogleOverviewMap routeStops={orderedStops} />
+                    </div>
+                </div>
+            </OverviewLayout>
+        );
+    }
+
     return (
         <OverviewLayout fullViewport>
             <div className="flex flex-col md:flex-row flex-1 min-h-0 w-full overflow-hidden md:overflow-hidden">
-                <div className="relative w-full md:w-[68%] h-[65vh] md:h-full flex-shrink-0 min-w-0">
-                    <GoogleOverviewMap routeStops={orderedStops} />
+                <div className="flex flex-col w-full md:w-[68%] flex-shrink-0 min-w-0">
+                    {/* <div className="flex flex-wrap items-center gap-2 p-2 border-b border-[#E0E0E0] bg-white">
+                        <button
+                            type="button"
+                            onClick={() => setMapViewMode("normal")}
+                            className="px-3 py-1.5 text-sm font-medium bg-white border border-[#E0E0E0] rounded-lg hover:bg-[#F5F5F5] text-black disabled:opacity-50"
+                            disabled={mapViewMode === "normal"}
+                        >
+                            View Map
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setMapViewMode("hidden")}
+                            className="px-3 py-1.5 text-sm font-medium bg-white border border-[#E0E0E0] rounded-lg hover:bg-[#F5F5F5] text-black disabled:opacity-50"
+                            disabled={mapViewMode === "hidden"}
+                        >
+                            Hide Map
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setMapViewMode("fullscreen")}
+                            className="px-3 py-1.5 text-sm font-medium bg-white border border-[#E0E0E0] rounded-lg hover:bg-[#F5F5F5] text-black"
+                        >
+                            Fullscreen
+                        </button>
+                    </div> */}
+                    {mapViewMode !== "hidden" && (
+                        <div
+                            className={`relative w-full flex-shrink-0 min-w-0 ${
+                                mapViewMode === "normal" ? "h-[65vh] md:h-full" : ""
+                            }`}
+                        >
+                            <GoogleOverviewMap routeStops={orderedStops} />
+                        </div>
+                    )}
                 </div>
                 <div className="w-full min-w-0 md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white border-l border-[#E0E0E0] p-4 md:p-6 md:flex md:flex-col md:overflow-hidden flex-1 min-h-0 overflow-y-auto md:overflow-y-auto">
                     <div className="md:flex-1 md:min-h-0 md:overflow-y-auto min-w-0">

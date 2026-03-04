@@ -230,11 +230,15 @@ export default function CountryRegionSelector() {
 
     const handleSelect = (type: "country" | "region", option: Option) => {
         if (type === "country") {
+            localStorage.removeItem("smartRoute:vineyards:filters");
+            localStorage.removeItem("lunchFilters");
             setCountry(option);
             setRegion(null);
             // Open the region panel automatically after country is selected
             setTimeout(() => setOpenPanel("region"), 100);
         } else {
+            localStorage.removeItem("smartRoute:vineyards:filters");
+            localStorage.removeItem("lunchFilters");
             setRegion(option);
             setOpenPanel(null);
         }

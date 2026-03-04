@@ -356,6 +356,11 @@ export default function DesktopFiltersSidebar({
                         <div className="flex gap-3 mt-8">
                             <Button
                                 onClick={onGo}
+                                disabled={
+                                    !pendingFilters.selectedArea ||
+                                    !pendingFilters.selectedType ||
+                                    !pendingFilters.selectedCostBucket
+                                }
                                 className="flex-1 font-bold h-14 rounded-xl text-base transition-all duration-300 shadow-sm bg-black text-white hover:bg-[#424242] border border-black"
                             >
                                 GO
