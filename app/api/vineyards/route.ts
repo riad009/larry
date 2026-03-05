@@ -4,6 +4,16 @@ import clientPromise from "@/lib/mongo";
 import { NextResponse } from "next/server";
 import { VineyardExperience } from "@/types/vineyard";
 import { ObjectId } from "mongodb";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+async function requireAdmin() {
+    const session = await getServerSession(authOptions);
+    if (!session || (session.user as { role?: string }).role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return null;
+}
 
 const EXPERIENCE_COLUMNS = [
     "Tasting Only", "Tour & Tasting", "Pairing & Lunch", "Lunch", "Vine Experience",
@@ -54,6 +64,8 @@ function mapVineyard(doc: any): VineyardExperience {
 
 // --- GET ALL (Optimized with Projection) ---
 export async function GET() {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");
@@ -94,6 +106,8 @@ export async function GET() {
 
 // --- CREATE NEW ---
 export async function POST(req: Request) {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");
@@ -130,6 +144,8 @@ export async function POST(req: Request) {
 
 // --- UPDATE EXISTING ---
 export async function PUT(req: Request) {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");
@@ -171,6 +187,8 @@ export async function PUT(req: Request) {
 
 // --- DELETE ---
 export async function DELETE(req: Request) {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const { searchParams } = new URL(req.url);
         const id = searchParams.get("id");

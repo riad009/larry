@@ -3,6 +3,16 @@ import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongo";
 import { LunchExperience } from "@/types/lunch";
 import { ObjectId } from "mongodb";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+async function requireAdmin() {
+    const session = await getServerSession(authOptions);
+    if (!session || (session.user as { role?: string }).role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return null;
+}
 
 /**
  * Optimized Mapper: Uses || to handle cases where a field might be an empty string.
@@ -30,6 +40,8 @@ function mapLunch(doc: any): LunchExperience {
 
 // --- GET ALL (Optimized with Projection) ---
 export async function GET() {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");
@@ -66,6 +78,8 @@ export async function GET() {
 
 // --- CREATE ---
 export async function POST(req: Request) {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");
@@ -98,6 +112,8 @@ export async function POST(req: Request) {
 
 // --- UPDATE ---
 export async function PUT(req: Request) {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");
@@ -134,6 +150,8 @@ export async function PUT(req: Request) {
 
 // --- DELETE ---
 export async function DELETE(req: Request) {
+    const authError = await requireAdmin();
+    if (authError) return authError;
     try {
         const { searchParams } = new URL(req.url);
         const id = searchParams.get("id");

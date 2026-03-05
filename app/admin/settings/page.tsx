@@ -73,7 +73,7 @@ export default function AdminSettings() {
         }
     };
 
-    if (fetching) return <div className="p-8 text-white">Loading Admin Data...</div>;
+    if (fetching) return <div className="p-8 text-black">Loading Admin Data...</div>;
 
     return (
         <div className="p-4 md:p-8 max-w-7xl mx-auto">
@@ -82,12 +82,12 @@ export default function AdminSettings() {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30">
-                                <ShieldCheck className="h-6 w-6 text-green-400" />
+                            <div className="p-2 rounded-lg bg-white border border-black">
+                                <ShieldCheck className="h-6 w-6 text-black" />
                             </div>
                             <div>
-                                <h1 className="text-2xl md:text-3xl font-bold text-white">Admin Settings</h1>
-                                <p className="text-gray-400 text-sm">Manage your account and security settings</p>
+                                <h1 className="text-2xl md:text-3xl font-bold text-black">Admin Settings</h1>
+                                <p className="text-[#424242] text-sm">Manage your account and security settings</p>
                             </div>
                         </div>
                     </div>
@@ -95,72 +95,71 @@ export default function AdminSettings() {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30">
-                                <Shield className="h-5 w-5 text-green-400" />
+                            <div className="p-2 rounded-lg bg-white border border-black">
+                                <Shield className="h-5 w-5 text-black" />
                             </div>
                             <div>
-                                <p className="text-sm text-gray-400">Account Type</p>
-                                <p className="text-lg font-bold text-white">Super Admin</p>
+                                <p className="text-sm text-[#424242]">Account Type</p>
+                                <p className="text-lg font-bold text-black">Super Admin</p>
                             </div>
                         </div>
                     </div>
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border border-blue-500/30">
-                                <Key className="h-5 w-5 text-blue-400" />
+                            <div className="p-2 rounded-lg bg-white border border-black">
+                                <Key className="h-5 w-5 text-black" />
                             </div>
                             <div>
-                                <p className="text-sm text-gray-400">Status</p>
-                                <p className="text-lg font-bold text-white">Verified</p>
+                                <p className="text-sm text-[#424242]">Status</p>
+                                <p className="text-lg font-bold text-black">Verified</p>
                             </div>
                         </div>
                     </div>
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30">
-                                <Lock className="h-5 w-5 text-purple-400" />
+                            <div className="p-2 rounded-lg bg-white border border-black">
+                                <Lock className="h-5 w-5 text-black" />
                             </div>
                             <div>
-                                <p className="text-sm text-gray-400">Security</p>
-                                <p className="text-lg font-bold text-white">Active</p>
+                                <p className="text-sm text-[#424242]">Security</p>
+                                <p className="text-lg font-bold text-black">Active</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Form Section */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="space-y-6">
-                    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-6">
+                    <div className="bg-white border border-black rounded-xl p-6">
                         <div className="flex flex-col items-center text-center mb-6">
-                            <div className="h-20 w-20 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center text-2xl font-bold text-white mb-4 uppercase">
+                            <div className="h-20 w-20 rounded-full bg-black flex items-center justify-center text-2xl font-bold text-white mb-4 uppercase">
                                 {adminData.name.charAt(0)}
                             </div>
-                            <h2 className="text-xl font-bold text-white">{adminData.name}</h2>
-                            <p className="text-gray-400 text-sm mt-1">{adminData.email}</p>
+                            <h2 className="text-xl font-bold text-black">{adminData.name}</h2>
+                            <p className="text-[#424242] text-sm mt-1">{adminData.email}</p>
                         </div>
                     </div>
                 </div>
 
                 <div className="lg:col-span-2">
-                    <div className="bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-6 text-white">
+                    <div className="bg-white border border-black rounded-xl p-6 text-black">
                         <div className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label>Display Name</Label>
+                                    <Label className="text-black">Display Name</Label>
                                     <Input
-                                        className="bg-zinc-800 border-zinc-700"
+                                        className="bg-white border-[#E0E0E0] text-black"
                                         value={adminData.name}
                                         onChange={(e) => setAdminData({...adminData, name: e.target.value})}
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>Email</Label>
+                                    <Label className="text-black">Email</Label>
                                     <Input
-                                        className="bg-zinc-800 border-zinc-700"
+                                        className="bg-white border-[#E0E0E0] text-black"
                                         value={adminData.email}
                                         onChange={(e) => setAdminData({...adminData, email: e.target.value})}
                                     />
@@ -168,26 +167,26 @@ export default function AdminSettings() {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label>New Password</Label>
+                                    <Label className="text-black">New Password</Label>
                                     <Input
                                         type="password"
-                                        className="bg-zinc-800 border-zinc-700"
+                                        className="bg-white border-[#E0E0E0] text-black"
                                         value={adminData.newPassword}
                                         onChange={(e) => setAdminData({...adminData, newPassword: e.target.value})}
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>Confirm Password</Label>
+                                    <Label className="text-black">Confirm Password</Label>
                                     <Input
                                         type="password"
-                                        className="bg-zinc-800 border-zinc-700"
+                                        className="bg-white border-[#E0E0E0] text-black"
                                         value={adminData.confirmPassword}
                                         onChange={(e) => setAdminData({...adminData, confirmPassword: e.target.value})}
                                     />
                                 </div>
                             </div>
-                            {message && <p className="text-green-400 text-sm">{message}</p>}
-                            <Button onClick={handleUpdate} disabled={loading} className="w-full bg-green-600 hover:bg-green-500">
+                            {message && <p className="text-black text-sm">{message}</p>}
+                            <Button onClick={handleUpdate} disabled={loading} className="w-full bg-black hover:bg-[#424242] text-white border border-black">
                                 {loading ? "Saving..." : "Save Settings"}
                             </Button>
                         </div>

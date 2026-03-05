@@ -100,18 +100,18 @@ export default function UserAdmin() {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <div>
                         <div className="flex items-center gap-3 mb-2">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30">
-                                <Users className="h-6 w-6 text-green-400" />
+                            <div className="p-2 rounded-lg bg-white border border-black">
+                                <Users className="h-6 w-6 text-black" />
                             </div>
                             <div>
-                                <h1 className="text-2xl md:text-3xl font-bold text-white">User Management</h1>
-                                <p className="text-gray-400 text-sm">Manage all user accounts in the system</p>
+                                <h1 className="text-2xl md:text-3xl font-bold text-black">User Management</h1>
+                                <p className="text-[#424242] text-sm">Manage all user accounts in the system</p>
                             </div>
                         </div>
                     </div>
                     <Button
                         onClick={() => handleOpen()}
-                        className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold rounded-xl px-6 py-6 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20 flex items-center gap-2"
+                        className="bg-black hover:bg-[#424242] text-white font-bold rounded-xl px-6 py-6 border border-black flex items-center gap-2"
                     >
                         <Plus className="h-5 w-5" />
                         <span>New User</span>
@@ -120,75 +120,70 @@ export default function UserAdmin() {
 
                 {/* Stats Cards - Same as Vineyard page */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-2xl font-bold text-white">{totalUsers}</p>
-                                <p className="text-sm text-gray-400">Total Users</p>
+                                <p className="text-2xl font-bold text-black">{totalUsers}</p>
+                                <p className="text-sm text-[#424242]">Total Users</p>
                             </div>
-                            <Users className="h-8 w-8 text-green-500 opacity-70" />
+                            <Users className="h-8 w-8 text-black opacity-70" />
                         </div>
                     </div>
-
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-2xl font-bold text-white">{activeUsers}</p>
-                                <p className="text-sm text-gray-400">Active Users</p>
+                                <p className="text-2xl font-bold text-black">{activeUsers}</p>
+                                <p className="text-sm text-[#424242]">Active Users</p>
                             </div>
-                            <UserCheck className="h-8 w-8 text-blue-500 opacity-70" />
+                            <UserCheck className="h-8 w-8 text-black opacity-70" />
                         </div>
                     </div>
-
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-2xl font-bold text-white">{wineLovers}</p>
-                                <p className="text-sm text-gray-400">Wine Lovers</p>
+                                <p className="text-2xl font-bold text-black">{wineLovers}</p>
+                                <p className="text-sm text-[#424242]">Wine Lovers</p>
                             </div>
-                            <UserCheck className="h-8 w-8 text-amber-500 opacity-70" />
+                            <UserCheck className="h-8 w-8 text-black opacity-70" />
                         </div>
                     </div>
-
-                    <div className="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-xl p-4">
+                    <div className="bg-white border border-black rounded-xl p-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-2xl font-bold text-white">{adminUsers}</p>
-                                <p className="text-sm text-gray-400">Administrators</p>
+                                <p className="text-2xl font-bold text-black">{adminUsers}</p>
+                                <p className="text-sm text-[#424242]">Administrators</p>
                             </div>
-                            <Shield className="h-8 w-8 text-purple-500 opacity-70" />
+                            <Shield className="h-8 w-8 text-black opacity-70" />
                         </div>
                     </div>
                 </div>
 
-                {/* Search Bar - Simple and functional */}
                 <div className="relative max-w-md">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#424242]" />
                     <Input
                         placeholder="Search users by name or email..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-10 bg-black/50 border-gray-800 text-white placeholder:text-gray-500"
+                        className="pl-10 bg-white border border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
                     />
                 </div>
             </div>
 
-            {/* Table Section - Clean and consistent */}
-            <div className="rounded-2xl border border-gray-800 bg-gradient-to-br from-gray-900 to-black overflow-hidden shadow-xl">
+            <div className="rounded-xl border border-black bg-white overflow-hidden">
                 {loading ? (
                     <div className="p-12 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-800 border-t-green-500"></div>
-                        <p className="mt-4 text-gray-400">Loading users...</p>
+                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-[#E0E0E0] border-t-black"></div>
+                        <p className="mt-4 text-[#424242]">Loading users...</p>
                     </div>
                 ) : filteredUsers.length === 0 ? (
                     <div className="p-12 text-center">
-                        <Users className="h-12 w-12 text-gray-700 mx-auto mb-4" />
-                        <p className="text-gray-400">No users found</p>
+                        <Users className="h-12 w-12 text-[#424242] mx-auto mb-4" />
+                        <p className="text-[#424242]">No users found</p>
                         {search && (
                             <Button
                                 variant="ghost"
                                 onClick={() => setSearch("")}
-                                className="mt-2 text-green-400 hover:text-green-300"
+                                className="mt-2 text-black hover:bg-[#F5F5F5]"
                             >
                                 Clear search
                             </Button>
@@ -197,51 +192,47 @@ export default function UserAdmin() {
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="bg-gray-900/50 border-b border-gray-800">
+                            <thead className="bg-[#F5F5F5] border-b border-black">
                             <tr>
-                                <th className="text-left p-4 text-xs font-bold text-gray-400 uppercase tracking-wider">User</th>
-                                <th className="text-left p-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Type</th>
-                                <th className="text-left p-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Role</th>
-                                <th className="text-left p-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Status</th>
-                                <th className="text-left p-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Actions</th>
+                                <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">User</th>
+                                <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Type</th>
+                                <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Role</th>
+                                <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Status</th>
+                                <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Actions</th>
                             </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-800/50">
+                            <tbody className="divide-y divide-[#E0E0E0]">
                             {filteredUsers.map((u) => (
-                                <tr key={u.mongoId} className="hover:bg-white/5 transition-colors duration-150">
+                                <tr key={u.mongoId} className="hover:bg-[#F5F5F5] transition-colors duration-150">
                                     <td className="p-4">
                                         <div className="flex items-center gap-3">
                                             <div className={`p-2 rounded-lg ${
                                                 u.role === "admin"
-                                                    ? "bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20"
-                                                    : "bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20"
+                                                    ? "bg-[#F5F5F5] border border-[#E0E0E0]"
+                                                    : "bg-white border border-[#E0E0E0]"
                                             }`}>
                                                 {u.role === "admin" ? (
-                                                    <Shield className="h-5 w-5 text-purple-400" />
+                                                    <Shield className="h-5 w-5 text-black" />
                                                 ) : (
-                                                    <Users className="h-5 w-5 text-green-400" />
+                                                    <Users className="h-5 w-5 text-black" />
                                                 )}
                                             </div>
                                             <div>
-                                                <p className="font-medium text-white">{u.name}</p>
-                                                <p className="text-xs text-gray-500">{u.email}</p>
+                                                <p className="font-medium text-black">{u.name}</p>
+                                                <p className="text-xs text-[#424242]">{u.email}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="p-4">
-                                            <span className={`text-sm ${
-                                                u.userType === "travelPro"
-                                                    ? "text-blue-400"
-                                                    : "text-amber-400"
-                                            }`}>
+                                            <span className="text-sm text-black">
                                                 {u.displayName || u.userType}
                                             </span>
                                     </td>
                                     <td className="p-4">
                                             <span className={`text-xs font-medium px-2 py-1 rounded-full ${
                                                 u.role === "admin"
-                                                    ? "bg-purple-500/10 text-purple-400"
-                                                    : "bg-gray-800 text-gray-400"
+                                                    ? "bg-[#F5F5F5] text-black border border-[#E0E0E0]"
+                                                    : "bg-white text-[#424242] border border-[#E0E0E0]"
                                             }`}>
                                                 {u.role}
                                             </span>
@@ -249,13 +240,11 @@ export default function UserAdmin() {
                                     <td className="p-4">
                                         <div className="flex items-center gap-2">
                                             <div className={`h-2 w-2 rounded-full ${
-                                                u.isActive ? "bg-green-500" : "bg-red-500"
+                                                u.isActive ? "bg-black" : "bg-[#424242]"
                                             }`}></div>
-                                            <span className={`text-sm ${
-                                                u.isActive ? "text-green-400" : "text-red-400"
-                                            }`}>
-                                                    {u.isActive ? "Active" : "Inactive"}
-                                                </span>
+                                            <span className="text-sm text-black">
+                                                {u.isActive ? "Active" : "Inactive"}
+                                            </span>
                                         </div>
                                     </td>
                                     <td className="p-4">
@@ -264,7 +253,7 @@ export default function UserAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleOpen(u)}
-                                                className="text-gray-400 hover:text-green-400 hover:bg-green-500/10"
+                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
                                                 title="Edit user"
                                             >
                                                 <Edit3 className="h-4 w-4" />
@@ -273,7 +262,7 @@ export default function UserAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleDelete(u)}
-                                                className="text-gray-400 hover:text-red-400 hover:bg-red-500/10"
+                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
                                                 title="Delete user"
                                             >
                                                 <Trash2 className="h-4 w-4" />
@@ -288,13 +277,12 @@ export default function UserAdmin() {
                 )}
             </div>
 
-            {/* Dialog/Modal - Clean and functional */}
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="max-w-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 text-white rounded-2xl p-0 overflow-hidden">
-                    <DialogHeader className="p-6 border-b border-gray-800">
+                <DialogContent className="max-w-2xl bg-white border border-black text-black rounded-xl p-0 overflow-hidden">
+                    <DialogHeader className="p-6 border-b border-[#E0E0E0]">
                         <DialogTitle className="flex items-center gap-3">
-                            <div className="p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-500/30">
-                                <Shield className="h-5 w-5 text-green-400" />
+                            <div className="p-2 rounded-lg bg-white border border-black">
+                                <Shield className="h-5 w-5 text-black" />
                             </div>
                             <span className="text-xl font-bold">
                                 {current?.mongoId ? "Edit User" : "Create New User"}
@@ -307,12 +295,12 @@ export default function UserAdmin() {
                             {/* Left Column */}
                             <div className="space-y-4">
                                 <div>
-                                    <Label className="text-sm font-medium text-gray-300 mb-2 flex items-center gap-2">
-                                        <Users className="h-4 w-4 text-gray-500" />
+                                    <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
+                                        <Users className="h-4 w-4 text-[#424242]" />
                                         Full Name
                                     </Label>
                                     <Input
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500 focus:border-green-500 focus:ring-green-500"
+                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
                                         value={current?.name || ""}
                                         onChange={(e) => setCurrent({...current, name: e.target.value})}
                                         placeholder="Enter full name"
@@ -320,13 +308,13 @@ export default function UserAdmin() {
                                 </div>
 
                                 <div>
-                                    <Label className="text-sm font-medium text-gray-300 mb-2 flex items-center gap-2">
-                                        <Mail className="h-4 w-4 text-gray-500" />
+                                    <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
+                                        <Mail className="h-4 w-4 text-[#424242]" />
                                         Email Address
                                     </Label>
                                     <Input
                                         type="email"
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500"
+                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
                                         value={current?.email || ""}
                                         onChange={(e) => setCurrent({...current, email: e.target.value})}
                                         placeholder="user@example.com"
@@ -334,13 +322,13 @@ export default function UserAdmin() {
                                 </div>
 
                                 <div>
-                                    <Label className="text-sm font-medium text-gray-300 mb-2 flex items-center gap-2">
-                                        <Lock className="h-4 w-4 text-gray-500" />
+                                    <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
+                                        <Lock className="h-4 w-4 text-[#424242]" />
                                         Password
                                     </Label>
                                     <Input
                                         type="password"
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500"
+                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
                                         value={current?.password || ""}
                                         onChange={(e) => setCurrent({...current, password: e.target.value})}
                                         placeholder={current?.mongoId ? "Leave blank to keep current" : "Enter password"}
@@ -351,9 +339,9 @@ export default function UserAdmin() {
                             {/* Right Column */}
                             <div className="space-y-4">
                                 <div>
-                                    <Label className="text-sm font-medium text-gray-300 mb-2">User Type</Label>
+                                    <Label className="text-sm font-medium text-black mb-2">User Type</Label>
                                     <select
-                                        className="w-full bg-gray-800/50 border-gray-700 text-white rounded-lg p-3 focus:border-green-500 focus:ring-green-500"
+                                        className="w-full bg-white border-[#E0E0E0] text-black rounded-lg p-3 focus:border-black"
                                         value={current?.userType || "wineLover"}
                                         onChange={(e) => setCurrent({...current, userType: e.target.value})}
                                     >
@@ -363,9 +351,9 @@ export default function UserAdmin() {
                                 </div>
 
                                 <div>
-                                    <Label className="text-sm font-medium text-gray-300 mb-2">Role</Label>
+                                    <Label className="text-sm font-medium text-black mb-2">Role</Label>
                                     <select
-                                        className="w-full bg-gray-800/50 border-gray-700 text-white rounded-lg p-3 focus:border-green-500 focus:ring-green-500"
+                                        className="w-full bg-white border-[#E0E0E0] text-black rounded-lg p-3 focus:border-black"
                                         value={current?.role || "user"}
                                         onChange={(e) => setCurrent({...current, role: e.target.value})}
                                     >
@@ -374,10 +362,10 @@ export default function UserAdmin() {
                                     </select>
                                 </div>
 
-                                <div className="flex items-center justify-between p-4 rounded-lg bg-gray-800/30 border border-gray-700">
+                                <div className="flex items-center justify-between p-4 rounded-lg bg-[#F5F5F5] border border-[#E0E0E0]">
                                     <div className="flex items-center gap-3">
-                                        <div className={`h-3 w-3 rounded-full ${current?.isActive ? "bg-green-500" : "bg-red-500"}`}></div>
-                                        <span className="text-sm font-medium text-gray-300">
+                                        <div className={`h-3 w-3 rounded-full ${current?.isActive ? "bg-black" : "bg-[#424242]"}`}></div>
+                                        <span className="text-sm font-medium text-black">
                                             Account Status
                                         </span>
                                     </div>
@@ -388,24 +376,24 @@ export default function UserAdmin() {
                                             checked={current?.isActive}
                                             onChange={(e) => setCurrent({...current, isActive: e.target.checked})}
                                         />
-                                        <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                                        <div className="w-11 h-6 bg-[#E0E0E0] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"></div>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <DialogFooter className="p-6 border-t border-gray-800 bg-gray-900/50">
+                    <DialogFooter className="p-6 border-t border-[#E0E0E0] bg-[#F5F5F5]">
                         <Button
                             variant="ghost"
                             onClick={() => setIsOpen(false)}
-                            className="text-gray-400 hover:text-white"
+                            className="text-[#424242] hover:text-black hover:bg-[#E0E0E0]"
                         >
                             Cancel
                         </Button>
                         <Button
                             onClick={handleSave}
-                            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold px-8 py-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20"
+                            className="bg-black hover:bg-[#424242] text-white font-bold px-8 py-6 rounded-xl border border-black"
                         >
                             {current?.mongoId ? "Update User" : "Create User"}
                         </Button>

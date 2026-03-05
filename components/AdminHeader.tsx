@@ -16,12 +16,12 @@ export default function AdminHeader() {
     const pathname = usePathname();
 
     return (
-        <header className="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-[100]">
+        <header className="bg-white border-b border-black sticky top-0 z-[100]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <div className="flex items-center gap-2 font-bold text-white text-lg">
-                        <LayoutDashboard className="text-green-500" />
+                    <div className="flex items-center gap-2 font-bold text-black text-lg">
+                        <LayoutDashboard className="text-black" />
                         <span className="tracking-tight">Admin</span>
                     </div>
 
@@ -35,7 +35,7 @@ export default function AdminHeader() {
                                     key={item.href}
                                     href={item.href}
                                     className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                                        isActive ? 'text-green-500' : 'text-zinc-400 hover:text-white'
+                                        isActive ? 'text-black font-semibold' : 'text-[#424242] hover:text-black'
                                     }`}
                                 >
                                     <Icon size={16} />
@@ -47,7 +47,7 @@ export default function AdminHeader() {
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="md:hidden p-2 text-zinc-400 hover:text-white"
+                        className="md:hidden p-2 text-[#424242] hover:text-black"
                         onClick={() => setIsOpen(!isOpen)}
                     >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -57,7 +57,7 @@ export default function AdminHeader() {
 
             {/* Mobile Navigation Dropdown */}
             {isOpen && (
-                <nav className="md:hidden bg-zinc-900 border-t border-zinc-800 p-4 space-y-2 animate-in slide-in-from-top duration-200">
+                <nav className="md:hidden bg-white border-t border-[#E0E0E0] p-4 space-y-2 animate-in slide-in-from-top duration-200">
                     {navItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = pathname === item.href;
@@ -65,9 +65,9 @@ export default function AdminHeader() {
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                onClick={() => setIsOpen(false)} // Close menu on click
+                                onClick={() => setIsOpen(false)}
                                 className={`flex items-center gap-3 p-3 rounded-lg text-base font-medium transition-colors ${
-                                    isActive ? 'bg-green-500/10 text-green-500' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                                    isActive ? 'bg-[#F5F5F5] text-black font-semibold' : 'text-[#424242] hover:bg-[#F5F5F5] hover:text-black'
                                 }`}
                             >
                                 <Icon size={20} />

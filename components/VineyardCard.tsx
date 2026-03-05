@@ -358,7 +358,7 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
                 {isSelected && (
-                    <div className="absolute top-3 right-3 bg-black text-white rounded-full px-3 py-1 text-xs font-medium">
+                    <div className="absolute top-3 left-3 bg-black text-white rounded-full px-3 py-1 text-xs font-medium">
                         ✓ Selected
                     </div>
                 )}

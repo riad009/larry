@@ -48,7 +48,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     // 3. If they are an admin, show the protected content
     return (
-        <div className="bg-zinc-950 min-h-screen text-white">
+        <div className="bg-white min-h-screen text-black">
             <AdminHeader />
             <main>
                 {children}
