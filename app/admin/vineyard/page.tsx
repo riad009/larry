@@ -56,9 +56,11 @@ export default function VineyardAdmin() {
             setCurrent({
                 id: "",
                 name: "",
-                country: "France",
+                country: "",
                 region: "",
                 subRegion: "",
+                type: "",
+                gkp: "",
                 commune: "",
                 latitude: 0,
                 longitude: 0,
@@ -338,6 +340,26 @@ export default function VineyardAdmin() {
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
+                                        <Label className="text-sm font-medium text-black mb-2">Country</Label>
+                                        <Input
+                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            value={current?.country || ""}
+                                            onChange={(e) => setCurrent({...current, country: e.target.value})}
+                                            placeholder="e.g., France"
+                                        />
+                                    </div>
+                                    <div>
+                                        <Label className="text-sm font-medium text-black mb-2">Sub Region</Label>
+                                        <Input
+                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            value={current?.subRegion || ""}
+                                            onChange={(e) => setCurrent({...current, subRegion: e.target.value})}
+                                            placeholder="e.g., Médoc"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
                                         <Label className="text-sm font-medium text-black mb-2">Region</Label>
                                         <Input
                                             className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
@@ -355,6 +377,24 @@ export default function VineyardAdmin() {
                                             placeholder="e.g., Pauillac"
                                         />
                                     </div>
+                                </div>
+                                <div>
+                                    <Label className="text-sm font-medium text-black mb-2">Type</Label>
+                                    <Input
+                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        value={current?.type || ""}
+                                        onChange={(e) => setCurrent({...current, type: e.target.value})}
+                                        placeholder="e.g., Estate, Cooperative"
+                                    />
+                                </div>
+                                <div>
+                                    <Label className="text-sm font-medium text-black mb-2">GKP</Label>
+                                    <Input
+                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        value={current?.gkp || ""}
+                                        onChange={(e) => setCurrent({...current, gkp: e.target.value})}
+                                        placeholder="GKP identifier"
+                                    />
                                 </div>
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Dominant Grape</Label>

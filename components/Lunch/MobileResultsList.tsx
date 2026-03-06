@@ -142,7 +142,7 @@ export default function MobileResultsList({
             {appliedFilters && selectedLunches.length > 0 && (
                 <section className="mb-10 py-6 border-t border-[#E0E0E0]">
                     <h2 className="text-lg font-bold text-black mb-4">
-                        Selected for Trip ({selectedLunches.length}/3)
+                        Selected for Lunch ({selectedLunches.length}/3)
                     </h2>
                     <div className="space-y-4">
                         {selectedLunches.map((r) => (

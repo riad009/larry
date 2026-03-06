@@ -124,6 +124,7 @@ export async function PUT(req: Request) {
         const updateData = {
             "Restaurant ID": data.id,
             "Restaurants": data.name,
+            "Country": data.country ?? "",
             "Region": data.region,
             "Sub Region": data.subRegion,
             "Commune": data.commune,

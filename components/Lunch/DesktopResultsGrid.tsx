@@ -120,7 +120,7 @@ export default function DesktopResultsGrid({
                     {selectedLunches.length > 0 && (
                         <section className="mb-10 py-8 border-t border-[#E0E0E0]">
                             <h2 className="text-xl font-bold text-black mb-4">
-                                Selected for Trip ({selectedLunches.length}/3)
+                                Selected for Lunch ({selectedLunches.length}/3)
                             </h2>
                             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4">
                                 {selectedLunches.map((r) => (
