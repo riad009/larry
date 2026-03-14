@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongo";
 import { ObjectId } from "mongodb";
-import bcrypt from "bcrypt"; // Using bcryptjs for better compatibility
+import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
 
 export async function PUT(req: Request) {
