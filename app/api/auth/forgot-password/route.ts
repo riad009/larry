@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
         // 2. Send Email
         const { data, error } = await resend.emails.send({
-            from: 'SmartRoute <onboarding@resend.dev>',
+            from: 'SmartRoute <onboarding@smartroute.passportgourmet.com>',
             to: [email.toLowerCase().trim()],
             subject: 'Reset Your Password',
             html: `<p>Click <a href="${resetUrl}">here</a> to reset your password.</p>`
