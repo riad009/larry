@@ -58,7 +58,7 @@ export default function OverviewPage() {
                         <button
                             type="button"
                             onClick={() => setMapViewMode("normal")}
-                            className="px-3 py-2 text-sm font-medium bg-white border border-[#E0E0E0] rounded-lg shadow-sm hover:bg-[#F5F5F5] text-black"
+                            className="px-3 py-2 text-sm font-medium bg-white/80 backdrop-blur-sm border border-warm-border rounded-lg shadow-sm hover:bg-wine-50 text-charcoal"
                         >
                             Exit fullscreen
                         </button>
@@ -110,9 +110,9 @@ export default function OverviewPage() {
                         </div>
                     )}
                 </div>
-                <div className="w-full min-w-0 md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white border-l border-[#E0E0E0] p-4 md:p-6 md:flex md:flex-col md:overflow-hidden flex-1 min-h-0 overflow-y-auto md:overflow-y-auto">
+                <div className="w-full min-w-0 md:w-[32%] h-auto md:h-full flex-shrink-0 bg-white/70 backdrop-blur-sm border-l border-warm-border p-4 md:p-6 md:flex md:flex-col md:overflow-hidden flex-1 min-h-0 overflow-y-auto md:overflow-y-auto">
                     <div className="md:flex-1 md:min-h-0 md:overflow-y-auto min-w-0">
-                        <h2 className="text-lg font-bold text-black mb-4">Your Trip Route</h2>
+                        <h2 className="text-lg font-bold text-charcoal mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>Your Trip Route</h2>
                         <RouteOrderList
                             routeStops={orderedStops}
                             onReorder={setRouteStops}
@@ -122,7 +122,7 @@ export default function OverviewPage() {
                             }}
                         />
                     </div>
-                    <div className="mt-6 md:mt-0 md:flex-shrink-0 md:border-t md:border-[#E0E0E0] md:pt-4 md:bg-white">
+                    <div className="mt-6 md:mt-0 md:flex-shrink-0 md:border-t md:border-warm-border md:pt-4 md:bg-white/50">
                         <ActionButtonsGrid onButtonClick={(id) => console.log(id)} />
                         <div className="mt-6">
                             <PrimaryActionButton href="/transport" />

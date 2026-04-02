@@ -292,7 +292,7 @@ export default function VineyardPage() {
     }
 
     return (
-        <div className="min-h-screen text-black bg-white p-4 md:p-6 lg:p-8">
+        <div className="min-h-screen text-charcoal app-background p-4 md:p-6 lg:p-8">
             <div className="hidden md:block max-w-7xl mx-auto">
                 <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
                     <div className="lg:w-80 xl:w-96 flex-shrink-0">

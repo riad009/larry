@@ -249,14 +249,14 @@ export default function DesktopFiltersSidebar({
 
     return (
         <div className="sticky top-6">
-            <div className="p-6 bg-white rounded-3xl border border-[#E0E0E0] mb-6 shadow-sm">
+            <div className="p-6 glass-card rounded-3xl mb-6">
                 <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-[#F5F5F5] rounded-lg border border-[#E0E0E0]">
-                        <Filter className="w-5 h-5 text-black" />
+                    <div className="p-2 gradient-wine-light rounded-lg">
+                        <Filter className="w-5 h-5 text-wine-500" />
                     </div>
-                    <h2 className="text-lg font-bold text-black">Vineyard Filter</h2>
+                    <h2 className="text-lg font-bold text-charcoal">Vineyard Filter</h2>
                     {selectedRegion && (
-                        <span className="ml-auto text-sm text-black bg-[#F5F5F5] px-3 py-1 rounded-lg border border-[#E0E0E0]">
+                        <span className="ml-auto text-sm text-wine-600 bg-wine-50 px-3 py-1 rounded-lg border border-wine-100">
                             Region: {selectedRegion.name}
                         </span>
                     )}
@@ -264,9 +264,9 @@ export default function DesktopFiltersSidebar({
 
                 {!hasVineyardsInRegion && selectedRegion && (
                     <div className="text-center py-8">
-                        <p className="text-[#424242] mb-2">No vineyards found in</p>
-                        <p className="text-lg font-bold text-black mb-4">{selectedRegion?.name || "selected region"}</p>
-                        <p className="text-sm text-[#424242]">Please select a different region</p>
+                        <p className="text-warm-gray mb-2">No vineyards found in</p>
+                        <p className="text-lg font-bold text-charcoal mb-4">{selectedRegion?.name || "selected region"}</p>
+                        <p className="text-sm text-warm-gray">Please select a different region</p>
                     </div>
                 )}
 
@@ -275,13 +275,13 @@ export default function DesktopFiltersSidebar({
                         <div className="space-y-6">
                             {/* Area Filter */}
                             <div>
-                                <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                                <label className="text-sm font-bold text-wine-600 uppercase tracking-wider mb-2 block">
                                     Area *
                                 </label>
                                 <select
                                     value={pendingFilters.selectedArea}
                                     onChange={(e) => update("selectedArea", e.target.value)}
-                                    className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                    className="w-full bg-white/80 border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                                 >
                                     <option value="" className="text-[#424242]">
                                         {areas.length === 0 ? "Loading Areas..." : "Select Area"}
@@ -348,7 +348,7 @@ export default function DesktopFiltersSidebar({
                         </div>
 
                         {validationError && (
-                            <p className="mt-4 text-sm text-black font-medium border border-[#E0E0E0] bg-[#F5F5F5] px-3 py-2 rounded-lg" role="alert">
+                            <p className="mt-4 text-sm text-wine-700 font-medium border border-wine-200 bg-wine-50 px-3 py-2 rounded-lg" role="alert">
                                 {validationError}
                             </p>
                         )}
@@ -361,7 +361,7 @@ export default function DesktopFiltersSidebar({
                                     !pendingFilters.selectedType ||
                                     !pendingFilters.selectedCostBucket
                                 }
-                                className="flex-1 font-bold h-14 rounded-xl text-base transition-all duration-300 shadow-sm bg-black text-white hover:bg-[#424242] border border-black"
+                                className="flex-1 font-bold h-14 rounded-xl text-base transition-all duration-300 shadow-sm gradient-cta text-white border-0"
                             >
                                 GO
                             </Button>
@@ -373,8 +373,8 @@ export default function DesktopFiltersSidebar({
                                     disabled={selectedVineyards.length === 0}
                                     className={`w-full font-bold h-14 rounded-xl text-base transition-all shadow-sm border ${
                                         selectedVineyards.length > 0
-                                            ? "bg-white text-black hover:bg-[#F5F5F5] border-[#E0E0E0]"
-                                            : "bg-[#F5F5F5] text-[#424242] opacity-50 cursor-not-allowed border-[#E0E0E0]"
+                                            ? "bg-white text-charcoal hover:bg-wine-50 border-warm-border"
+                                            : "bg-cream text-warm-gray opacity-50 cursor-not-allowed border-warm-border"
                                     }`}
                                 >
                                     CONTINUE
@@ -385,7 +385,7 @@ export default function DesktopFiltersSidebar({
 
                         <button
                             onClick={onClearFilters}
-                            className="mt-6 text-sm text-[#424242] hover:text-black transition-colors underline underline-offset-4"
+                            className="mt-6 text-sm text-warm-gray hover:text-wine-600 transition-colors underline underline-offset-4"
                         >
                             Clear all filters
                         </button>
