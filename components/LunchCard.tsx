@@ -23,6 +23,13 @@ const safeText = (s?: string) => s?.trim() || "—";
 
 export default function LunchCard({ lunch, className, isSelected, onAdd, onRemove }: Props) {
     const [showMapPopup, setShowMapPopup] = useState(false);
+    const [justSelected, setJustSelected] = useState(false);
+
+    const handleAdd = () => {
+        onAdd?.();
+        setJustSelected(true);
+        setTimeout(() => setJustSelected(false), 600);
+    };
     const nameStr = (lunch.name ?? "").trim();
     const hasValidCoords =
         typeof lunch.latitude === "number" &&
@@ -49,8 +56,9 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
         <div
             className={clsx(
                 "rounded-2xl overflow-hidden border transition-all duration-300 bg-white hover:shadow-md max-w-full",
+                justSelected && "animate-selection-pop",
                 isSelected
-                    ? "border-black shadow-md ring-2 ring-black/20"
+                    ? "border-wine-500 shadow-md ring-2 ring-wine-500/20"
                     : "border-[#E0E0E0] hover:border-[#9E9E9E]",
                 className
             )}
@@ -69,7 +77,7 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
                 {isSelected && (
-                    <div className="absolute top-3 left-3 bg-black text-white rounded-full px-3 py-1 text-xs font-medium">
+                    <div className="absolute top-3 left-3 bg-wine-600 text-white rounded-full px-3 py-1 text-xs font-medium animate-checkmark-in shadow-lg">
                         ✓ Selected
                     </div>
                 )}
@@ -137,18 +145,18 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
                     </div>
 
                     <div className="flex flex-col items-end gap-3 mt-1">
-                        <div className="bg-[#F5F5F5] px-3 py-2 rounded-lg flex flex-col items-center justify-center border border-[#E0E0E0] min-w-[90px]">
-                            <p className="text-black text-sm font-bold text-center leading-tight">
+                        <div className="bg-gold-200/20 px-3 py-2 rounded-lg flex flex-col items-center justify-center border border-gold-300/50 min-w-[90px]">
+                            <p className="text-charcoal text-sm font-bold text-center leading-tight">
                                 {cost === "—" ? "N/A" : `${cost}`}
                             </p>
-                            <p className="text-[#424242] text-[10px]">LUNCH</p>
+                            <p className="text-gold-600 text-[9px] font-semibold mt-0.5">LUNCH</p>
                         </div>
 
                         <div className="w-full">
                             {!isSelected ? (
                                 <button
-                                    onClick={onAdd}
-                                    className="w-full py-3 px-4 text-sm font-bold uppercase tracking-wider rounded-xl bg-white text-black border border-black hover:bg-[#F5F5F5] active:scale-[0.98] transition-all duration-200 shadow-sm"
+                                    onClick={handleAdd}
+                                    className="w-full py-2.5 px-4 text-xs font-bold uppercase tracking-wider rounded-xl gradient-cta text-white active:scale-[0.97] transition-all duration-200 shadow-sm"
                                 >
                                     Add to Trip
                                 </button>
@@ -156,9 +164,9 @@ export default function LunchCard({ lunch, className, isSelected, onAdd, onRemov
                                 <button
                                     type="button"
                                     onClick={onRemove}
-                                    className="w-full py-3 px-4 text-sm font-bold uppercase tracking-wider rounded-xl bg-black text-white hover:bg-[#222] active:scale-[0.98] transition-all duration-200 shadow-sm"
+                                    className="w-full py-2.5 px-4 text-xs font-bold uppercase tracking-wider rounded-xl bg-wine-600 text-white hover:bg-wine-700 active:scale-[0.97] transition-all duration-200 shadow-sm"
                                 >
-                                    Selected
+                                    ✓ Selected
                                 </button>
                             )}
 

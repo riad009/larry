@@ -53,27 +53,27 @@ export default function DesktopFiltersSidebar({
         <div className="lg:w-80 xl:w-96 flex-shrink-0">
             <div className="sticky top-6">
                 {/* Main Filters Card - match Vineyard */}
-                <div className="p-6 bg-white rounded-3xl border border-[#E0E0E0] mb-6 shadow-sm">
+                <div className="p-6 bg-white/70 backdrop-blur-sm rounded-3xl border border-warm-border mb-6 shadow-sm">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="p-2 bg-[#F5F5F5] rounded-lg border border-[#E0E0E0]">
-                            <Filter className="w-5 h-5 text-black" />
+                        <div className="p-2 bg-cream rounded-lg border border-warm-border">
+                            <Filter className="w-5 h-5 text-charcoal" />
                         </div>
-                        <h2 className="text-lg font-bold text-black">Lunch Filter</h2>
+                        <h2 className="text-lg font-bold text-charcoal">Lunch Filter</h2>
                     </div>
 
                     <div className="space-y-6">
                         {/* Area Filter */}
                         <div>
-                            <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                            <label className="text-sm font-bold text-charcoal uppercase tracking-wider mb-2 block">
                                 Area *
                             </label>
                             <select
                                 value={filters.area}
                                 onChange={(e) => onFilterChange("area", e.target.value)}
-                                className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                             >
                                 {subRegionOptions.map((opt) => (
-                                    <option key={opt.key} value={opt.key} className="text-[#424242]">
+                                    <option key={opt.key} value={opt.key} className="text-warm-gray">
                                         {opt.name}
                                     </option>
                                 ))}
@@ -82,15 +82,15 @@ export default function DesktopFiltersSidebar({
 
                         {/* Cost Filter - required; no "ALL"; mirrors Vineyard Cost structure */}
                         <div>
-                            <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                            <label className="text-sm font-bold text-charcoal uppercase tracking-wider mb-2 block">
                                 Cost *
                             </label>
                             <select
                                 value={filters.cost}
                                 onChange={(e) => onFilterChange("cost", e.target.value)}
-                                className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                             >
-                                <option value="" className="text-[#424242]">Select Cost</option>
+                                <option value="" className="text-warm-gray">Select Cost</option>
                                 {costOptions.map((opt) => (
                                     <option key={opt.key} value={opt.key}>
                                         {opt.name}
@@ -101,13 +101,13 @@ export default function DesktopFiltersSidebar({
 
                         {/* Type Filter */}
                         <div>
-                            <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                            <label className="text-sm font-bold text-charcoal uppercase tracking-wider mb-2 block">
                                 Type
                             </label>
                             <select
                                 value={filters.type}
                                 onChange={(e) => onFilterChange("type", e.target.value)}
-                                className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                             >
                                 {typeOptions.map((opt) => (
                                     <option key={opt.key} value={opt.key}>
@@ -123,7 +123,7 @@ export default function DesktopFiltersSidebar({
                         <Button
                             onClick={onApplyFilters}
                             disabled={!hasActiveFilters}
-                            className="flex-1 font-bold h-14 rounded-xl text-base transition-all duration-300 shadow-sm bg-black text-white hover:bg-[#424242] border border-black disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-[#F5F5F5] disabled:text-[#424242] disabled:border-[#E0E0E0]"
+                            className="flex-1 font-bold h-14 rounded-xl text-base transition-all duration-300 shadow-sm gradient-cta text-white hover:bg-wine-700 border border-wine-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-cream disabled:text-warm-gray disabled:border-warm-border"
                         >
                             GO
                         </Button>
@@ -136,8 +136,8 @@ export default function DesktopFiltersSidebar({
                                 disabled={!hasSelectedLunch}
                                 className={`w-full font-bold h-14 rounded-xl text-base transition-all shadow-sm border ${
                                     hasSelectedLunch
-                                        ? "bg-white text-black hover:bg-[#F5F5F5] border-[#E0E0E0]"
-                                        : "bg-[#F5F5F5] text-[#424242] opacity-50 cursor-not-allowed border-[#E0E0E0]"
+                                        ? "bg-white/70 backdrop-blur-sm text-charcoal hover:bg-cream border-warm-border"
+                                        : "bg-cream text-warm-gray opacity-50 cursor-not-allowed border-warm-border"
                                 }`}
                             >
                                 CONTINUE
@@ -148,37 +148,37 @@ export default function DesktopFiltersSidebar({
 
                     {/* Applied Filters Indicator - match Vineyard light theme */}
                     {appliedFilters && (
-                        <div className="mt-6 pt-6 border-t border-[#E0E0E0]">
-                            <p className="text-sm text-[#424242] mb-3">Active Filters:</p>
+                        <div className="mt-6 pt-6 border-t border-warm-border">
+                            <p className="text-sm text-warm-gray mb-3">Active Filters:</p>
                             <div className="flex flex-wrap gap-2">
                                 {appliedFilters.area !== "ALL" && (
-                                    <span className="px-3 py-2 bg-[#F5F5F5] text-black text-sm rounded-lg border border-[#E0E0E0] flex items-center gap-2">
+                                    <span className="px-3 py-2 bg-cream text-charcoal text-sm rounded-lg border border-warm-border flex items-center gap-2">
                                         Area: {appliedFilters.area}
                                         <button
                                             onClick={() => onRemoveFilter("area")}
-                                            className="hover:text-[#424242]"
+                                            className="hover:text-warm-gray"
                                         >
                                             <X className="w-3 h-3" />
                                         </button>
                                     </span>
                                 )}
                                 {appliedFilters.type !== "ALL" && (
-                                    <span className="px-3 py-2 bg-[#F5F5F5] text-black text-sm rounded-lg border border-[#E0E0E0] flex items-center gap-2">
+                                    <span className="px-3 py-2 bg-cream text-charcoal text-sm rounded-lg border border-warm-border flex items-center gap-2">
                                         Type: {appliedFilters.type}
                                         <button
                                             onClick={() => onRemoveFilter("type")}
-                                            className="hover:text-[#424242]"
+                                            className="hover:text-warm-gray"
                                         >
                                             <X className="w-3 h-3" />
                                         </button>
                                     </span>
                                 )}
                                 {appliedFilters.cost !== "" && (
-                                    <span className="px-3 py-2 bg-[#F5F5F5] text-black text-sm rounded-lg border border-[#E0E0E0] flex items-center gap-2">
+                                    <span className="px-3 py-2 bg-cream text-charcoal text-sm rounded-lg border border-warm-border flex items-center gap-2">
                                         {costOptions.find((o) => o.key === appliedFilters.cost)?.name ?? appliedFilters.cost}
                                         <button
                                             onClick={() => onRemoveFilter("cost")}
-                                            className="hover:text-[#424242]"
+                                            className="hover:text-warm-gray"
                                         >
                                             <X className="w-3 h-3" />
                                         </button>
@@ -187,7 +187,7 @@ export default function DesktopFiltersSidebar({
                             </div>
                             <button
                                 onClick={onClearFilters}
-                                className="mt-3 text-sm text-[#424242] hover:text-black transition-colors underline underline-offset-4"
+                                className="mt-3 text-sm text-warm-gray hover:text-charcoal transition-colors underline underline-offset-4"
                             >
                                 Clear all filters
                             </button>

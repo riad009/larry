@@ -254,16 +254,16 @@ export function GoogleOverviewMap({ routeStops }: GoogleOverviewMapProps) {
 
     if (error) {
         return (
-            <div className="w-full h-full min-h-[300px] bg-white border border-[#E0E0E0] rounded-2xl shadow-sm flex items-center justify-center p-6">
-                <p className="text-[#424242] text-sm">{error}</p>
+            <div className="w-full h-full min-h-[300px] bg-white/70 backdrop-blur-sm border border-warm-border rounded-2xl shadow-sm flex items-center justify-center p-6">
+                <p className="text-warm-gray text-sm">{error}</p>
             </div>
         );
     }
 
     if (!apiKey) {
         return (
-            <div className="w-full h-full min-h-[300px] bg-white border border-[#E0E0E0] rounded-2xl shadow-sm flex items-center justify-center p-6">
-                <p className="text-[#424242] text-sm">Google Maps API key is not configured.</p>
+            <div className="w-full h-full min-h-[300px] bg-white/70 backdrop-blur-sm border border-warm-border rounded-2xl shadow-sm flex items-center justify-center p-6">
+                <p className="text-warm-gray text-sm">Google Maps API key is not configured.</p>
             </div>
         );
     }
@@ -271,7 +271,7 @@ export function GoogleOverviewMap({ routeStops }: GoogleOverviewMapProps) {
     return (
         <div
             ref={containerRef}
-            className="w-full max-w-full h-full min-h-[300px] rounded-2xl overflow-hidden border border-[#E0E0E0] bg-white shadow-sm relative"
+            className="w-full max-w-full h-full min-h-[300px] rounded-2xl overflow-hidden border border-warm-border bg-white/70 backdrop-blur-sm shadow-sm relative"
         />
     );
 }

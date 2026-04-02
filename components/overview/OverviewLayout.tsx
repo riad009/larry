@@ -10,13 +10,13 @@ interface OverviewLayoutProps {
 export function OverviewLayout({ children, fullViewport }: OverviewLayoutProps) {
     if (fullViewport) {
         return (
-            <div className="min-h-screen w-full overflow-visible flex flex-col text-black bg-white">
+            <div className="min-h-screen w-full overflow-visible flex flex-col text-charcoal bg-white/70 backdrop-blur-sm">
                 {children}
             </div>
         );
     }
     return (
-        <div className="min-h-screen p-3 md:p-6 lg:p-8 text-black bg-white max-w-7xl mx-auto">
+        <div className="min-h-screen p-3 md:p-6 lg:p-8 text-charcoal bg-white/70 backdrop-blur-sm max-w-7xl mx-auto">
             {children}
         </div>
     );

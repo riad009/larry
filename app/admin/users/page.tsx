@@ -105,7 +105,7 @@ export default function UserAdmin() {
                             </div>
                             <div>
                                 <h1 className="text-2xl md:text-3xl font-bold text-black">User Management</h1>
-                                <p className="text-[#424242] text-sm">Manage all user accounts in the system</p>
+                                <p className="text-warm-gray text-sm">Manage all user accounts in the system</p>
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@ export default function UserAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{totalUsers}</p>
-                                <p className="text-sm text-[#424242]">Total Users</p>
+                                <p className="text-sm text-warm-gray">Total Users</p>
                             </div>
                             <Users className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -133,7 +133,7 @@ export default function UserAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{activeUsers}</p>
-                                <p className="text-sm text-[#424242]">Active Users</p>
+                                <p className="text-sm text-warm-gray">Active Users</p>
                             </div>
                             <UserCheck className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -142,7 +142,7 @@ export default function UserAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{wineLovers}</p>
-                                <p className="text-sm text-[#424242]">Wine Lovers</p>
+                                <p className="text-sm text-warm-gray">Wine Lovers</p>
                             </div>
                             <UserCheck className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -151,7 +151,7 @@ export default function UserAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{adminUsers}</p>
-                                <p className="text-sm text-[#424242]">Administrators</p>
+                                <p className="text-sm text-warm-gray">Administrators</p>
                             </div>
                             <Shield className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -159,12 +159,12 @@ export default function UserAdmin() {
                 </div>
 
                 <div className="relative max-w-md">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#424242]" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-warm-gray" />
                     <Input
                         placeholder="Search users by name or email..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="pl-10 bg-white border border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
+                        className="pl-10 bg-white border border-warm-border text-black placeholder:text-warm-gray focus:border-black"
                     />
                 </div>
             </div>
@@ -172,18 +172,18 @@ export default function UserAdmin() {
             <div className="rounded-xl border border-black bg-white overflow-hidden">
                 {loading ? (
                     <div className="p-12 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-[#E0E0E0] border-t-black"></div>
-                        <p className="mt-4 text-[#424242]">Loading users...</p>
+                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-warm-border border-t-black"></div>
+                        <p className="mt-4 text-warm-gray">Loading users...</p>
                     </div>
                 ) : filteredUsers.length === 0 ? (
                     <div className="p-12 text-center">
-                        <Users className="h-12 w-12 text-[#424242] mx-auto mb-4" />
-                        <p className="text-[#424242]">No users found</p>
+                        <Users className="h-12 w-12 text-warm-gray mx-auto mb-4" />
+                        <p className="text-warm-gray">No users found</p>
                         {search && (
                             <Button
                                 variant="ghost"
                                 onClick={() => setSearch("")}
-                                className="mt-2 text-black hover:bg-[#F5F5F5]"
+                                className="mt-2 text-black hover:bg-cream"
                             >
                                 Clear search
                             </Button>
@@ -192,7 +192,7 @@ export default function UserAdmin() {
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="bg-[#F5F5F5] border-b border-black">
+                            <thead className="bg-cream border-b border-black">
                             <tr>
                                 <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">User</th>
                                 <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Type</th>
@@ -203,13 +203,13 @@ export default function UserAdmin() {
                             </thead>
                             <tbody className="divide-y divide-[#E0E0E0]">
                             {filteredUsers.map((u) => (
-                                <tr key={u.mongoId} className="hover:bg-[#F5F5F5] transition-colors duration-150">
+                                <tr key={u.mongoId} className="hover:bg-cream transition-colors duration-150">
                                     <td className="p-4">
                                         <div className="flex items-center gap-3">
                                             <div className={`p-2 rounded-lg ${
                                                 u.role === "admin"
-                                                    ? "bg-[#F5F5F5] border border-[#E0E0E0]"
-                                                    : "bg-white border border-[#E0E0E0]"
+                                                    ? "bg-cream border border-warm-border"
+                                                    : "bg-white border border-warm-border"
                                             }`}>
                                                 {u.role === "admin" ? (
                                                     <Shield className="h-5 w-5 text-black" />
@@ -219,7 +219,7 @@ export default function UserAdmin() {
                                             </div>
                                             <div>
                                                 <p className="font-medium text-black">{u.name}</p>
-                                                <p className="text-xs text-[#424242]">{u.email}</p>
+                                                <p className="text-xs text-warm-gray">{u.email}</p>
                                             </div>
                                         </div>
                                     </td>
@@ -231,8 +231,8 @@ export default function UserAdmin() {
                                     <td className="p-4">
                                             <span className={`text-xs font-medium px-2 py-1 rounded-full ${
                                                 u.role === "admin"
-                                                    ? "bg-[#F5F5F5] text-black border border-[#E0E0E0]"
-                                                    : "bg-white text-[#424242] border border-[#E0E0E0]"
+                                                    ? "bg-cream text-black border border-warm-border"
+                                                    : "bg-white text-warm-gray border border-warm-border"
                                             }`}>
                                                 {u.role}
                                             </span>
@@ -253,7 +253,7 @@ export default function UserAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleOpen(u)}
-                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
+                                                className="text-warm-gray hover:text-black hover:bg-cream"
                                                 title="Edit user"
                                             >
                                                 <Edit3 className="h-4 w-4" />
@@ -262,7 +262,7 @@ export default function UserAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleDelete(u)}
-                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
+                                                className="text-warm-gray hover:text-black hover:bg-cream"
                                                 title="Delete user"
                                             >
                                                 <Trash2 className="h-4 w-4" />
@@ -279,7 +279,7 @@ export default function UserAdmin() {
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent className="max-w-2xl bg-white border border-black text-black rounded-xl p-0 overflow-hidden">
-                    <DialogHeader className="p-6 border-b border-[#E0E0E0]">
+                    <DialogHeader className="p-6 border-b border-warm-border">
                         <DialogTitle className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-white border border-black">
                                 <Shield className="h-5 w-5 text-black" />
@@ -296,11 +296,11 @@ export default function UserAdmin() {
                             <div className="space-y-4">
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Users className="h-4 w-4 text-[#424242]" />
+                                        <Users className="h-4 w-4 text-warm-gray" />
                                         Full Name
                                     </Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray focus:border-black"
                                         value={current?.name || ""}
                                         onChange={(e) => setCurrent({...current, name: e.target.value})}
                                         placeholder="Enter full name"
@@ -309,12 +309,12 @@ export default function UserAdmin() {
 
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Mail className="h-4 w-4 text-[#424242]" />
+                                        <Mail className="h-4 w-4 text-warm-gray" />
                                         Email Address
                                     </Label>
                                     <Input
                                         type="email"
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                         value={current?.email || ""}
                                         onChange={(e) => setCurrent({...current, email: e.target.value})}
                                         placeholder="user@example.com"
@@ -323,12 +323,12 @@ export default function UserAdmin() {
 
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Lock className="h-4 w-4 text-[#424242]" />
+                                        <Lock className="h-4 w-4 text-warm-gray" />
                                         Password
                                     </Label>
                                     <Input
                                         type="password"
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                         value={current?.password || ""}
                                         onChange={(e) => setCurrent({...current, password: e.target.value})}
                                         placeholder={current?.mongoId ? "Leave blank to keep current" : "Enter password"}
@@ -341,7 +341,7 @@ export default function UserAdmin() {
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">User Type</Label>
                                     <select
-                                        className="w-full bg-white border-[#E0E0E0] text-black rounded-lg p-3 focus:border-black"
+                                        className="w-full bg-white border-warm-border text-black rounded-lg p-3 focus:border-black"
                                         value={current?.userType || "wineLover"}
                                         onChange={(e) => setCurrent({...current, userType: e.target.value})}
                                     >
@@ -353,7 +353,7 @@ export default function UserAdmin() {
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Role</Label>
                                     <select
-                                        className="w-full bg-white border-[#E0E0E0] text-black rounded-lg p-3 focus:border-black"
+                                        className="w-full bg-white border-warm-border text-black rounded-lg p-3 focus:border-black"
                                         value={current?.role || "user"}
                                         onChange={(e) => setCurrent({...current, role: e.target.value})}
                                     >
@@ -362,7 +362,7 @@ export default function UserAdmin() {
                                     </select>
                                 </div>
 
-                                <div className="flex items-center justify-between p-4 rounded-lg bg-[#F5F5F5] border border-[#E0E0E0]">
+                                <div className="flex items-center justify-between p-4 rounded-lg bg-cream border border-warm-border">
                                     <div className="flex items-center gap-3">
                                         <div className={`h-3 w-3 rounded-full ${current?.isActive ? "bg-black" : "bg-[#424242]"}`}></div>
                                         <span className="text-sm font-medium text-black">
@@ -383,11 +383,11 @@ export default function UserAdmin() {
                         </div>
                     </div>
 
-                    <DialogFooter className="p-6 border-t border-[#E0E0E0] bg-[#F5F5F5]">
+                    <DialogFooter className="p-6 border-t border-warm-border bg-cream">
                         <Button
                             variant="ghost"
                             onClick={() => setIsOpen(false)}
-                            className="text-[#424242] hover:text-black hover:bg-[#E0E0E0]"
+                            className="text-warm-gray hover:text-black hover:bg-[#E0E0E0]"
                         >
                             Cancel
                         </Button>

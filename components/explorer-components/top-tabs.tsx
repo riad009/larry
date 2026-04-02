@@ -12,10 +12,10 @@ interface TabOption {
 }
 
 const tabs: TabOption[] = [
-    { name: "Vineyard", path: "/vineyard", icon: <Wine className="w-4 h-4" /> },
-    { name: "Lunch", path: "/lunch", icon: <Utensils className="w-4 h-4" /> },
-    { name: "Trip", path: "/overview", icon: <MapPin className="w-4 h-4" /> },
-    { name: "Transport", path: "/transport", icon: <Car className="w-4 h-4" /> },
+    { name: "Vineyard", path: "/vineyard", icon: <Wine className="w-5 h-5" /> },
+    { name: "Lunch", path: "/lunch", icon: <Utensils className="w-5 h-5" /> },
+    { name: "Trip", path: "/overview", icon: <MapPin className="w-5 h-5" /> },
+    { name: "Transport", path: "/transport", icon: <Car className="w-5 h-5" /> },
 ];
 
 export default function TopTabs() {
@@ -68,13 +68,10 @@ export default function TopTabs() {
                                     }
                                     `}
                                 >
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <div className={`
-                                            p-1.5 rounded-lg
-                                            ${isActive ? 'bg-white/20' : 'bg-cream border border-warm-border'}
-                                        `}>
+                                    <div className="flex items-center gap-2.5">
+                                        <span className={`${isActive ? 'text-white' : 'text-warm-gray'}`}>
                                             {tab.icon}
-                                        </div>
+                                        </span>
                                         <span className="text-sm font-bold tracking-wide">
                                             {tab.name}
                                         </span>
@@ -156,8 +153,8 @@ export default function TopTabs() {
                                     `}
                                 >
                                     <div className={`
-                                        p-1.5 rounded-lg mb-1
-                                        ${isActive ? 'bg-white/20' : 'bg-cream border border-warm-border'}
+                                        mb-1
+                                        ${isActive ? 'text-white' : 'text-warm-gray'}
                                     `}>
                                         {tab.icon}
                                     </div>

@@ -51,25 +51,25 @@ export function RouteOrderList({ routeStops, onReorder, onRemove }: RouteOrderLi
             {routeStops.map((stop, index) => (
                 <li
                     key={`${stop.type}-${stop.data.id}-${index}`}
-                    className="py-3 border-b border-[#E0E0E0] last:border-b-0"
+                    className="py-3 border-b border-warm-border last:border-b-0"
                 >
                     <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-sm text-[#424242] shrink-0">{index + 1}.</span>
+                                <span className="text-sm text-warm-gray shrink-0">{index + 1}.</span>
                                 {index === 0 && (
-                                    <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-black text-white shrink-0">
+                                    <span className="text-xs font-medium px-1.5 py-0.5 rounded gradient-cta text-white shrink-0">
                                         START
                                     </span>
                                 )}
                                 {index === routeStops.length - 1 && index > 0 && (
-                                    <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-black text-white shrink-0">
+                                    <span className="text-xs font-medium px-1.5 py-0.5 rounded gradient-cta text-white shrink-0">
                                         END
                                     </span>
                                 )}
-                                <span className="font-medium text-base text-black break-words">{getName(stop)}</span>
+                                <span className="font-medium text-base text-charcoal break-words">{getName(stop)}</span>
                             </div>
-                            <p className="text-sm text-[#424242] mt-0.5 pl-5">{getSecondaryLine(stop)}</p>
+                            <p className="text-sm text-warm-gray mt-0.5 pl-5">{getSecondaryLine(stop)}</p>
                         </div>
                         <div className="flex items-center gap-2 shrink-0">
                             <span
@@ -86,7 +86,7 @@ export function RouteOrderList({ routeStops, onReorder, onRemove }: RouteOrderLi
                                     type="button"
                                     onClick={() => handleMoveUp(index)}
                                     disabled={index === 0}
-                                    className="px-2 py-1 text-xs border border-black rounded bg-white text-black disabled:opacity-40 disabled:cursor-not-allowed"
+                                    className="px-2 py-1 text-xs border border-wine-500 rounded bg-white/70 backdrop-blur-sm text-charcoal disabled:opacity-40 disabled:cursor-not-allowed"
                                 >
                                     ↑
                                 </button>
@@ -94,7 +94,7 @@ export function RouteOrderList({ routeStops, onReorder, onRemove }: RouteOrderLi
                                     type="button"
                                     onClick={() => handleMoveDown(index)}
                                     disabled={index === routeStops.length - 1}
-                                    className="px-2 py-1 text-xs border border-black rounded bg-white text-black disabled:opacity-40 disabled:cursor-not-allowed"
+                                    className="px-2 py-1 text-xs border border-wine-500 rounded bg-white/70 backdrop-blur-sm text-charcoal disabled:opacity-40 disabled:cursor-not-allowed"
                                 >
                                     ↓
                                 </button>
@@ -102,7 +102,7 @@ export function RouteOrderList({ routeStops, onReorder, onRemove }: RouteOrderLi
                                     <button
                                         type="button"
                                         onClick={() => onRemove(stop)}
-                                        className="px-2 py-1 text-xs border border-black rounded bg-white text-black hover:bg-[#F5F5F5] disabled:opacity-40"
+                                        className="px-2 py-1 text-xs border border-wine-500 rounded bg-white/70 backdrop-blur-sm text-charcoal hover:bg-cream disabled:opacity-40"
                                         aria-label="Remove from trip"
                                     >
                                         ✕

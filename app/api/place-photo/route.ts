@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
+import clientPromise from "@/lib/mongo";
 
 const FIND_PLACE_URL = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json";
 const PLACE_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json";
 const PLACE_PHOTO_URL = "https://maps.googleapis.com/maps/api/place/photo";
+
+// Cache duration: 30 days
+const CACHE_DURATION_MS = 30 * 24 * 60 * 60 * 1000;
 
 function parseNum(value: string | null): number | null {
     if (value == null || value.trim() === "") return null;
@@ -87,7 +91,29 @@ export async function GET(req: Request) {
         return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
+    // Generate cache key from name + approximate coordinates
+    const cacheKey = `${name.toLowerCase()}|${lat.toFixed(3)}|${lng.toFixed(3)}`;
+
     try {
+        const client = await clientPromise;
+        const db = client.db();
+        const cache = db.collection("photo_cache");
+
+        // Check cache
+        const cached = await cache.findOne({ key: cacheKey });
+        if (cached && cached.expiresAt > new Date()) {
+            const buf = Buffer.from(cached.imageBase64, "base64");
+            return new NextResponse(buf, {
+                status: 200,
+                headers: {
+                    "Content-Type": cached.contentType || "image/jpeg",
+                    "Cache-Control": "public, max-age=2592000",
+                    "X-Cache": "HIT",
+                },
+            });
+        }
+
+        // Cache miss — fetch from Google
         const placeId = await resolvePlaceId(name, lat, lng, apiKey);
         if (!placeId) {
             return NextResponse.json({ error: "Place not found" }, { status: 404 });
@@ -100,11 +126,28 @@ export async function GET(req: Request) {
 
         const result = await fetchPhoto(photoReference, apiKey);
 
+        // Store in cache (base64 encoded, with TTL)
+        const imageBase64 = Buffer.from(result.body).toString("base64");
+        await cache.updateOne(
+            { key: cacheKey },
+            {
+                $set: {
+                    key: cacheKey,
+                    imageBase64,
+                    contentType: result.contentType,
+                    expiresAt: new Date(Date.now() + CACHE_DURATION_MS),
+                    updatedAt: new Date(),
+                },
+            },
+            { upsert: true }
+        );
+
         return new NextResponse(Buffer.from(result.body), {
             status: 200,
             headers: {
                 "Content-Type": result.contentType,
-                "Cache-Control": "public, max-age=86400",
+                "Cache-Control": "public, max-age=2592000",
+                "X-Cache": "MISS",
             },
         });
     } catch (e) {

@@ -14,7 +14,7 @@ interface PlannerPanelProps {
 export function PlannerPanel({ routeStops, onReorder }: PlannerPanelProps) {
     return (
         <div className="flex flex-col gap-0">
-            <h2 className="text-lg font-bold text-black mb-4">Your Trip Route</h2>
+            <h2 className="text-lg font-bold text-charcoal mb-4">Your Trip Route</h2>
 
             <RouteOrderList routeStops={routeStops} onReorder={onReorder} />
 

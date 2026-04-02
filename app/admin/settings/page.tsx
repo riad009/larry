@@ -87,7 +87,7 @@ export default function AdminSettings() {
                             </div>
                             <div>
                                 <h1 className="text-2xl md:text-3xl font-bold text-black">Admin Settings</h1>
-                                <p className="text-[#424242] text-sm">Manage your account and security settings</p>
+                                <p className="text-warm-gray text-sm">Manage your account and security settings</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ export default function AdminSettings() {
                                 <Shield className="h-5 w-5 text-black" />
                             </div>
                             <div>
-                                <p className="text-sm text-[#424242]">Account Type</p>
+                                <p className="text-sm text-warm-gray">Account Type</p>
                                 <p className="text-lg font-bold text-black">Super Admin</p>
                             </div>
                         </div>
@@ -112,7 +112,7 @@ export default function AdminSettings() {
                                 <Key className="h-5 w-5 text-black" />
                             </div>
                             <div>
-                                <p className="text-sm text-[#424242]">Status</p>
+                                <p className="text-sm text-warm-gray">Status</p>
                                 <p className="text-lg font-bold text-black">Verified</p>
                             </div>
                         </div>
@@ -123,7 +123,7 @@ export default function AdminSettings() {
                                 <Lock className="h-5 w-5 text-black" />
                             </div>
                             <div>
-                                <p className="text-sm text-[#424242]">Security</p>
+                                <p className="text-sm text-warm-gray">Security</p>
                                 <p className="text-lg font-bold text-black">Active</p>
                             </div>
                         </div>
@@ -139,7 +139,7 @@ export default function AdminSettings() {
                                 {adminData.name.charAt(0)}
                             </div>
                             <h2 className="text-xl font-bold text-black">{adminData.name}</h2>
-                            <p className="text-[#424242] text-sm mt-1">{adminData.email}</p>
+                            <p className="text-warm-gray text-sm mt-1">{adminData.email}</p>
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@ export default function AdminSettings() {
                                 <div className="space-y-2">
                                     <Label className="text-black">Display Name</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black"
+                                        className="bg-white border-warm-border text-black"
                                         value={adminData.name}
                                         onChange={(e) => setAdminData({...adminData, name: e.target.value})}
                                     />
@@ -159,7 +159,7 @@ export default function AdminSettings() {
                                 <div className="space-y-2">
                                     <Label className="text-black">Email</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black"
+                                        className="bg-white border-warm-border text-black"
                                         value={adminData.email}
                                         onChange={(e) => setAdminData({...adminData, email: e.target.value})}
                                     />
@@ -170,7 +170,7 @@ export default function AdminSettings() {
                                     <Label className="text-black">New Password</Label>
                                     <Input
                                         type="password"
-                                        className="bg-white border-[#E0E0E0] text-black"
+                                        className="bg-white border-warm-border text-black"
                                         value={adminData.newPassword}
                                         onChange={(e) => setAdminData({...adminData, newPassword: e.target.value})}
                                     />
@@ -179,7 +179,7 @@ export default function AdminSettings() {
                                     <Label className="text-black">Confirm Password</Label>
                                     <Input
                                         type="password"
-                                        className="bg-white border-[#E0E0E0] text-black"
+                                        className="bg-white border-warm-border text-black"
                                         value={adminData.confirmPassword}
                                         onChange={(e) => setAdminData({...adminData, confirmPassword: e.target.value})}
                                     />

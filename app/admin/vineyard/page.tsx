@@ -140,7 +140,7 @@ export default function VineyardAdmin() {
                             </div>
                             <div>
                                 <h1 className="text-2xl md:text-3xl font-bold text-black">Vineyard Management</h1>
-                                <p className="text-[#424242] text-sm">Manage all vineyard estates in the system</p>
+                                <p className="text-warm-gray text-sm">Manage all vineyard estates in the system</p>
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@ export default function VineyardAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{totalVineyards}</p>
-                                <p className="text-sm text-[#424242]">Total Vineyards</p>
+                                <p className="text-sm text-warm-gray">Total Vineyards</p>
                             </div>
                             <Building className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -168,7 +168,7 @@ export default function VineyardAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{totalRegions}</p>
-                                <p className="text-sm text-[#424242]">Unique Regions</p>
+                                <p className="text-sm text-warm-gray">Unique Regions</p>
                             </div>
                             <MapPin className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -177,7 +177,7 @@ export default function VineyardAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">€{avgCostRange}</p>
-                                <p className="text-sm text-[#424242]">Avg. Cost Per Person</p>
+                                <p className="text-sm text-warm-gray">Avg. Cost Per Person</p>
                             </div>
                             <TrendingUp className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -186,7 +186,7 @@ export default function VineyardAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{socialPercentage}%</p>
-                                <p className="text-sm text-[#424242]">With Social Media</p>
+                                <p className="text-sm text-warm-gray">With Social Media</p>
                             </div>
                             <Percent className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -201,7 +201,7 @@ export default function VineyardAdmin() {
                     placeholder="Search vineyards by name, ID, region, or commune..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="max-w-md bg-white border border-[#E0E0E0] rounded-xl px-4 py-2 text-black placeholder:text-[#424242] focus:border-black"
+                    className="max-w-md bg-white border border-warm-border rounded-xl px-4 py-2 text-black placeholder:text-warm-gray focus:border-black"
                 />
             </div>
 
@@ -209,13 +209,13 @@ export default function VineyardAdmin() {
             <div className="rounded-xl border border-black bg-white overflow-hidden">
                 {loading ? (
                     <div className="p-12 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-[#E0E0E0] border-t-black"></div>
-                        <p className="mt-4 text-[#424242]">Loading vineyards...</p>
+                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-warm-border border-t-black"></div>
+                        <p className="mt-4 text-warm-gray">Loading vineyards...</p>
                     </div>
                 ) : vineyards.length === 0 ? (
                     <div className="p-12 text-center">
-                        <Wine className="h-12 w-12 text-[#424242] mx-auto mb-4" />
-                        <p className="text-[#424242]">No vineyards found in the database</p>
+                        <Wine className="h-12 w-12 text-warm-gray mx-auto mb-4" />
+                        <p className="text-warm-gray">No vineyards found in the database</p>
                         <Button
                             onClick={() => handleOpen()}
                             className="mt-4 bg-black hover:bg-[#424242] text-white border border-black"
@@ -227,7 +227,7 @@ export default function VineyardAdmin() {
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="bg-[#F5F5F5] border-b border-black">
+                            <thead className="bg-cream border-b border-black">
                             <tr>
                                 <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Vineyard</th>
                                 <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Location</th>
@@ -237,32 +237,32 @@ export default function VineyardAdmin() {
                             </thead>
                             <tbody className="divide-y divide-[#E0E0E0]">
                             {filteredVineyards.map((v) => (
-                                <tr key={v.mongoId || v.id} className="hover:bg-[#F5F5F5] transition-colors duration-150">
+                                <tr key={v.mongoId || v.id} className="hover:bg-cream transition-colors duration-150">
                                     <td className="p-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-2 rounded-lg bg-white border border-[#E0E0E0]">
+                                            <div className="p-2 rounded-lg bg-white border border-warm-border">
                                                 <Wine className="h-5 w-5 text-black" />
                                             </div>
                                             <div>
                                                 <p className="font-medium text-black">{v.name}</p>
-                                                <p className="text-xs text-[#424242] font-mono">{v.id}</p>
+                                                <p className="text-xs text-warm-gray font-mono">{v.id}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="p-4">
                                         <div>
                                             <p className="text-black">{v.region}</p>
-                                            <p className="text-xs text-[#424242]">{v.commune}</p>
+                                            <p className="text-xs text-warm-gray">{v.commune}</p>
                                         </div>
                                     </td>
                                     <td className="p-4">
                                         <div className="flex items-center gap-2">
-                                            <Euro className="h-4 w-4 text-[#424242]" />
+                                            <Euro className="h-4 w-4 text-warm-gray" />
                                             <span className="font-medium text-black">
                                                 €{v.lowestCost} - €{v.highestCost}
                                             </span>
                                             {v.dominantGrape && (
-                                                <div className="ml-2 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[#F5F5F5] border border-[#E0E0E0]">
+                                                <div className="ml-2 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-cream border border-warm-border">
                                                     <Grape className="h-3 w-3 text-black" />
                                                     <span className="text-xs text-black">{v.dominantGrape}</span>
                                                 </div>
@@ -275,7 +275,7 @@ export default function VineyardAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleOpen(v)}
-                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
+                                                className="text-warm-gray hover:text-black hover:bg-cream"
                                                 title="Edit vineyard"
                                             >
                                                 <Edit3 className="h-4 w-4" />
@@ -284,7 +284,7 @@ export default function VineyardAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleDelete(v)}
-                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
+                                                className="text-warm-gray hover:text-black hover:bg-cream"
                                                 title="Delete vineyard"
                                             >
                                                 <Trash2 className="h-4 w-4" />
@@ -302,7 +302,7 @@ export default function VineyardAdmin() {
             {/* Dialog/Modal */}
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent className="max-w-4xl bg-white border border-black text-black rounded-xl p-0 overflow-hidden">
-                    <DialogHeader className="p-6 border-b border-[#E0E0E0]">
+                    <DialogHeader className="p-6 border-b border-warm-border">
                         <DialogTitle className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-white border border-black">
                                 <Wine className="h-5 w-5 text-black" />
@@ -318,21 +318,21 @@ export default function VineyardAdmin() {
                             <div className="space-y-4">
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Tag className="h-4 w-4 text-[#424242]" />
+                                        <Tag className="h-4 w-4 text-warm-gray" />
                                         Vineyard ID
                                     </Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray focus:border-black"
                                         placeholder="e.g., RV-007"
                                         value={current?.id || ""}
                                         onChange={(e) => setCurrent({...current, id: e.target.value})}
                                     />
-                                    <p className="text-xs text-[#424242] mt-1">Unique identifier for offers mapping</p>
+                                    <p className="text-xs text-warm-gray mt-1">Unique identifier for offers mapping</p>
                                 </div>
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Vineyard Name</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray focus:border-black"
                                         value={current?.name || ""}
                                         onChange={(e) => setCurrent({...current, name: e.target.value})}
                                         placeholder="Enter vineyard name"
@@ -342,7 +342,7 @@ export default function VineyardAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Country</Label>
                                         <Input
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.country || ""}
                                             onChange={(e) => setCurrent({...current, country: e.target.value})}
                                             placeholder="e.g., France"
@@ -351,7 +351,7 @@ export default function VineyardAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Sub Region</Label>
                                         <Input
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.subRegion || ""}
                                             onChange={(e) => setCurrent({...current, subRegion: e.target.value})}
                                             placeholder="e.g., Médoc"
@@ -362,7 +362,7 @@ export default function VineyardAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Region</Label>
                                         <Input
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.region || ""}
                                             onChange={(e) => setCurrent({...current, region: e.target.value})}
                                             placeholder="e.g., Bordeaux"
@@ -371,7 +371,7 @@ export default function VineyardAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Commune</Label>
                                         <Input
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.commune || ""}
                                             onChange={(e) => setCurrent({...current, commune: e.target.value})}
                                             placeholder="e.g., Pauillac"
@@ -381,7 +381,7 @@ export default function VineyardAdmin() {
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Type</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                         value={current?.type || ""}
                                         onChange={(e) => setCurrent({...current, type: e.target.value})}
                                         placeholder="e.g., Estate, Cooperative"
@@ -390,7 +390,7 @@ export default function VineyardAdmin() {
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">GKP</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                         value={current?.gkp || ""}
                                         onChange={(e) => setCurrent({...current, gkp: e.target.value})}
                                         placeholder="GKP identifier"
@@ -399,7 +399,7 @@ export default function VineyardAdmin() {
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Dominant Grape</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                         value={current?.dominantGrape || ""}
                                         onChange={(e) => setCurrent({...current, dominantGrape: e.target.value})}
                                         placeholder="e.g., Cabernet Sauvignon"
@@ -408,26 +408,26 @@ export default function VineyardAdmin() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <MapPin className="h-4 w-4 text-[#424242]" />
+                                            <MapPin className="h-4 w-4 text-warm-gray" />
                                             Latitude
                                         </Label>
                                         <Input
                                             type="number"
                                             step="any"
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.latitude || ""}
                                             onChange={(e) => setCurrent({...current, latitude: parseFloat(e.target.value)})}
                                         />
                                     </div>
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <MapPin className="h-4 w-4 text-[#424242]" />
+                                            <MapPin className="h-4 w-4 text-warm-gray" />
                                             Longitude
                                         </Label>
                                         <Input
                                             type="number"
                                             step="any"
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.longitude || ""}
                                             onChange={(e) => setCurrent({...current, longitude: parseFloat(e.target.value)})}
                                         />
@@ -438,13 +438,13 @@ export default function VineyardAdmin() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <DollarSign className="h-4 w-4 text-[#424242]" />
+                                            <DollarSign className="h-4 w-4 text-warm-gray" />
                                             Lowest Cost
                                         </Label>
                                         <Input
                                             type="number"
                                             step="0.01"
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.lowestCost || 0}
                                             onChange={(e) => setCurrent({...current, lowestCost: Number(e.target.value)})}
                                             placeholder="0.00"
@@ -452,13 +452,13 @@ export default function VineyardAdmin() {
                                     </div>
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <DollarSign className="h-4 w-4 text-[#424242]" />
+                                            <DollarSign className="h-4 w-4 text-warm-gray" />
                                             Highest Cost
                                         </Label>
                                         <Input
                                             type="number"
                                             step="0.01"
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.highestCost || 0}
                                             onChange={(e) => setCurrent({...current, highestCost: Number(e.target.value)})}
                                             placeholder="0.00"
@@ -467,11 +467,11 @@ export default function VineyardAdmin() {
                                 </div>
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Instagram className="h-4 w-4 text-[#424242]" />
+                                        <Instagram className="h-4 w-4 text-warm-gray" />
                                         Instagram URL
                                     </Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                         value={current?.instagram || ""}
                                         onChange={(e) => setCurrent({...current, instagram: e.target.value})}
                                         placeholder="https://instagram.com/..."
@@ -480,11 +480,11 @@ export default function VineyardAdmin() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <Clock className="h-4 w-4 text-[#424242]" />
+                                            <Clock className="h-4 w-4 text-warm-gray" />
                                             Saturday Hours
                                         </Label>
                                         <Input
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.saturday || ""}
                                             onChange={(e) => setCurrent({...current, saturday: e.target.value})}
                                             placeholder="e.g., 9:00 AM - 5:00 PM"
@@ -492,11 +492,11 @@ export default function VineyardAdmin() {
                                     </div>
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <Clock className="h-4 w-4 text-[#424242]" />
+                                            <Clock className="h-4 w-4 text-warm-gray" />
                                             Sunday Hours
                                         </Label>
                                         <Input
-                                            className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                            className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                             value={current?.sunday || ""}
                                             onChange={(e) => setCurrent({...current, sunday: e.target.value})}
                                             placeholder="e.g., Closed"
@@ -504,18 +504,18 @@ export default function VineyardAdmin() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="md:col-span-2 space-y-4 pt-6 border-t border-[#E0E0E0]">
+                            <div className="md:col-span-2 space-y-4 pt-6 border-t border-warm-border">
                                 <div className="flex items-center gap-2">
                                     <Wine className="h-5 w-5 text-black" />
                                     <h3 className="text-lg font-bold text-black">Experience Highlights</h3>
                                 </div>
-                                <p className="text-sm text-[#424242] mb-4">Add up to 5 key highlights for this vineyard</p>
+                                <p className="text-sm text-warm-gray mb-4">Add up to 5 key highlights for this vineyard</p>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {[1, 2, 3, 4, 5].map((num) => (
                                         <div key={num} className="space-y-2">
                                             <Label className="text-sm font-medium text-black">Highlight {num}</Label>
                                             <Input
-                                                className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242]"
+                                                className="bg-white border-warm-border text-black placeholder:text-warm-gray"
                                                 value={current?.[`reason${num}`] || ""}
                                                 onChange={(e) => setCurrent({...current, [`reason${num}`]: e.target.value})}
                                                 placeholder={`Key feature ${num}...`}
@@ -527,11 +527,11 @@ export default function VineyardAdmin() {
                         </div>
                     </ScrollArea>
 
-                    <DialogFooter className="p-6 border-t border-[#E0E0E0] bg-[#F5F5F5]">
+                    <DialogFooter className="p-6 border-t border-warm-border bg-cream">
                         <Button
                             variant="ghost"
                             onClick={() => setIsOpen(false)}
-                            className="text-[#424242] hover:text-black hover:bg-[#E0E0E0]"
+                            className="text-warm-gray hover:text-black hover:bg-[#E0E0E0]"
                         >
                             Cancel
                         </Button>

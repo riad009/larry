@@ -19,33 +19,29 @@ export function ActionButtonsGrid({
                                   }: ActionButtonsGridProps) {
     const colorClasses = {
         green: {
-            hover: "hover:shadow-green-500/5",
-            iconBg: "group-hover:from-green-500/20 group-hover:to-emerald-500/20",
-            iconBorder: "group-hover:border-green-500/30",
-            iconColor: "group-hover:text-green-400",
+            bg: "bg-green-50 hover:bg-green-100 border-green-200",
+            icon: "text-green-600",
+            text: "text-green-700",
         },
         blue: {
-            hover: "hover:shadow-blue-500/5",
-            iconBg: "group-hover:from-blue-500/20 group-hover:to-cyan-500/20",
-            iconBorder: "group-hover:border-blue-500/30",
-            iconColor: "group-hover:text-blue-400",
+            bg: "bg-blue-50 hover:bg-blue-100 border-blue-200",
+            icon: "text-blue-600",
+            text: "text-blue-700",
         },
         amber: {
-            hover: "hover:shadow-amber-500/5",
-            iconBg: "group-hover:from-amber-500/20 group-hover:to-orange-500/20",
-            iconBorder: "group-hover:border-amber-500/30",
-            iconColor: "group-hover:text-amber-400",
+            bg: "bg-amber-50 hover:bg-amber-100 border-amber-200",
+            icon: "text-amber-600",
+            text: "text-amber-700",
         },
         purple: {
-            hover: "hover:shadow-purple-500/5",
-            iconBg: "group-hover:from-purple-500/20 group-hover:to-violet-500/20",
-            iconBorder: "group-hover:border-purple-500/30",
-            iconColor: "group-hover:text-purple-400",
+            bg: "bg-purple-50 hover:bg-purple-100 border-purple-200",
+            icon: "text-purple-600",
+            text: "text-purple-700",
         },
     };
 
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             {buttons.map((button) => {
                 const color = colorClasses[button.color];
                 const Icon = button.icon;
@@ -54,14 +50,10 @@ export function ActionButtonsGrid({
                     <button
                         key={button.id}
                         onClick={() => onButtonClick?.(button.id)}
-                        className={`px-4 py-4 rounded-xl md:rounded-2xl bg-gradient-to-r from-zinc-900 to-black border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-all duration-300 flex items-center justify-center gap-3 group ${color.hover}`}
+                        className={`px-3 py-3 rounded-xl border ${color.bg} transition-all duration-200 flex items-center justify-center gap-2 group hover:shadow-sm active:scale-[0.97]`}
                     >
-                        <div
-                            className={`p-2.5 rounded-lg bg-gradient-to-r from-zinc-800 to-zinc-900 border border-zinc-700 transition-all ${color.iconBg} ${color.iconBorder}`}
-                        >
-                            <Icon className={`w-4 h-4 md:w-5 md:h-5 transition-colors ${color.iconColor}`} />
-                        </div>
-                        <span className="text-sm font-bold">{button.label}</span>
+                        <Icon className={`w-4 h-4 ${color.icon}`} />
+                        <span className={`text-xs font-bold ${color.text}`}>{button.label}</span>
                     </button>
                 );
             })}

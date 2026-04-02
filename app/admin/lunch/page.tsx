@@ -117,7 +117,7 @@ export default function LunchAdmin() {
                             </div>
                             <div>
                                 <h1 className="text-2xl md:text-3xl font-bold text-black">Restaurant Management</h1>
-                                <p className="text-[#424242] text-sm">Manage all lunch spots in the system</p>
+                                <p className="text-warm-gray text-sm">Manage all lunch spots in the system</p>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@ export default function LunchAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{totalRestaurants}</p>
-                                <p className="text-sm text-[#424242]">Total Restaurants</p>
+                                <p className="text-sm text-warm-gray">Total Restaurants</p>
                             </div>
                             <Building className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -145,7 +145,7 @@ export default function LunchAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{totalRegions}</p>
-                                <p className="text-sm text-[#424242]">Unique Regions</p>
+                                <p className="text-sm text-warm-gray">Unique Regions</p>
                             </div>
                             <MapPin className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -154,7 +154,7 @@ export default function LunchAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">€{avgLunchCost}</p>
-                                <p className="text-sm text-[#424242]">Avg. Lunch Cost</p>
+                                <p className="text-sm text-warm-gray">Avg. Lunch Cost</p>
                             </div>
                             <TrendingUp className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -163,7 +163,7 @@ export default function LunchAdmin() {
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-2xl font-bold text-black">{typePercentage}%</p>
-                                <p className="text-sm text-[#424242]">With Cuisine Type</p>
+                                <p className="text-sm text-warm-gray">With Cuisine Type</p>
                             </div>
                             <Percent className="h-8 w-8 text-black opacity-70" />
                         </div>
@@ -178,7 +178,7 @@ export default function LunchAdmin() {
                     placeholder="Search restaurants..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="max-w-md bg-white border border-[#E0E0E0] rounded-xl px-4 py-2 text-black placeholder:text-[#424242] focus:border-black"
+                    className="max-w-md bg-white border border-warm-border rounded-xl px-4 py-2 text-black placeholder:text-warm-gray focus:border-black"
                 />
             </div>
 
@@ -186,13 +186,13 @@ export default function LunchAdmin() {
             <div className="rounded-xl border border-black bg-white overflow-hidden">
                 {loading ? (
                     <div className="p-12 text-center">
-                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-[#E0E0E0] border-t-black"></div>
-                        <p className="mt-4 text-[#424242]">Loading restaurants...</p>
+                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-warm-border border-t-black"></div>
+                        <p className="mt-4 text-warm-gray">Loading restaurants...</p>
                     </div>
                 ) : restaurants.length === 0 ? (
                     <div className="p-12 text-center">
-                        <Utensils className="h-12 w-12 text-[#424242] mx-auto mb-4" />
-                        <p className="text-[#424242]">No restaurants found in the database</p>
+                        <Utensils className="h-12 w-12 text-warm-gray mx-auto mb-4" />
+                        <p className="text-warm-gray">No restaurants found in the database</p>
                         <Button
                             onClick={() => handleOpen()}
                             className="mt-4 bg-black hover:bg-[#424242] text-white border border-black"
@@ -204,7 +204,7 @@ export default function LunchAdmin() {
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
-                            <thead className="bg-[#F5F5F5] border-b border-black">
+                            <thead className="bg-cream border-b border-black">
                             <tr>
                                 <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Restaurant</th>
                                 <th className="text-left p-4 text-xs font-bold text-black uppercase tracking-wider">Location</th>
@@ -214,33 +214,33 @@ export default function LunchAdmin() {
                             </thead>
                             <tbody className="divide-y divide-[#E0E0E0]">
                             {filteredRestaurants.map((r) => (
-                                <tr key={r.mongoId || r.id} className="hover:bg-[#F5F5F5] transition-colors duration-150">
+                                <tr key={r.mongoId || r.id} className="hover:bg-cream transition-colors duration-150">
                                     <td className="p-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-2 rounded-lg bg-white border border-[#E0E0E0]">
+                                            <div className="p-2 rounded-lg bg-white border border-warm-border">
                                                 <Utensils className="h-5 w-5 text-black" />
                                             </div>
                                             <div>
                                                 <p className="font-medium text-black">{r.name}</p>
-                                                <p className="text-xs text-[#424242] font-mono">{r.id}</p>
+                                                <p className="text-xs text-warm-gray font-mono">{r.id}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="p-4">
                                         <div>
                                             <p className="text-black">{r.region}</p>
-                                            <p className="text-xs text-[#424242]">{r.commune}</p>
+                                            <p className="text-xs text-warm-gray">{r.commune}</p>
                                         </div>
                                     </td>
                                     <td className="p-4">
                                         <div className="flex flex-col gap-2">
                                             <div className="flex items-center gap-2">
-                                                <Euro className="h-4 w-4 text-[#424242]" />
+                                                <Euro className="h-4 w-4 text-warm-gray" />
                                                 <span className="font-medium text-black">
                                                     €{r.lunchCost || "0"}
                                                 </span>
                                                 {r.bracket && (
-                                                    <span className="text-xs text-[#424242]">({r.bracket})</span>
+                                                    <span className="text-xs text-warm-gray">({r.bracket})</span>
                                                 )}
                                             </div>
                                             <div className="flex items-center gap-2">
@@ -255,7 +255,7 @@ export default function LunchAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleOpen(r)}
-                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
+                                                className="text-warm-gray hover:text-black hover:bg-cream"
                                                 title="Edit restaurant"
                                             >
                                                 <Edit3 className="h-4 w-4" />
@@ -264,7 +264,7 @@ export default function LunchAdmin() {
                                                 variant="ghost"
                                                 size="sm"
                                                 onClick={() => handleDelete(r)}
-                                                className="text-[#424242] hover:text-black hover:bg-[#F5F5F5]"
+                                                className="text-warm-gray hover:text-black hover:bg-cream"
                                                 title="Delete restaurant"
                                             >
                                                 <Trash2 className="h-4 w-4" />
@@ -282,7 +282,7 @@ export default function LunchAdmin() {
             {/* Dialog/Modal */}
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent className="max-w-4xl bg-white border border-black text-black rounded-xl p-0 overflow-hidden">
-                    <DialogHeader className="p-6 border-b border-[#E0E0E0]">
+                    <DialogHeader className="p-6 border-b border-warm-border">
                         <DialogTitle className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-white border border-black">
                                 <Utensils className="h-5 w-5 text-black" />
@@ -299,22 +299,22 @@ export default function LunchAdmin() {
                             <div className="space-y-4">
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Tag className="h-4 w-4 text-[#424242]" />
+                                        <Tag className="h-4 w-4 text-warm-gray" />
                                         Restaurant ID
                                     </Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray focus:border-black"
                                         placeholder="e.g., RS-001"
                                         value={current?.id || ""}
                                         onChange={(e) => setCurrent({...current, id: e.target.value})}
                                     />
-                                    <p className="text-xs text-[#424242] mt-1">Unique identifier for database</p>
+                                    <p className="text-xs text-warm-gray mt-1">Unique identifier for database</p>
                                 </div>
 
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Restaurant Name</Label>
                                     <Input
-                                        className="bg-white border-[#E0E0E0] text-black placeholder:text-[#424242] focus:border-black"
+                                        className="bg-white border-warm-border text-black placeholder:text-warm-gray focus:border-black"
                                         value={current?.name || ""}
                                         onChange={(e) => setCurrent({...current, name: e.target.value})}
                                         placeholder="Enter restaurant name"
@@ -325,7 +325,7 @@ export default function LunchAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Region</Label>
                                         <Input
-                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                             value={current?.region || ""}
                                             onChange={(e) => setCurrent({...current, region: e.target.value})}
                                             placeholder="e.g., Bordeaux"
@@ -334,7 +334,7 @@ export default function LunchAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Commune</Label>
                                         <Input
-                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                             value={current?.commune || ""}
                                             onChange={(e) => setCurrent({...current, commune: e.target.value})}
                                             placeholder="e.g., Pauillac"
@@ -345,7 +345,7 @@ export default function LunchAdmin() {
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2">Cuisine Type</Label>
                                     <Input
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                         value={current?.type || ""}
                                         onChange={(e) => setCurrent({...current, type: e.target.value})}
                                         placeholder="e.g., French, Italian, Bistro"
@@ -358,13 +358,13 @@ export default function LunchAdmin() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <Euro className="h-4 w-4 text-[#424242]" />
+                                            <Euro className="h-4 w-4 text-warm-gray" />
                                             Lunch Cost (€)
                                         </Label>
                                         <Input
                                             type="number"
                                             step="0.01"
-                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                             value={current?.lunchCost || 0}
                                             onChange={(e) => setCurrent({...current, lunchCost: Number(e.target.value)})}
                                             placeholder="0.00"
@@ -373,7 +373,7 @@ export default function LunchAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Price Bracket</Label>
                                         <Input
-                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                             value={current?.bracket || ""}
                                             onChange={(e) => setCurrent({...current, bracket: e.target.value})}
                                             placeholder="€€ - €€€"
@@ -384,7 +384,7 @@ export default function LunchAdmin() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                            <Star className="h-4 w-4 text-[#424242]" />
+                                            <Star className="h-4 w-4 text-warm-gray" />
                                             Rating (0-5)
                                         </Label>
                                         <Input
@@ -392,7 +392,7 @@ export default function LunchAdmin() {
                                             step="0.1"
                                             min="0"
                                             max="5"
-                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                             value={current?.rating || 0}
                                             onChange={(e) => setCurrent({...current, rating: Number(e.target.value)})}
                                         />
@@ -400,7 +400,7 @@ export default function LunchAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">GKP Code</Label>
                                         <Input
-                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                            className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                             value={current?.gkp || ""}
                                             onChange={(e) => setCurrent({...current, gkp: e.target.value})}
                                             placeholder="GKP identifier"
@@ -410,11 +410,11 @@ export default function LunchAdmin() {
 
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <Clock className="h-4 w-4 text-[#424242]" />
+                                        <Clock className="h-4 w-4 text-warm-gray" />
                                         Opening Hours
                                     </Label>
                                     <Input
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                         value={current?.open || ""}
                                         onChange={(e) => setCurrent({...current, open: e.target.value})}
                                         placeholder="e.g., 11:00 AM - 3:00 PM"
@@ -423,29 +423,29 @@ export default function LunchAdmin() {
                             </div>
 
                             {/* Coordinates Section */}
-                            <div className="grid grid-cols-2 gap-4 md:col-span-2 pt-4 border-t border-[#E0E0E0]">
+                            <div className="grid grid-cols-2 gap-4 md:col-span-2 pt-4 border-t border-warm-border">
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <MapPin className="h-4 w-4 text-[#424242]" />
+                                        <MapPin className="h-4 w-4 text-warm-gray" />
                                         Latitude
                                     </Label>
                                     <Input
                                         type="number"
                                         step="any"
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                         value={current?.latitude || ""}
                                         onChange={(e) => setCurrent({...current, latitude: parseFloat(e.target.value)})}
                                     />
                                 </div>
                                 <div>
                                     <Label className="text-sm font-medium text-black mb-2 flex items-center gap-2">
-                                        <MapPin className="h-4 w-4 text-[#424242]" />
+                                        <MapPin className="h-4 w-4 text-warm-gray" />
                                         Longitude
                                     </Label>
                                     <Input
                                         type="number"
                                         step="any"
-                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                        className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                         value={current?.longitude || ""}
                                         onChange={(e) => setCurrent({...current, longitude: parseFloat(e.target.value)})}
                                     />
@@ -453,7 +453,7 @@ export default function LunchAdmin() {
                             </div>
 
                             {/* Description Section - Full Width */}
-                            <div className="md:col-span-2 space-y-4 pt-6 border-t border-[#E0E0E0]">
+                            <div className="md:col-span-2 space-y-4 pt-6 border-t border-warm-border">
                                 <div className="flex items-center gap-2">
                                     <Coffee className="h-5 w-5 text-black" />
                                     <h3 className="text-lg font-bold text-black">Description & Details</h3>
@@ -462,7 +462,7 @@ export default function LunchAdmin() {
                                     <div>
                                         <Label className="text-sm font-medium text-black mb-2">Short Description</Label>
                                         <textarea
-                                            className="w-full bg-white border border-[#E0E0E0] rounded-lg p-3 text-white placeholder:text-[#424242] min-h-[100px] resize-y"
+                                            className="w-full bg-white border border-warm-border rounded-lg p-3 text-white placeholder:text-warm-gray min-h-[100px] resize-y"
                                             value={current?.description || ""}
                                             onChange={(e) => setCurrent({...current, description: e.target.value})}
                                             placeholder="Brief description of the restaurant, ambiance, specialties..."
@@ -472,7 +472,7 @@ export default function LunchAdmin() {
                                         <div>
                                             <Label className="text-sm font-medium text-black mb-2">Country</Label>
                                             <Input
-                                                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                                 value={current?.country || ""}
                                                 onChange={(e) => setCurrent({...current, country: e.target.value})}
                                                 placeholder="e.g., France"
@@ -481,7 +481,7 @@ export default function LunchAdmin() {
                                         <div>
                                             <Label className="text-sm font-medium text-black mb-2">Sub-Region</Label>
                                             <Input
-                                                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-[#424242]"
+                                                className="bg-gray-800/50 border-gray-700 text-white placeholder:text-warm-gray"
                                                 value={current?.subRegion || ""}
                                                 onChange={(e) => setCurrent({...current, subRegion: e.target.value})}
                                                 placeholder="Specific sub-region"
@@ -493,11 +493,11 @@ export default function LunchAdmin() {
                         </div>
                     </ScrollArea>
 
-                    <DialogFooter className="p-6 border-t border-[#E0E0E0] bg-[#F5F5F5]">
+                    <DialogFooter className="p-6 border-t border-warm-border bg-cream">
                         <Button
                             variant="ghost"
                             onClick={() => setIsOpen(false)}
-                            className="text-[#424242] hover:text-black hover:bg-[#E0E0E0]"
+                            className="text-warm-gray hover:text-black hover:bg-[#E0E0E0]"
                         >
                             Cancel
                         </Button>

@@ -53,36 +53,36 @@ export default function MobileFilterControls({
 
     if (!hasVineyardsInRegion && selectedRegion) {
         return (
-            <div className="w-full max-w-sm p-6 bg-white rounded-3xl mb-6 border border-[#E0E0E0] shadow-sm">
+            <div className="w-full max-w-sm p-6 bg-white/70 backdrop-blur-sm rounded-3xl mb-6 border border-warm-border shadow-sm">
                 <div className="text-center">
-                    <div className="p-2 bg-[#F5F5F5] border border-[#E0E0E0] rounded-lg inline-block mb-4">
-                        <Filter className="w-5 h-5 text-black" />
+                    <div className="p-2 bg-cream border border-warm-border rounded-lg inline-block mb-4">
+                        <Filter className="w-5 h-5 text-charcoal" />
                     </div>
-                    <h2 className="text-base font-bold text-black mb-2">No Vineyards Available</h2>
-                    <p className="text-sm text-[#424242] mb-2">No vineyards found in</p>
-                    <p className="text-base font-bold text-black mb-4">{selectedRegion?.name || "selected region"}</p>
-                    <p className="text-sm text-[#424242]">Please select a different region</p>
+                    <h2 className="text-base font-bold text-charcoal mb-2">No Vineyards Available</h2>
+                    <p className="text-sm text-warm-gray mb-2">No vineyards found in</p>
+                    <p className="text-base font-bold text-charcoal mb-4">{selectedRegion?.name || "selected region"}</p>
+                    <p className="text-sm text-warm-gray">Please select a different region</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="w-full max-w-sm p-4 bg-white rounded-3xl mb-6 border border-[#E0E0E0] shadow-sm">
+        <div className="w-full max-w-sm p-4 bg-white/70 backdrop-blur-sm rounded-3xl mb-6 border border-warm-border shadow-sm">
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                    <Filter className="w-4 h-4 text-black" />
-                    <h2 className="text-sm font-bold text-black uppercase tracking-wider">Vineyard Filter</h2>
+                    <Filter className="w-4 h-4 text-charcoal" />
+                    <h2 className="text-sm font-bold text-charcoal uppercase tracking-wider">Vineyard Filter</h2>
                 </div>
                 <div className="flex items-center gap-2">
                     {selectedRegion && (
-                        <span className="text-xs text-black bg-[#F5F5F5] border border-[#E0E0E0] px-2 py-1 rounded">
+                        <span className="text-xs text-charcoal bg-cream border border-warm-border px-2 py-1 rounded">
                             {selectedRegion.name}
                         </span>
                     )}
                     <button
                         onClick={onClearFilters}
-                        className="text-sm text-[#424242] hover:text-black"
+                        className="text-sm text-warm-gray hover:text-charcoal"
                     >
                         Clear
                     </button>
@@ -91,12 +91,12 @@ export default function MobileFilterControls({
 
             <div className="space-y-3 mb-4">
                 <div>
-                    <label className="text-sm font-bold text-black uppercase ml-1 mb-1 block">Area *</label>
+                    <label className="text-sm font-bold text-charcoal uppercase ml-1 mb-1 block">Area *</label>
                     <select
                         value={pendingFilters.selectedArea}
                         onChange={(e) => update("selectedArea", e.target.value)}
                         disabled={areaOptions.length === 0}
-                        className="w-full bg-white border border-[#E0E0E0] p-2 rounded-lg text-base h-10 outline-none hover:border-[#9E9E9E] focus:border-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-2 rounded-lg text-base h-10 outline-none hover:border-wine-200 focus:border-wine-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <option value="">{areaOptions.length === 0 ? "Select a region first" : "Select Area"}</option>
                         {areaOptions.map((a) => (
@@ -107,11 +107,11 @@ export default function MobileFilterControls({
                     </select>
                 </div>
                 <div>
-                    <label className="text-sm font-bold text-black uppercase ml-1 mb-1 block">Type *</label>
+                    <label className="text-sm font-bold text-charcoal uppercase ml-1 mb-1 block">Type *</label>
                     <select
                         value={pendingFilters.selectedType}
                         onChange={(e) => update("selectedType", e.target.value)}
-                        className="w-full bg-white border border-[#E0E0E0] p-2 rounded-lg text-base h-10 outline-none hover:border-[#9E9E9E] focus:border-black transition-colors"
+                        className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-2 rounded-lg text-base h-10 outline-none hover:border-wine-200 focus:border-wine-500 transition-colors"
                     >
                         <option value="">Select Type</option>
                         {VINEYARD_TYPE_OPTIONS.map((o) => (
@@ -122,11 +122,11 @@ export default function MobileFilterControls({
                     </select>
                 </div>
                 <div>
-                    <label className="text-sm font-bold text-black uppercase ml-1 mb-1 block">Cost *</label>
+                    <label className="text-sm font-bold text-charcoal uppercase ml-1 mb-1 block">Cost *</label>
                     <select
                         value={pendingFilters.selectedCostBucket}
                         onChange={(e) => update("selectedCostBucket", e.target.value)}
-                        className="w-full bg-white border border-[#E0E0E0] p-2 rounded-lg text-base h-10 outline-none hover:border-[#9E9E9E] focus:border-black transition-colors"
+                        className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-2 rounded-lg text-base h-10 outline-none hover:border-wine-200 focus:border-wine-500 transition-colors"
                     >
                         <option value="">Select Cost</option>
                         {VINEYARD_COST_BUCKET_OPTIONS.map((o) => (
@@ -137,11 +137,11 @@ export default function MobileFilterControls({
                     </select>
                 </div>
                 <div>
-                    <label className="text-sm font-bold text-black uppercase ml-1 mb-1 block">Experience Type *</label>
+                    <label className="text-sm font-bold text-charcoal uppercase ml-1 mb-1 block">Experience Type *</label>
                     <select
                         value={pendingFilters.selectedExperienceType}
                         onChange={(e) => update("selectedExperienceType", e.target.value)}
-                        className="w-full bg-white border border-[#E0E0E0] p-2 rounded-lg text-base h-10 outline-none hover:border-[#9E9E9E] focus:border-black transition-colors"
+                        className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-2 rounded-lg text-base h-10 outline-none hover:border-wine-200 focus:border-wine-500 transition-colors"
                     >
                         <option value="">All</option>
                         {VINEYARD_EXPERIENCE_TYPE_OPTIONS.map((o) => (
@@ -154,7 +154,7 @@ export default function MobileFilterControls({
             </div>
 
             {validationError && (
-                <p className="mb-2 text-sm text-black border border-[#E0E0E0] bg-[#F5F5F5] px-3 py-2 rounded-lg" role="alert">
+                <p className="mb-2 text-sm text-charcoal border border-warm-border bg-cream px-3 py-2 rounded-lg" role="alert">
                     {validationError}
                 </p>
             )}
@@ -167,7 +167,7 @@ export default function MobileFilterControls({
                         !pendingFilters.selectedType ||
                         !pendingFilters.selectedCostBucket
                     }
-                    className="flex-1 font-bold h-12 rounded-xl transition-all duration-300 shadow-sm bg-black text-white hover:bg-[#424242] border border-black"
+                    className="flex-1 font-bold h-12 rounded-xl transition-all duration-300 shadow-sm gradient-cta text-white hover:bg-wine-700 border border-wine-500"
                 >
                     GO
                 </Button>
@@ -179,8 +179,8 @@ export default function MobileFilterControls({
                         disabled={selectedVineyards.length === 0}
                         className={`w-full font-bold h-12 rounded-xl transition-all shadow-sm border ${
                             selectedVineyards.length > 0
-                                ? "bg-white text-black hover:bg-[#F5F5F5] border-[#E0E0E0]"
-                                : "bg-[#F5F5F5] text-[#424242] opacity-50 cursor-not-allowed border-[#E0E0E0]"
+                                ? "bg-white/70 backdrop-blur-sm text-charcoal hover:bg-cream border-warm-border"
+                                : "bg-cream text-warm-gray opacity-50 cursor-not-allowed border-warm-border"
                         }`}
                     >
                         NEXT

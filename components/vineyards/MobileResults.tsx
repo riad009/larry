@@ -191,27 +191,27 @@ export default function MobileResults({
             {hasSearched && areaTotalCount !== undefined && (
                 <div className="mb-6 flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                        <p className="text-[#424242] text-base">
-                            <span className="text-black font-bold">{areaTotalCount}</span> vineyard{areaTotalCount !== 1 ? "s" : ""} in this area
+                        <p className="text-warm-gray text-base">
+                            <span className="text-charcoal font-bold">{areaTotalCount}</span> vineyard{areaTotalCount !== 1 ? "s" : ""} in this area
                         </p>
                         <button
                             onClick={onClearFilters}
-                            className="px-3 py-1.5 text-sm text-black hover:bg-[#F5F5F5] border border-[#E0E0E0] rounded-lg transition-colors"
+                            className="px-3 py-1.5 text-sm text-charcoal hover:bg-cream border border-warm-border rounded-lg transition-colors"
                         >
                             Clear filters
                         </button>
                     </div>
-                    <p className="text-[#424242] text-sm">Select up to 6 to view in Trip.</p>
+                    <p className="text-warm-gray text-sm">Select up to 6 to view in Trip.</p>
                 </div>
             )}
 
             {!hasSearched ? (
                 <div className="text-center py-8">
-                    <div className="w-full p-6 rounded-3xl bg-white border border-[#E0E0E0] shadow-sm">
-                        <Filter className="w-10 h-10 text-black mx-auto mb-4" />
-                        <h3 className="text-lg font-bold text-black mb-2">Start Exploring</h3>
-                        <p className="text-[#424242] text-base mb-4">Set filters and tap GO to see results</p>
-                        <div className="flex items-center justify-center gap-2 text-[#424242] text-sm">
+                    <div className="w-full p-6 rounded-3xl bg-white/70 backdrop-blur-sm border border-warm-border shadow-sm">
+                        <Filter className="w-10 h-10 text-charcoal mx-auto mb-4" />
+                        <h3 className="text-lg font-bold text-charcoal mb-2">Start Exploring</h3>
+                        <p className="text-warm-gray text-base mb-4">Set filters and tap GO to see results</p>
+                        <div className="flex items-center justify-center gap-2 text-warm-gray text-sm">
                             <Wine className="w-3 h-3" />
                             <span>{items.length} vineyards available</span>
                         </div>
@@ -219,8 +219,8 @@ export default function MobileResults({
                 </div>
             ) : filteredResults.length === 0 ? (
                 <div className="text-center py-6">
-                    <p className="text-black text-base mb-3">No vineyards match your filters.</p>
-                    <Button onClick={onClearFilters} className="bg-black text-white text-base border border-black">Reset Filters</Button>
+                    <p className="text-charcoal text-base mb-3">No vineyards match your filters.</p>
+                    <Button onClick={onClearFilters} className="gradient-cta text-white text-base border border-wine-500">Reset Filters</Button>
                 </div>
             ) : (
                 <div className="space-y-4 mb-10">
@@ -238,8 +238,8 @@ export default function MobileResults({
             )}
 
             {hasSearched && selectedVineyards.length > 0 && (
-                <section className="mb-10 py-6 border-t border-[#E0E0E0]">
-                    <h2 className="text-lg font-bold text-black mb-4">
+                <section className="mb-10 py-6 border-t border-warm-border">
+                    <h2 className="text-lg font-bold text-charcoal mb-4">
                         Selected for Trip ({selectedVineyards.length}/6)
                     </h2>
                     <div className="space-y-4">
@@ -249,7 +249,7 @@ export default function MobileResults({
                                     <div className="relative">
                                         <button
                                             onClick={() => setExpandedId(null)}
-                                            className="absolute top-4 right-4 z-10 bg-black p-2 rounded-full text-white border border-[#E0E0E0] shadow-md"
+                                            className="absolute top-4 right-4 z-10 bg-black p-2 rounded-full text-white border border-warm-border shadow-md"
                                         >
                                             <ChevronUp className="w-4 h-4" />
                                         </button>
@@ -282,8 +282,8 @@ export default function MobileResults({
             )}
 
             {hasSearched && topRatedInArea.length > 0 && (
-                <section className="mt-8 pt-6 border-t border-[#E0E0E0]">
-                    <h2 className="text-lg font-bold text-black mb-4">Top rated in this area</h2>
+                <section className="mt-8 pt-6 border-t border-warm-border">
+                    <h2 className="text-lg font-bold text-charcoal mb-4">Top rated in this area</h2>
                     <div className="space-y-4">
                         {topRatedInArea.map((v) => (
                             <VineyardCard

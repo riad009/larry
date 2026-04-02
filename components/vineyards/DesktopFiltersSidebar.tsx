@@ -178,7 +178,7 @@
 //                                     disabled={selectedVineyards.length === 0}
 //                                     className={`w-full font-bold h-14 rounded-xl text-base transition-all shadow-lg ${
 //                                         selectedVineyards.length > 0
-//                                             ? "bg-gradient-to-r from-white to-zinc-100 hover:from-zinc-100 hover:to-zinc-200 text-black opacity-100 hover:shadow-white/20"
+//                                             ? "bg-gradient-to-r from-white to-zinc-100 hover:from-zinc-100 hover:to-zinc-200 text-charcoal opacity-100 hover:shadow-white/20"
 //                                             : "bg-zinc-800 text-zinc-500 opacity-50 cursor-not-allowed"
 //                                     }`}
 //                                 >
@@ -283,7 +283,7 @@ export default function DesktopFiltersSidebar({
                                     onChange={(e) => update("selectedArea", e.target.value)}
                                     className="w-full bg-white/80 border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                                 >
-                                    <option value="" className="text-[#424242]">
+                                    <option value="" className="text-warm-gray">
                                         {areas.length === 0 ? "Loading Areas..." : "Select Area"}
                                     </option>
                                     {pendingFilters.selectedArea && !areas.includes(pendingFilters.selectedArea) && (
@@ -297,15 +297,15 @@ export default function DesktopFiltersSidebar({
 
                             {/* Type Filter */}
                             <div>
-                                <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                                <label className="text-sm font-bold text-charcoal uppercase tracking-wider mb-2 block">
                                     Type *
                                 </label>
                                 <select
                                     value={pendingFilters.selectedType}
                                     onChange={(e) => update("selectedType", e.target.value)}
-                                    className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                    className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                                 >
-                                    <option value="" className="text-[#424242]">Select Type</option>
+                                    <option value="" className="text-warm-gray">Select Type</option>
                                     {VINEYARD_TYPE_OPTIONS.map((o) => (
                                         <option key={o.value} value={o.value}>{o.label}</option>
                                     ))}
@@ -314,15 +314,15 @@ export default function DesktopFiltersSidebar({
 
                             {/* Cost Filter */}
                             <div>
-                                <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                                <label className="text-sm font-bold text-charcoal uppercase tracking-wider mb-2 block">
                                     Cost *
                                 </label>
                                 <select
                                     value={pendingFilters.selectedCostBucket}
                                     onChange={(e) => update("selectedCostBucket", e.target.value)}
-                                    className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                    className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                                 >
-                                    <option value="" className="text-[#424242]">Select Cost</option>
+                                    <option value="" className="text-warm-gray">Select Cost</option>
                                     {VINEYARD_COST_BUCKET_OPTIONS.map((o) => (
                                         <option key={o.value} value={o.value}>{o.label}</option>
                                     ))}
@@ -331,15 +331,15 @@ export default function DesktopFiltersSidebar({
 
                             {/* Experience Filter */}
                             <div>
-                                <label className="text-sm font-bold text-black uppercase tracking-wider mb-2 block">
+                                <label className="text-sm font-bold text-charcoal uppercase tracking-wider mb-2 block">
                                     Experience Type *
                                 </label>
                                 <select
                                     value={pendingFilters.selectedExperienceType}
                                     onChange={(e) => update("selectedExperienceType", e.target.value)}
-                                    className="w-full bg-white border border-[#E0E0E0] p-3 rounded-xl text-base h-12 text-black outline-none hover:border-[#9E9E9E] focus:border-black focus:ring-2 focus:ring-black/20 transition-colors"
+                                    className="w-full bg-white/70 backdrop-blur-sm border border-warm-border p-3 rounded-xl text-base h-12 text-charcoal outline-none hover:border-wine-200 focus:border-wine-500 focus:ring-2 focus:ring-wine-500/20 transition-colors"
                                 >
-                                    <option value="" className="text-[#424242]">All</option>
+                                    <option value="" className="text-warm-gray">All</option>
                                     {VINEYARD_EXPERIENCE_TYPE_OPTIONS.map((o) => (
                                         <option key={o.value} value={o.value}>{o.label}</option>
                                     ))}
@@ -373,7 +373,7 @@ export default function DesktopFiltersSidebar({
                                     disabled={selectedVineyards.length === 0}
                                     className={`w-full font-bold h-14 rounded-xl text-base transition-all shadow-sm border ${
                                         selectedVineyards.length > 0
-                                            ? "bg-white text-charcoal hover:bg-wine-50 border-warm-border"
+                                            ? "bg-white/70 backdrop-blur-sm text-charcoal hover:bg-wine-50 border-warm-border"
                                             : "bg-cream text-warm-gray opacity-50 cursor-not-allowed border-warm-border"
                                     }`}
                                 >

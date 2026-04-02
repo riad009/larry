@@ -40,8 +40,7 @@ function mapLunch(doc: any): LunchExperience {
 
 // --- GET ALL (Optimized with Projection) ---
 export async function GET() {
-    const authError = await requireAdmin();
-    if (authError) return authError;
+    // No admin check — all authenticated users can read restaurants
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");

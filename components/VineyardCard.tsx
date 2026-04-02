@@ -305,6 +305,7 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
     const [offers, setOffers] = useState<VineyardOffer[]>([]);
     const [loading, setLoading] = useState(false);
     const [showMapPopup, setShowMapPopup] = useState(false);
+    const [justSelected, setJustSelected] = useState(false);
     const name = (vineyard as any).Vineyard ?? vineyard.name ?? "";
     const lat = typeof vineyard.latitude === "number" && Number.isFinite(vineyard.latitude) ? vineyard.latitude : null;
     const lng = typeof vineyard.longitude === "number" && Number.isFinite(vineyard.longitude) ? vineyard.longitude : null;
@@ -313,6 +314,12 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
             ? `/api/place-photo?name=${encodeURIComponent(String(name).trim())}&lat=${lat}&lng=${lng}`
             : VINEYARD_PLACEHOLDER
     );
+
+    const handleAdd = (v: VineyardExperience) => {
+        onAdd(v);
+        setJustSelected(true);
+        setTimeout(() => setJustSelected(false), 600);
+    };
 
     const toggleExpand = async () => {
         const nextState = !expanded;
@@ -337,8 +344,9 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
     const cardClasses = `
         rounded-2xl overflow-hidden border transition-all duration-300 bg-white
         hover:shadow-md
+        ${justSelected ? "animate-selection-pop" : ""}
         ${isSelected
-        ? "border-black shadow-md ring-2 ring-black/20"
+        ? "border-wine-500 shadow-md ring-2 ring-wine-500/20"
         : "border-[#E0E0E0] hover:border-[#9E9E9E]"
     }
     `;
@@ -358,15 +366,15 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
                 {isSelected && (
-                    <div className="absolute top-3 left-3 bg-black text-white rounded-full px-3 py-1 text-xs font-medium">
+                    <div className="absolute top-3 left-3 bg-wine-600 text-white rounded-full px-3 py-1 text-xs font-medium animate-checkmark-in shadow-lg">
                         ✓ Selected
                     </div>
                 )}
 
                 {(vineyard.score ?? 0) > 0 && (
-                    <span className="text-xs absolute bottom-3 left-3 flex items-center gap-1.5 tracking-tight text-white border border-[#E0E0E0] bg-black/80 px-2.5 py-1.5 rounded-lg">
-                WINE SCORE {vineyard.score}
-                     </span>
+                    <span className="text-xs absolute bottom-3 left-3 flex items-center gap-1.5 tracking-tight text-white border border-gold-400/50 bg-gradient-to-r from-wine-800/90 to-wine-900/90 px-2.5 py-1.5 rounded-lg shadow-sm">
+                        <span className="text-gold-300 font-bold">{vineyard.score}</span> WINE SCORE
+                    </span>
                 )}
 
                 {vineyard.rating > 0 && (
@@ -467,17 +475,18 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
                     </div>
 
                     <div className="flex flex-col items-end gap-3 mt-1">
-                        <div className="bg-[#F5F5F5] px-3 py-2 rounded-lg flex flex-col items-center justify-center border border-[#E0E0E0] min-w-[90px]">
-                            <p className="text-black text-sm font-bold text-center leading-tight">
+                        <div className="bg-gold-200/20 px-3 py-2 rounded-lg flex flex-col items-center justify-center border border-gold-300/50 min-w-[90px]">
+                            <p className="text-charcoal text-sm font-bold text-center leading-tight">
                                 {priceDisplay.includes("N/A") ? "N/A" : `${priceDisplay} pp`}
                             </p>
+                            <p className="text-gold-600 text-[9px] font-semibold mt-0.5">PER PERSON</p>
                         </div>
 
                         <div className="w-full">
                             {!isSelected ? (
                                 <button
-                                    onClick={() => onAdd(vineyard)}
-                                    className="w-full py-3 px-4 text-sm font-bold uppercase tracking-wider rounded-xl bg-white text-black border border-black hover:bg-[#F5F5F5] active:scale-[0.98] transition-all duration-200 shadow-sm"
+                                    onClick={() => handleAdd(vineyard)}
+                                    className="w-full py-2.5 px-4 text-xs font-bold uppercase tracking-wider rounded-xl gradient-cta text-white active:scale-[0.97] transition-all duration-200 shadow-sm"
                                 >
                                     Add to Trip
                                 </button>
@@ -485,16 +494,16 @@ export default function VineyardCard({ vineyard, loadOffers, onAdd, onRemove, is
                                 <button
                                     type="button"
                                     onClick={() => onRemove(vineyard.id)}
-                                    className="w-full py-3 px-4 text-sm font-bold uppercase tracking-wider rounded-xl bg-black text-white hover:bg-[#222] active:scale-[0.98] transition-all duration-200 shadow-sm"
+                                    className="w-full py-2.5 px-4 text-xs font-bold uppercase tracking-wider rounded-xl bg-wine-600 text-white hover:bg-wine-700 active:scale-[0.97] transition-all duration-200 shadow-sm"
                                 >
-                                    Selected
+                                    ✓ Selected
                                 </button>
                             )}
                         </div>
 
                         <button
                             onClick={toggleExpand}
-                            className="text-[11px] font-bold text-black flex items-center gap-1.5 hover:underline transition-colors duration-200"
+                            className="text-[11px] font-bold text-wine-600 flex items-center gap-1.5 hover:underline transition-colors duration-200"
                         >
                             {expanded ? "SHOW LESS" : "SEE MORE"}
                             {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

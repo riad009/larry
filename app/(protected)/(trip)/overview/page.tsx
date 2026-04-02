@@ -1,6 +1,6 @@
 /* app/overview/page.tsx */
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTripStore, useTripHydrationStore } from "@/store/tripStore";
 import {
@@ -17,8 +17,39 @@ type MapViewMode = "normal" | "fullscreen" | "hidden";
 
 export default function OverviewPage() {
     const hasHydrated = useTripHydrationStore((s) => s.hasHydrated);
-    const { vineyards, lunches, removeVineyard, removeLunch } = useTripStore();
+    const { vineyards, lunches, removeVineyard, removeLunch, country, region, subRegion } = useTripStore();
     const router = useRouter();
+    const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+    const handleActionClick = useCallback(async (id: string) => {
+        if (id === "save") {
+            setSaveStatus("saving");
+            try {
+                const res = await fetch("/api/bookings", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        tripName: `${region || "Wine"} Trip — ${new Date().toLocaleDateString()}`,
+                        country,
+                        region,
+                        subRegion,
+                        vineyards,
+                        lunches,
+                    }),
+                });
+                if (res.ok) {
+                    setSaveStatus("saved");
+                    setTimeout(() => setSaveStatus("idle"), 3000);
+                } else {
+                    setSaveStatus("error");
+                    setTimeout(() => setSaveStatus("idle"), 3000);
+                }
+            } catch {
+                setSaveStatus("error");
+                setTimeout(() => setSaveStatus("idle"), 3000);
+            }
+        }
+    }, [vineyards, lunches, country, region, subRegion]);
 
     const defaultRouteStops = React.useMemo<RouteStop[]>(
         () => [
@@ -123,7 +154,22 @@ export default function OverviewPage() {
                         />
                     </div>
                     <div className="mt-6 md:mt-0 md:flex-shrink-0 md:border-t md:border-warm-border md:pt-4 md:bg-white/50">
-                        <ActionButtonsGrid onButtonClick={(id) => console.log(id)} />
+                        <ActionButtonsGrid onButtonClick={handleActionClick} />
+                        {saveStatus === "saved" && (
+                            <div className="mt-2 text-sm text-green-600 font-medium text-center animate-fade-in">
+                                ✓ Trip saved! View it in your Profile.
+                            </div>
+                        )}
+                        {saveStatus === "saving" && (
+                            <div className="mt-2 text-sm text-warm-gray font-medium text-center">
+                                Saving...
+                            </div>
+                        )}
+                        {saveStatus === "error" && (
+                            <div className="mt-2 text-sm text-red-500 font-medium text-center">
+                                Failed to save. Please try again.
+                            </div>
+                        )}
                         <div className="mt-6">
                             <PrimaryActionButton href="/transport" />
                         </div>
