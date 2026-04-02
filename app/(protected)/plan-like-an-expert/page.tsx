@@ -253,17 +253,17 @@ export default function CountryRegionSelector() {
                     if (isLoading) {
                         return (
                             <div className="flex justify-center py-20">
-                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-wine-500"></div>
                             </div>
                         );
                     }
 
-                    if (error) return <div className="text-black text-center py-10 text-base">{error}</div>;
+                    if (error) return <div className="text-charcoal text-center py-10 text-base">{error}</div>;
 
                     return (
-                        <div className="flex flex-col items-center w-full">
+                        <div className="flex flex-col items-center w-full animate-fade-in-up">
                             {/* Selector Box */}
-                            <div className="w-full max-w-sm bg-white border border-[#E0E0E0] rounded-xl overflow-hidden shadow-sm">
+                            <div className="w-full max-w-sm glass-card rounded-2xl overflow-hidden">
 
                                 {/* COUNTRY */}
                                 <DropdownSelector

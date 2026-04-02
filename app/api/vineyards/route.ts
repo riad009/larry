@@ -64,8 +64,7 @@ function mapVineyard(doc: any): VineyardExperience {
 
 // --- GET ALL (Optimized with Projection) ---
 export async function GET() {
-    const authError = await requireAdmin();
-    if (authError) return authError;
+    // No admin check — any authenticated user can browse vineyards
     try {
         const client = await clientPromise;
         const db = client.db("smartRoute");

@@ -27,10 +27,10 @@ export default function CompactLunchCard({
     const cost = formatCost(lunch.lunchCost);
 
     const cardClasses = `
-    rounded-lg border transition-all duration-300 bg-white w-full min-w-0 max-w-full overflow-hidden
+    rounded-2xl border transition-all duration-300 bg-white/70 backdrop-blur-sm w-full min-w-0 max-w-full overflow-hidden hover-lift
     ${isSelected
-        ? "border-black shadow-md ring-2 ring-black/20"
-        : "border-[#E0E0E0] hover:border-[#9E9E9E]"
+        ? "border-wine-500 shadow-md ring-2 ring-wine-500/20"
+        : "border-warm-border hover:border-wine-200"
     }
   `;
 
@@ -40,19 +40,19 @@ export default function CompactLunchCard({
                 <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-1 min-w-0">
-                            <h3 className="text-black font-medium text-sm truncate min-w-0">
+                            <h3 className="text-charcoal font-medium text-sm truncate min-w-0">
                                 {title}
                             </h3>
                             {isSelected && (
-                                <span className="text-[10px] font-bold bg-black text-white px-1.5 py-0.5 rounded">
+                                <span className="text-[10px] font-bold bg-wine-500 text-white px-1.5 py-0.5 rounded">
                                     ✓
                                 </span>
                             )}
                         </div>
 
                         {location && (
-                            <div className="flex items-center gap-1 text-[#424242] text-xs">
-                                <MapPin size={10} />
+                            <div className="flex items-center gap-1 text-warm-gray text-xs">
+                                <MapPin size={10} className="text-wine-400" />
                                 <span className="truncate">{location}</span>
                             </div>
                         )}
@@ -60,10 +60,10 @@ export default function CompactLunchCard({
 
                     <div className="flex items-center gap-2">
                         <div className="text-right min-w-[60px]">
-                            <p className="text-black text-sm font-semibold">
+                            <p className="text-charcoal text-sm font-semibold">
                                 {cost}
                             </p>
-                            <p className="text-[#424242] text-[10px]">LUNCH</p>
+                            <p className="text-warm-gray text-[10px]">LUNCH</p>
                         </div>
 
                         <div className="flex items-center gap-1">
@@ -73,7 +73,7 @@ export default function CompactLunchCard({
                                         e.stopPropagation();
                                         onAdd();
                                     }}
-                                    className="px-2.5 py-1 text-xs font-semibold rounded-md bg-black text-white hover:bg-[#424242] active:scale-95 transition-all duration-150 whitespace-nowrap border border-black"
+                                    className="px-2.5 py-1 text-xs font-semibold rounded-lg gradient-cta text-white active:scale-95 transition-all duration-150 whitespace-nowrap border-0 shadow-sm"
                                 >
                                     Add
                                 </button>
@@ -83,7 +83,7 @@ export default function CompactLunchCard({
                                         e.stopPropagation();
                                         onRemove(lunch.id);
                                     }}
-                                    className="px-2.5 py-1 text-xs font-semibold rounded-md bg-white text-black border-2 border-black hover:bg-[#F5F5F5] flex items-center gap-1 whitespace-nowrap transition-all duration-150"
+                                    className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white text-wine-600 border-2 border-wine-500 hover:bg-wine-50 flex items-center gap-1 whitespace-nowrap transition-all duration-150"
                                 >
                                     <span>Remove</span>
                                     <X size={11} />
@@ -91,7 +91,7 @@ export default function CompactLunchCard({
                             )}
 
                             <button
-                                className="p-1.5 rounded-md bg-[#F5F5F5] border border-[#E0E0E0] hover:bg-[#E0E0E0] text-black transition-colors duration-150 pointer-events-none"
+                                className="p-1.5 rounded-lg bg-cream border border-warm-border hover:bg-wine-50 text-wine-500 transition-colors duration-150 pointer-events-none"
                                 aria-label="Expand"
                                 tabIndex={-1}
                             >

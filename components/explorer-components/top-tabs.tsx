@@ -32,26 +32,26 @@ export default function TopTabs() {
             <div className="hidden md:flex flex-col items-center w-full max-w-4xl">
                 {/* Main container with back button and tabs in same row */}
                 <div className="flex items-center justify-between w-full gap-4 mb-4">
-                    {/* Back Button - Separate styled container */}
+                    {/* Back Button */}
                     <button
                         onClick={handleBackToPlan}
-                        className="group flex items-center gap-3 px-4 py-3 bg-white border border-[#E0E0E0] hover:border-black rounded-2xl transition-all duration-300 shadow-sm"
+                        className="group flex items-center gap-3 px-4 py-3 glass-card rounded-2xl transition-all duration-300 hover-lift"
                     >
-                        <div className="p-1.5 bg-[#F5F5F5] group-hover:bg-[#E0E0E0] rounded-lg transition-colors duration-300 border border-[#E0E0E0]">
-                            <ChevronLeft className="w-4 h-4 text-black transition-colors" />
+                        <div className="p-1.5 bg-wine-50 group-hover:bg-wine-100 rounded-lg transition-colors duration-300 border border-wine-100">
+                            <ChevronLeft className="w-4 h-4 text-wine-600" />
                         </div>
                         <div className="flex flex-col items-start">
-                            <span className="text-xs text-[#424242] transition-colors">
+                            <span className="text-xs text-warm-gray transition-colors">
                                 BACK TO
                             </span>
-                            <span className="text-sm font-bold text-black transition-colors">
+                            <span className="text-sm font-bold text-charcoal transition-colors">
                                 Plan Like an Expert
                             </span>
                         </div>
                     </button>
 
                     {/* Tabs Container */}
-                    <div className="flex-1 flex items-center justify-between p-1 bg-white rounded-2xl border border-[#E0E0E0] shadow-sm">
+                    <div className="flex-1 flex items-center justify-between p-1 glass-card rounded-2xl">
                         {tabs.map((tab) => {
                             const isActive = pathname === tab.path;
 
@@ -61,17 +61,17 @@ export default function TopTabs() {
                                     onClick={() => router.push(tab.path)}
                                     className={`
                                         flex-1 flex flex-col items-center justify-center 
-                                        py-3 px-4 rounded-xl transition-all duration-200
+                                        py-3 px-4 rounded-xl transition-all duration-300
                                         ${isActive
-                                        ? 'bg-black text-white shadow-sm'
-                                        : 'text-[#424242] hover:text-black hover:bg-[#F5F5F5]'
+                                        ? 'gradient-wine text-white shadow-md'
+                                        : 'text-warm-gray hover:text-wine-600 hover:bg-wine-50'
                                     }
                                     `}
                                 >
                                     <div className="flex items-center gap-2 mb-1">
                                         <div className={`
                                             p-1.5 rounded-lg
-                                            ${isActive ? 'bg-white/20' : 'bg-[#F5F5F5] border border-[#E0E0E0]'}
+                                            ${isActive ? 'bg-white/20' : 'bg-cream border border-warm-border'}
                                         `}>
                                             {tab.icon}
                                         </div>
@@ -96,16 +96,16 @@ export default function TopTabs() {
                                 <div className={`
                                     w-2 h-2 rounded-full transition-all duration-300
                                     ${isActive
-                                    ? 'bg-black'
+                                    ? 'bg-wine-500 shadow-sm shadow-wine-500/30'
                                     : isCompleted
-                                        ? 'bg-[#424242]'
-                                        : 'bg-[#E0E0E0]'
+                                        ? 'bg-wine-300'
+                                        : 'bg-warm-border'
                                 }
                                 `}></div>
                                 {index < tabs.length - 1 && (
                                     <div className={`
                                         w-6 h-0.5 transition-all duration-300
-                                        ${isCompleted ? 'bg-[#424242]' : 'bg-[#E0E0E0]'}
+                                        ${isCompleted ? 'bg-wine-300' : 'bg-warm-border'}
                                     `}></div>
                                 )}
                             </div>
@@ -117,20 +117,20 @@ export default function TopTabs() {
             {/* Mobile - Stacked layout */}
             <div className="md:hidden w-full max-w-sm">
                 <div className="flex flex-col items-center">
-                    {/* Back Button for Mobile - Styled similarly */}
+                    {/* Back Button for Mobile */}
                     <button
                         onClick={handleBackToPlan}
-                        className="group w-full flex items-center justify-between px-4 py-3 bg-white border border-[#E0E0E0] hover:border-black rounded-2xl mb-4 transition-all duration-300 shadow-sm"
+                        className="group w-full flex items-center justify-between px-4 py-3 glass-card rounded-2xl mb-4 transition-all duration-300 hover-lift"
                     >
                         <div className="flex items-center gap-3">
-                            <div className="p-1.5 bg-[#F5F5F5] rounded-lg transition-colors duration-300 border border-[#E0E0E0]">
-                                <ChevronLeft className="w-4 h-4 text-black transition-colors" />
+                            <div className="p-1.5 bg-wine-50 rounded-lg transition-colors duration-300 border border-wine-100">
+                                <ChevronLeft className="w-4 h-4 text-wine-600" />
                             </div>
                             <div className="flex flex-col items-start">
-                                <span className="text-xs text-[#424242] transition-colors">
+                                <span className="text-xs text-warm-gray transition-colors">
                                     BACK TO
                                 </span>
-                                <span className="text-sm font-bold text-black transition-colors">
+                                <span className="text-sm font-bold text-charcoal transition-colors">
                                     Plan Like an Expert
                                 </span>
                             </div>
@@ -138,7 +138,7 @@ export default function TopTabs() {
                     </button>
 
                     {/* Tabs */}
-                    <div className="flex items-center justify-between w-full p-1 bg-white rounded-2xl border border-[#E0E0E0] shadow-sm">
+                    <div className="flex items-center justify-between w-full p-1 glass-card rounded-2xl">
                         {tabs.map((tab) => {
                             const isActive = pathname === tab.path;
 
@@ -148,16 +148,16 @@ export default function TopTabs() {
                                     onClick={() => router.push(tab.path)}
                                     className={`
                                         flex-1 flex flex-col items-center justify-center 
-                                        py-2.5 px-2 rounded-xl transition-all duration-200
+                                        py-2.5 px-2 rounded-xl transition-all duration-300
                                         ${isActive
-                                        ? 'bg-black text-white shadow-sm'
-                                        : 'text-[#424242]'
+                                        ? 'gradient-wine text-white shadow-md'
+                                        : 'text-warm-gray'
                                     }
                                     `}
                                 >
                                     <div className={`
                                         p-1.5 rounded-lg mb-1
-                                        ${isActive ? 'bg-white/20' : 'bg-[#F5F5F5] border border-[#E0E0E0]'}
+                                        ${isActive ? 'bg-white/20' : 'bg-cream border border-warm-border'}
                                     `}>
                                         {tab.icon}
                                     </div>
@@ -171,10 +171,10 @@ export default function TopTabs() {
 
                     {/* Step indicator */}
                     <div className="mt-2 flex items-center gap-2">
-                        <span className="text-xs text-[#424242] font-medium">
+                        <span className="text-xs text-warm-gray font-medium">
                             Step {tabs.findIndex(t => t.path === pathname) + 1} of {tabs.length}
                         </span>
-                        <span className="text-xs font-bold text-black">
+                        <span className="text-xs font-bold text-wine-600">
                             {pathname === '/vineyard' && 'Vineyard'}
                             {pathname === '/lunch' && 'Lunch'}
                             {pathname === '/overview' && 'Trip'}

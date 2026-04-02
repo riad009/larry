@@ -1,61 +1,3 @@
-// "use client";
-//
-// import { useEffect, useState } from "react";
-// import { useRouter, usePathname } from "next/navigation";
-// import { Geist, Geist_Mono } from "next/font/google";
-// import "@/app/globals.css";
-// import TopTabs from "@/components/explorer-components/top-tabs";
-// import { Loader2 } from "lucide-react";
-//
-// const geistSans = Geist({
-//     variable: "--font-geist-sans",
-//     subsets: ["latin"],
-// });
-//
-// const geistMono = Geist_Mono({
-//     variable: "--font-geist-mono",
-//     subsets: ["latin"],
-// });
-//
-// export default function RootLayout({ children }: { children: React.ReactNode }) {
-//     const [loading, setLoading] = useState(true);
-//     const router = useRouter();
-//     const pathname = usePathname();
-//
-//     useEffect(() => {
-//         const user = localStorage.getItem("user");
-//
-//         // Define pages that DON'T need a login (Login, Signup, etc.)
-//         const publicPages = ["/login", "/signup", "/forgot-password"];
-//         const isPublicPage = publicPages.includes(pathname);
-//
-//         if (!user && !isPublicPage) {
-//             // No user found and trying to access a private page
-//             router.push("/login");
-//         } else {
-//             setLoading(false);
-//         }
-//     }, [pathname, router]);
-//
-//     return (
-//         <html lang="en">
-//         <body className={`${geistSans.variable} ${geistMono.variable} antialiased app-background flex flex-col items-center justify-start`}>
-//         {loading ? (
-//             <div className="h-screen w-full flex items-center justify-center bg-zinc-950">
-//                 <Loader2 className="animate-spin text-green-500" size={40} />
-//             </div>
-//         ) : (
-//             <>
-//                 {/* Only show Tabs if not on login/signup pages */}
-//                 {!["/login", "/signup"].includes(pathname) && <TopTabs />}
-//                 {children}
-//             </>
-//         )}
-//         </body>
-//         </html>
-//     );
-// }
-
 // app/(trip)/layout.tsx
 "use client";
 
@@ -87,7 +29,7 @@ export default function TripLayout({ children }: { children: React.ReactNode }) 
             </main>
 
             {!isAuthPage && (
-                <footer className="fixed bottom-0 left-0 right-0 z-50 w-full border-t border-[#E0E0E0] bg-white py-4">
+                <footer className="fixed bottom-0 left-0 right-0 z-50 w-full bg-white/80 backdrop-blur-xl border-t border-warm-border py-3 shadow-[0_-4px_20px_rgba(155,27,48,0.05)]">
                     <nav className="flex justify-center items-center gap-6 flex-wrap px-4" aria-label="Footer navigation">
                         {FOOTER_ITEMS.map(({ label, href, icon: Icon }) => {
                             const isActive = pathname === href || (href !== "/plan" && pathname.startsWith(href));
@@ -95,12 +37,23 @@ export default function TripLayout({ children }: { children: React.ReactNode }) 
                                 <Link
                                     key={href}
                                     href={href}
-                                    className={`flex flex-col items-center gap-1 text-sm font-medium transition-colors ${
-                                        isActive ? "text-black" : "text-black hover:text-[#424242]"
+                                    className={`flex flex-col items-center gap-1 text-sm font-medium transition-all duration-300 ${
+                                        isActive
+                                            ? "text-wine-600"
+                                            : "text-warm-gray hover:text-wine-500"
                                     }`}
                                 >
-                                    <Icon className="w-5 h-5" aria-hidden />
-                                    <span>{label}</span>
+                                    <div className={`p-1.5 rounded-xl transition-all duration-300 ${
+                                        isActive
+                                            ? "bg-wine-50 shadow-sm"
+                                            : ""
+                                    }`}>
+                                        <Icon className="w-5 h-5" aria-hidden />
+                                    </div>
+                                    <span className="text-xs">{label}</span>
+                                    {isActive && (
+                                        <div className="w-1 h-1 rounded-full bg-wine-500 animate-fade-in" />
+                                    )}
                                 </Link>
                             );
                         })}
