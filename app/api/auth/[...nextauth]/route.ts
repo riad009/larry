@@ -1,5 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getDb } from "@/lib/mongo";
+import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -10,41 +12,42 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials) {
-                const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
-
-                try {
-                    const res = await fetch(`${baseUrl}/api/login`, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            email: credentials?.email,
-                            password: credentials?.password
-                        }),
-                        headers: { "Content-Type": "application/json" }
-                    });
-
-                    // Safety check: if the response isn't JSON/OK, don't parse it
-                    if (!res.ok) {
-                        return null;
-                    }
-
-                    const data = await res.json();
-
-                    if (data && data.user) {
-                        const u = data.user;
-                        return {
-                            id: u.id,
-                            email: u.email,
-                            name: u.name ?? u.displayName,
-                            role: u.role,
-                            trialEndDate: u.trialEndDate ?? undefined,
-                            createdAt: u.createdAt ?? undefined,
-                        };
-                    }
-                } catch (error) {
-                    console.error("Auth authorize error:", error);
+                if (!credentials?.email || !credentials?.password) {
+                    return null;
                 }
 
-                return null;
+                try {
+                    // Query MongoDB directly — no HTTP self-fetch needed.
+                    // This works reliably on Vercel regardless of NEXTAUTH_URL.
+                    const db = await getDb();
+                    const user = await db.collection("users").findOne({
+                        email: credentials.email.toLowerCase().trim()
+                    });
+
+                    if (!user) return null;
+                    if (user.isActive === false) return null;
+
+                    const isValidPassword = await bcrypt.compare(credentials.password, user.password);
+                    if (!isValidPassword) return null;
+
+                    // Update last login timestamp
+                    await db.collection("users").updateOne(
+                        { _id: user._id },
+                        { $set: { lastLoginAt: new Date(), updatedAt: new Date() } }
+                    );
+
+                    return {
+                        id: user._id.toString(),
+                        email: user.email,
+                        name: user.name ?? user.displayName,
+                        role: user.role ?? "user",
+                        trialEndDate: user.trialEndDate ? new Date(user.trialEndDate).toISOString() : undefined,
+                        createdAt: user.createdAt ? new Date(user.createdAt).toISOString() : undefined,
+                    };
+                } catch (error) {
+                    console.error("Auth authorize error:", error);
+                    return null;
+                }
             }
         })
     ],
