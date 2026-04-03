@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import { ObjectId } from "mongodb";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
@@ -18,8 +18,7 @@ export async function GET() {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         const users = await db.collection("users").find({}).toArray();
 
         const mappedUsers = users.map(u => ({
@@ -42,8 +41,7 @@ export async function POST(req: Request) {
         }
 
         const { name, email, password, userType, role } = await req.json();
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         const cleanEmail = email.toLowerCase().trim();
         const existingUser = await db.collection("users").findOne({ email: cleanEmail });
@@ -80,8 +78,7 @@ export async function PUT(req: Request) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         const data = await req.json();
 
         if (!data.mongoId) return NextResponse.json({ error: "No ID" }, { status: 400 });
@@ -122,8 +119,7 @@ export async function DELETE(req: Request) {
         const id = searchParams.get("id");
         if (!id) return NextResponse.json({ error: "No ID" }, { status: 400 });
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         await db.collection("users").deleteOne({ _id: new ObjectId(id) });
 
         return NextResponse.json({ success: true });

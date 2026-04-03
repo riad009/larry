@@ -1,6 +1,6 @@
 /* app/api/vineyards/route.ts */
 
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import { NextResponse } from "next/server";
 import { VineyardExperience } from "@/types/vineyard";
 import { ObjectId } from "mongodb";
@@ -66,8 +66,7 @@ function mapVineyard(doc: any): VineyardExperience {
 export async function GET() {
     // No admin check — any authenticated user can browse vineyards
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         const docs = await db.collection("vineyards")
             .find({})
@@ -108,8 +107,7 @@ export async function POST(req: Request) {
     const authError = await requireAdmin();
     if (authError) return authError;
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         const data = await req.json();
 
         const newDoc = {
@@ -148,8 +146,7 @@ export async function PUT(req: Request) {
     const authError = await requireAdmin();
     if (authError) return authError;
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         const body = await req.json();
 
         if (!body.mongoId) return NextResponse.json({ error: "Missing mongoId" }, { status: 400 });
@@ -199,8 +196,7 @@ export async function DELETE(req: Request) {
 
         if (!id) return NextResponse.json({ error: "No ID provided" }, { status: 400 });
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         await db.collection("vineyards").deleteOne({ _id: new ObjectId(id) });
 
         return NextResponse.json({ success: true });

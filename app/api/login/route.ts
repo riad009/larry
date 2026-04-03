@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
@@ -16,8 +16,7 @@ export async function POST(req: Request) {
             );
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         // 2. Find user (Case-insensitive)
         const user = await db.collection("users").findOne({

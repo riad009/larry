@@ -1,4 +1,4 @@
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -10,8 +10,7 @@ export async function GET(req: Request) {
             return NextResponse.json({ count: 0 });
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         const count = await db.collection("vineyards").countDocuments({
             $or: [

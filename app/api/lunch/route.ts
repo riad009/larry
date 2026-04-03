@@ -1,6 +1,6 @@
 /* app/api/lunch/route.ts */
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import { LunchExperience } from "@/types/lunch";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
@@ -42,8 +42,7 @@ function mapLunch(doc: any): LunchExperience {
 export async function GET() {
     // No admin check — all authenticated users can read restaurants
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         // Using project to only download necessary fields for speed
         const docs = await db.collection("restaurants")
@@ -80,8 +79,7 @@ export async function POST(req: Request) {
     const authError = await requireAdmin();
     if (authError) return authError;
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         const data = await req.json();
 
         const newDoc = {
@@ -114,8 +112,7 @@ export async function PUT(req: Request) {
     const authError = await requireAdmin();
     if (authError) return authError;
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         const data = await req.json();
 
         if (!data.mongoId) return NextResponse.json({ error: "Missing mongoId" }, { status: 400 });
@@ -157,8 +154,7 @@ export async function DELETE(req: Request) {
         const id = searchParams.get("id");
         if (!id) return NextResponse.json({ error: "No ID" }, { status: 400 });
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
         await db.collection("restaurants").deleteOne({ _id: new ObjectId(id) });
 
         return NextResponse.json({ success: true });

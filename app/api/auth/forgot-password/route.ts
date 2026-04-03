@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import crypto from "crypto";
 import { Resend } from 'resend';
 
@@ -17,8 +17,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Email service not configured" }, { status: 500 });
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         const user = await db.collection("users").findOne({
             email: email.toLowerCase().trim()

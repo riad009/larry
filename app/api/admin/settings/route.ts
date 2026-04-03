@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import { ObjectId } from "mongodb";
 import bcrypt from "bcryptjs";
 import { getServerSession } from "next-auth";
@@ -21,8 +21,7 @@ export async function PUT(req: Request) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         // 2. Prepare the update object
         const updateData: any = {

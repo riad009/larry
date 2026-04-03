@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
@@ -13,8 +13,7 @@ export async function POST(req: Request) {
             );
         }
 
-        const client = await clientPromise;
-        const db = client.db("smartRoute");
+        const db = await getDb();
 
         // 1. Find the user with this token and check if it's still valid (not expired)
         const user = await db.collection("users").findOne({

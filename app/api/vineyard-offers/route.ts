@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import clientPromise from "@/lib/mongo";
+import { getDb } from "@/lib/mongo";
 import { mapVineyardOfferDoc } from "@/utils/mappers";
 
 export async function GET(request: Request) {
@@ -9,8 +9,7 @@ export async function GET(request: Request) {
     if (!vineyardId) return NextResponse.json([], { status: 400 });
 
     try {
-        const client = await clientPromise;
-        const db = client.db("smartRoute"); // Ensure this matches your DB name
+        const db = await getDb();
 
         // Query the offers collection for matches
         const rawOffers = await db.collection("vineyard-offers")
